@@ -13,17 +13,17 @@
         android:layout_height="172dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/doge"
+        app:srcCompat="@drawable/chihuahua"
         tools:layout_editor_absoluteY="132dp" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="202dp"
-        android:layout_height="162dp"
+        android:layout_width="147dp"
+        android:layout_height="167dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/koira" />
+        app:srcCompat="@drawable/canine" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -32,10 +32,10 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dogg" />
+        app:srcCompat="@drawable/whitedog" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/feedTime"
         android:layout_width="61dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/feedDate"
         android:layout_width="125dp"
         android:layout_height="55dp"
         android:layout_marginStart="24dp"
@@ -61,11 +61,11 @@
         android:text="18/02/2020"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/feedTime"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/feedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -74,12 +74,12 @@
         android:text="Ruoki"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText5"
+        app:layout_constraintStart_toEndOf="@+id/feedDate"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.497" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/feedFood"
         android:layout_width="218dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
@@ -90,10 +90,10 @@
         android:text="Golden Eagle"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/feedTime" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/feedAmount"
         android:layout_width="83dp"
         android:layout_height="55dp"
         android:layout_marginStart="24dp"
@@ -104,11 +104,11 @@
         android:inputType="number"
         android:text="125g"
         android:textSize="24dp"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/feedFood"
+        app:layout_constraintTop_toBottomOf="@+id/feedBtn" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/feedNotesHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -117,10 +117,10 @@
         android:text="Muistiinpanot"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/feedFood" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/FeedNotes"
         android:layout_width="339dp"
         android:layout_height="162dp"
         android:layout_marginStart="32dp"
@@ -131,5 +131,51 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/feedNotesHeadline" />
+
+    <TextView
+        android:id="@+id/nameDog1"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Justi \n8V  4kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/nameDog3"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Musti \n6V  10kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/nameDog2"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Kusti \n3V  18kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
