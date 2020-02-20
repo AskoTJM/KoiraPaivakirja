@@ -4,4 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Aktiviteetti"/>
+    tools:context=".Aktiviteetti">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="159dp"
+        android:layout_height="172dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/chihuahua"
+        tools:layout_editor_absoluteY="132dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="147dp"
+        android:layout_height="167dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/canine" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="274dp"
+        android:layout_height="304dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/whitedog" />
+
+    <TextView
+        android:id="@+id/nameDog6"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Justi \n8V  4kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/nameDog4"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Musti \n6V  10kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/nameDog5"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/share"
+        android:inputType="textMultiLine"
+        android:text="Kusti \n3V  18kg"
+        android:textColor="#F6F6F6"
+        android:textColorHighlight="#0500DF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
