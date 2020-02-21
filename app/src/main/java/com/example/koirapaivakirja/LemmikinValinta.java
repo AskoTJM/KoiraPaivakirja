@@ -1,4 +1,4 @@
-fontpackage com.example.koirapaivakirja;
+package com.example.koirapaivakirja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
