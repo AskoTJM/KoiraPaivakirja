@@ -81,7 +81,7 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="time"
-        android:text="17:01"
+        android:text="17:54"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activityNotesText"
@@ -173,20 +173,23 @@
         android:fontFamily="@font/share"
         android:text="Ulkoilu"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkPlay"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
         android:id="@+id/checkPlay"
         android:layout_width="112dp"
         android:layout_height="41dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="72dp"
         android:fontFamily="@font/share"
         android:text="Leikki"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="@+id/checkOut" />
 
     <TextView
         android:id="@+id/activityNotesText"
