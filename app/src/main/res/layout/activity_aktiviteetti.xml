@@ -4,23 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F6F6F6"
     tools:context=".Aktiviteetti">
+
+    <EditText
+        android:id="@+id/activityTimeStart"
+        android:layout_width="61dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal"
+        android:inputType="time"
+        android:text="17:01"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575" />
+
+    <Button
+        android:id="@+id/activityBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:height="55dp"
+        android:fontFamily="@font/share"
+        android:text="Aloita"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/activityDateStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689" />
+
+    <EditText
+        android:id="@+id/activityDateStart"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal"
+        android:inputType="date"
+        android:text="18/02/2020"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/activityTimeStop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689" />
+
+    <EditText
+        android:id="@+id/activityElapsedTime"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal"
+        android:inputType="date"
+        android:text="00:53:12"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/activityTimeStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.573" />
+
+    <EditText
+        android:id="@+id/activityTimeStop"
+        android:layout_width="61dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal"
+        android:inputType="time"
+        android:text="17:01"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activityNotesText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="159dp"
-        android:layout_height="172dp"
+        android:layout_width="139dp"
+        android:layout_height="138dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/chihuahua"
-        tools:layout_editor_absoluteY="132dp" />
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:srcCompat="@drawable/chihuahua" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="147dp"
-        android:layout_height="167dp"
+        android:layout_width="138dp"
+        android:layout_height="166dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/canine" />
 
@@ -77,4 +163,93 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView5" />
+
+    <CheckBox
+        android:id="@+id/checkOut"
+        android:layout_width="112dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/share"
+        android:text="Ulkoilu"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/checkPlay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <CheckBox
+        android:id="@+id/checkPlay"
+        android:layout_width="112dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/share"
+        android:text="Leikki"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/activityNotesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/share"
+        android:text="Muistiinpanot"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/activityElapsedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Aikaa kulunut"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/activityElapsedTime"
+        app:layout_constraintStart_toStartOf="@+id/activityElapsedTime" />
+
+    <TextView
+        android:id="@+id/activityStopText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Loppui"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/activityTimeStop"
+        app:layout_constraintStart_toStartOf="@+id/activityTimeStop" />
+
+    <TextView
+        android:id="@+id/activityDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Päivämäärä"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/activityDateStart"
+        app:layout_constraintStart_toStartOf="@+id/activityDateStart" />
+
+    <TextView
+        android:id="@+id/activityStartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Aloitus"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/activityTimeStart"
+        app:layout_constraintStart_toStartOf="@+id/activityTimeStart" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="337dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="52dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityDateStart" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
