@@ -12,7 +12,7 @@
         android:id="@+id/mainFeedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="116dp"
         android:onClick="goToFeed"
         android:text="Ruokinta"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,23 +38,23 @@
         android:id="@+id/mainInfoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="116dp"
         android:onClick="goToInfo"
         android:text="Tiedot"
         app:layout_constraintBottom_toTopOf="@+id/mainReportBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/mainReportBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="200dp"
         android:onClick="goToReport"
         android:text="Raportit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

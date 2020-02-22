@@ -12,6 +12,7 @@
         android:layout_width="137dp"
         android:layout_height="142dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -41,6 +42,7 @@
         android:layout_width="61dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:fontFamily="@font/share"
@@ -49,14 +51,14 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.065" />
 
     <EditText
         android:id="@+id/feedDate"
         android:layout_width="125dp"
         android:layout_height="55dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="40dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:inputType="date"
@@ -64,28 +66,32 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/feedTime"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/feedTime"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/feedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:height="55dp"
         android:fontFamily="@font/share"
         android:text="Ruoki"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/feedDate"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintTop_toTopOf="@+id/feedDate"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/feedFood"
         android:layout_width="218dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:inputType="textPersonName"
@@ -113,18 +119,19 @@
         android:id="@+id/feedNotesHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:fontFamily="@font/share"
         android:text="Muistiinpanot"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/FeedNotes"
-        app:layout_constraintStart_toStartOf="@+id/FeedNotes" />
+        app:layout_constraintStart_toStartOf="@+id/FeedNotes"
+        app:layout_constraintTop_toBottomOf="@+id/feedFood" />
 
     <EditText
         android:id="@+id/FeedNotes"
         android:layout_width="336dp"
         android:layout_height="182dp"
         android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
@@ -133,14 +140,15 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedFood" />
 
     <TextView
         android:id="@+id/nameDog1"
         android:layout_width="65dp"
         android:layout_height="45dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/share"
         android:inputType="textMultiLine"
         android:text="Justi \n8V  4kg"
