@@ -11,7 +11,8 @@
         android:id="@+id/activityTimeStart"
         android:layout_width="61dp"
         android:layout_height="55dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:fontFamily="@font/share"
@@ -19,63 +20,54 @@
         android:inputType="time"
         android:text="17:01"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+        app:layout_constraintTop_toBottomOf="@+id/checkOut" />
 
     <Button
         android:id="@+id/activityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
         android:height="55dp"
         android:fontFamily="@font/share"
         android:text="Aloita"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/activityDateStart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintTop_toTopOf="@+id/activityDateStart" />
 
     <EditText
         android:id="@+id/activityDateStart"
         android:layout_width="125dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="28dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="date"
         android:text="18/02/2020"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/activityTimeStop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintTop_toTopOf="@+id/activityTimeStop" />
 
     <EditText
         android:id="@+id/activityElapsedTime"
         android:layout_width="125dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="36dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="date"
         android:text="00:53:12"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/activityTimeStart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintTop_toTopOf="@+id/activityTimeStart" />
 
     <EditText
         android:id="@+id/activityTimeStop"
         android:layout_width="61dp"
         android:layout_height="55dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:fontFamily="@font/share"
@@ -83,10 +75,8 @@
         android:inputType="time"
         android:text="17:54"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/activityNotesText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
+        app:layout_constraintStart_toStartOf="@+id/activityTimeStart"
+        app:layout_constraintTop_toBottomOf="@+id/activityTimeStart" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -118,6 +108,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/whitedog" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="337dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityDateStart" />
 
     <TextView
         android:id="@+id/nameDog6"
@@ -241,18 +245,5 @@
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/activityTimeStart"
         app:layout_constraintStart_toStartOf="@+id/activityTimeStart" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="337dp"
-        android:layout_height="161dp"
-        android:layout_marginTop="52dp"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activityDateStart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
