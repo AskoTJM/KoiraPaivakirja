@@ -80,20 +80,23 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="139dp"
-        android:layout_height="138dp"
+        android:layout_width="163dp"
+        android:layout_height="133dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@drawable/chihuahua" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="138dp"
-        android:layout_height="166dp"
+        android:layout_width="163dp"
+        android:layout_height="119dp"
         android:scaleType="centerCrop"
+        android:scrollY="-40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -102,8 +105,8 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="274dp"
-        android:layout_height="304dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -127,7 +130,7 @@
         android:id="@+id/nameDog6"
         android:layout_width="65dp"
         android:layout_height="45dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/share"
         android:inputType="textMultiLine"
