@@ -9,15 +9,29 @@
     tools:context=".Tiedot">
 
     <TextView
-        android:id="@+id/infoIDNum"
+        android:id="@+id/infoNotice"
         android:layout_width="350dp"
-        android:layout_height="55dp"
+        android:layout_height="136dp"
         android:fontFamily="@font/share"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:text="Ruoka-allergia: Sika"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/infoNoticeText"
+        app:layout_constraintTop_toBottomOf="@+id/infoNoticeText" />
+
+    <TextView
+        android:id="@+id/infoIDNum"
+        android:layout_width="184dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_vertical"
         android:text="123456789012345"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/infoIDNumText"
-        app:layout_constraintTop_toBottomOf="@+id/infoIDNumText" />
+        app:layout_constraintStart_toEndOf="@+id/infoReg"
+        app:layout_constraintTop_toTopOf="@+id/infoReg" />
 
     <TextView
         android:id="@+id/infoIDNumText"
@@ -26,15 +40,15 @@
         android:fontFamily="@font/share"
         android:text="Tunnistusmerkintä"
         android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/infoReg"
-        app:layout_constraintTop_toBottomOf="@+id/infoReg" />
+        app:layout_constraintBottom_toTopOf="@+id/infoIDNum"
+        app:layout_constraintStart_toStartOf="@+id/infoIDNum" />
 
     <TextView
         android:id="@+id/infoReg"
-        android:layout_width="350dp"
+        android:layout_width="150dp"
         android:layout_height="55dp"
         android:fontFamily="@font/share"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="center_vertical"
         android:text="FI12345/67	"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/infoRegNum"
@@ -65,14 +79,14 @@
         app:layout_constraintTop_toTopOf="@+id/infoName" />
 
     <TextView
-        android:id="@+id/infoName5"
+        android:id="@+id/infoNoticeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Kutsumanimi"
+        android:text="Huomioitavaa"
         android:textSize="18dp"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="613dp" />
+        app:layout_constraintStart_toStartOf="@+id/infoReg"
+        app:layout_constraintTop_toBottomOf="@+id/infoReg" />
 
     <TextView
         android:id="@+id/infoWeightText"

@@ -26,7 +26,7 @@ public class Etusivu extends AppCompatActivity {
 
     public void goToInfo(View view) {
 
-    Intent intentInfo = new Intent(this, Ruokinta.class);
+    Intent intentInfo = new Intent(this, Tiedot.class);
         startActivity(intentInfo);
     }
     public void goToReport(View view){

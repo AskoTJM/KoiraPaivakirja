@@ -8,6 +8,46 @@
     android:background="#F6F6F6"
     tools:context=".Ruokinta">
 
+    <TextView
+        android:id="@+id/feedDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Päivämäärä"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/feedDate"
+        app:layout_constraintStart_toStartOf="@+id/feedDate" />
+
+    <TextView
+        android:id="@+id/feedTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Kellonaika"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/feedTime"
+        app:layout_constraintStart_toStartOf="@+id/feedTime" />
+
+    <TextView
+        android:id="@+id/feedFoodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Kutsumanimi"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/feedFood"
+        app:layout_constraintStart_toStartOf="@+id/feedFood" />
+
+    <TextView
+        android:id="@+id/feedAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Määrä"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/feedAmount"
+        app:layout_constraintStart_toStartOf="@+id/feedAmount" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="164dp"
@@ -44,7 +84,7 @@
         android:layout_width="61dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:fontFamily="@font/share"
@@ -91,7 +131,7 @@
         android:layout_width="218dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:inputType="textPersonName"
@@ -105,7 +145,6 @@
         android:layout_width="83dp"
         android:layout_height="55dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:ems="10"
         android:fontFamily="@font/share"
         android:gravity="center"
@@ -113,7 +152,7 @@
         android:text="125g"
         android:textSize="24dp"
         app:layout_constraintStart_toEndOf="@+id/feedFood"
-        app:layout_constraintTop_toBottomOf="@+id/feedBtn" />
+        app:layout_constraintTop_toTopOf="@+id/feedFood" />
 
     <TextView
         android:id="@+id/feedNotesHeadline"
