@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tiedotContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6"
+    tools:context=".Tiedot">
+
+    <TextView
+        android:id="@+id/infoIDNum"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="123456789012345"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/infoIDNumText"
+        app:layout_constraintTop_toBottomOf="@+id/infoIDNumText" />
+
+    <TextView
+        android:id="@+id/infoIDNumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Tunnistusmerkintä"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/infoReg"
+        app:layout_constraintTop_toBottomOf="@+id/infoReg" />
+
+    <TextView
+        android:id="@+id/infoReg"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="FI12345/67	"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/infoRegNum"
+        app:layout_constraintTop_toBottomOf="@+id/infoRegNum" />
+
+    <TextView
+        android:id="@+id/infoWeight"
+        android:layout_width="50dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="8kg"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/infoBirth"
+        app:layout_constraintTop_toTopOf="@+id/infoBirth" />
+
+    <TextView
+        android:id="@+id/infoBirth"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="12/12/2013"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/infoName"
+        app:layout_constraintTop_toTopOf="@+id/infoName" />
+
+    <TextView
+        android:id="@+id/infoName5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Kutsumanimi"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="222dp"
+        tools:layout_editor_absoluteY="613dp" />
+
+    <TextView
+        android:id="@+id/infoWeightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Paino"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/infoWeight"
+        app:layout_constraintStart_toStartOf="@+id/infoWeight" />
+
+    <TextView
+        android:id="@+id/infoBirthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Syntymäpäivä"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/infoBirth"
+        app:layout_constraintStart_toStartOf="@+id/infoBirth" />
+
+    <TextView
+        android:id="@+id/infoKennelName"
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Hell bent for leather"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/infoKennelNameText"
+        app:layout_constraintTop_toBottomOf="@+id/infoKennelNameText" />
+
+    <TextView
+        android:id="@+id/infoRegNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Rekisterinumero"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/infoKennelName"
+        app:layout_constraintTop_toBottomOf="@+id/infoKennelName" />
+
+    <TextView
+        android:id="@+id/infoNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Kutsumanimi"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/infoName"
+        app:layout_constraintStart_toStartOf="@+id/infoName" />
+
+    <TextView
+        android:id="@+id/infoKennelNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/share"
+        android:text="Kennelnimi"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/infoName"
+        app:layout_constraintTop_toBottomOf="@+id/infoName" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="413dp"
+        android:layout_height="245dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/whitedog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoName"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/share"
+        android:gravity="center_vertical"
+        android:text="Musti"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
