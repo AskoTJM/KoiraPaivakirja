@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Etusivu extends AppCompatActivity {
 
     @Override
@@ -33,4 +35,10 @@ public class Etusivu extends AppCompatActivity {
 
     }
 
+    public void logOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+        //kirjaa nykyisen käyttäjän ulos
+        startActivity(new Intent (getApplicationContext(), MainActivity.class));
+        finish();
+    }
 }

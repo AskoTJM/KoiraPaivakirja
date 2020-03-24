@@ -15,64 +15,52 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class Rekisterointi extends AppCompatActivity {
+
     FirebaseAuth firebaseAuth;
     EditText mEmail, mPassword;
-    Button mSignInButton;
-
+    Button mRegisterButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_rekisterointi);
 
         mEmail = findViewById(R.id.sahkoposti);
         mPassword = findViewById(R.id.salasana);
-        mSignInButton = findViewById(R.id.signInButton);
+        mRegisterButton = findViewById(R.id.registerButton);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),Etusivu.class));
-            finish();
-            //jos kirjautunut jo sisään, menee suoraan etusivulle
-        }
-
-            mSignInButton.setOnClickListener(new View.OnClickListener() {
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Sähköposti vaaditaan");
+                    mEmail.setError("Email required");
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Salasana vaaditaan");
+                    mPassword.setError("Password required");
                     return;
                 }
                 //rekisteröi käyttäjän firebaseen
-                firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Kirjautuminen onnistui", Toast.LENGTH_SHORT).show();
-                            //jos kirjautuminen onnistui valmiilla käyttäjällä
+                            Toast.makeText(Rekisterointi.this, "user created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),Etusivu.class));
                         }else{
-                            Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
-                            //jos käyttäjää ei olemassa tai väärät tunnukset
+                            Toast.makeText(Rekisterointi.this, "error", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
             }
         });
+    }
 
-    }
-    public void goToRegister(View view) {
-        Intent intentActivity = new Intent(this, Rekisterointi.class);
-        startActivity(intentActivity);
-    }
     public void goToMainactivity(View view) {
         Intent intentActivity = new Intent(this, MainActivity.class);
         startActivity(intentActivity);
