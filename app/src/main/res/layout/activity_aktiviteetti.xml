@@ -23,14 +23,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkOut" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/activityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:checked="false"
+        android:textOff="Aloita"
+        android:textOn="Lopeta"
         android:height="55dp"
         android:fontFamily="@font/share"
-        android:text="Aloita"
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/activityDateStart"
         app:layout_constraintTop_toTopOf="@+id/activityDateStart" />
@@ -58,7 +60,7 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="date"
-        android:text="00:53:12"
+        android:text=""
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/activityTimeStart"
         app:layout_constraintTop_toTopOf="@+id/activityTimeStart" />
@@ -73,7 +75,7 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="time"
-        android:text="17:54"
+        android:text=""
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/activityTimeStart"
         app:layout_constraintTop_toBottomOf="@+id/activityTimeStart" />
@@ -185,7 +187,7 @@
         app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <CheckBox
         android:id="@+id/checkPlay"
@@ -258,5 +260,15 @@
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/activityTimeStart"
         app:layout_constraintStart_toStartOf="@+id/activityTimeStart" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="28dp"
+        android:text="Tallenna"
+        app:layout_constraintBottom_toTopOf="@+id/activityBtn"
+        app:layout_constraintStart_toEndOf="@+id/activityElapsedTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

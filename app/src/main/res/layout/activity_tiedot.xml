@@ -173,4 +173,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
+    <ListView
+        android:layout_width="201dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@+id/infoNotice"
+        app:layout_constraintTop_toTopOf="@+id/infoNotice" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
