@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tiedotContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F6F6F6"
     tools:context=".Tiedot">
 
-    <TextView
-        android:id="@+id/infoNotice"
+    <EditText
+        android:id="@+id/infoNote"
         android:layout_width="350dp"
         android:layout_height="136dp"
         android:fontFamily="@font/share"
@@ -24,10 +24,10 @@
         android:singleLine="false"
         android:text="Ruoka-allergia: Sika"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/infoNoticeText"
-        app:layout_constraintTop_toBottomOf="@+id/infoNoticeText" />
+        app:layout_constraintStart_toStartOf="@+id/infoNoteText"
+        app:layout_constraintTop_toBottomOf="@+id/infoNoteText" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoIDNum"
         android:layout_width="184dp"
         android:layout_height="55dp"
@@ -44,12 +44,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Tunnistusmerkintä"
-        android:textSize="18dp"
+        android:text="@string/microChipID"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoIDNum"
         app:layout_constraintStart_toStartOf="@+id/infoIDNum" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoReg"
         android:layout_width="150dp"
         android:layout_height="55dp"
@@ -57,10 +57,10 @@
         android:gravity="center_vertical"
         android:text="FI12345/67	"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/infoRegNum"
-        app:layout_constraintTop_toBottomOf="@+id/infoRegNum" />
+        app:layout_constraintStart_toStartOf="@+id/infoRegText"
+        app:layout_constraintTop_toBottomOf="@+id/infoRegText" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoWeight"
         android:layout_width="50dp"
         android:layout_height="55dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toEndOf="@+id/infoBirth"
         app:layout_constraintTop_toTopOf="@+id/infoBirth" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoBirth"
         android:layout_width="110dp"
         android:layout_height="55dp"
@@ -80,17 +80,17 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
         android:text="12/12/2013"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/infoName"
         app:layout_constraintTop_toTopOf="@+id/infoName" />
 
     <TextView
-        android:id="@+id/infoNoticeText"
+        android:id="@+id/infoNoteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Huomioitavaa"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoReg"
         app:layout_constraintTop_toBottomOf="@+id/infoReg" />
 
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Paino"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoWeight"
         app:layout_constraintStart_toStartOf="@+id/infoWeight" />
 
@@ -110,11 +110,11 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Syntymäpäivä"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoBirth"
         app:layout_constraintStart_toStartOf="@+id/infoBirth" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoKennelName"
         android:layout_width="350dp"
         android:layout_height="55dp"
@@ -126,12 +126,12 @@
         app:layout_constraintTop_toBottomOf="@+id/infoKennelNameText" />
 
     <TextView
-        android:id="@+id/infoRegNum"
+        android:id="@+id/infoRegText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Rekisterinumero"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoKennelName"
         app:layout_constraintTop_toBottomOf="@+id/infoKennelName" />
 
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Kutsumanimi"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoName"
         app:layout_constraintStart_toStartOf="@+id/infoName" />
 
@@ -151,14 +151,15 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
         android:text="Kennelnimi"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoName"
         app:layout_constraintTop_toBottomOf="@+id/infoName" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/infoDogImage"
         android:layout_width="413dp"
         android:layout_height="245dp"
+        android:longClickable="true"
         android:scaleType="centerCrop"
         android:src="@drawable/whitedog"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +167,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/infoName"
         android:layout_width="125dp"
         android:layout_height="55dp"
@@ -177,15 +178,15 @@
         android:text="Musti"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+        app:layout_constraintTop_toBottomOf="@+id/infoDogImage" />
 
     <ListView
         android:layout_width="201dp"
         android:layout_height="61dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="@+id/infoNotice"
-        app:layout_constraintTop_toTopOf="@+id/infoNotice" />
+        app:layout_constraintStart_toStartOf="@+id/infoNote"
+        app:layout_constraintTop_toTopOf="@+id/infoNote" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
