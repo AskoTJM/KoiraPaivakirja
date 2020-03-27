@@ -34,7 +34,6 @@
         android:layout_marginStart="16dp"
         android:fontFamily="@font/share"
         android:gravity="center_vertical"
-        android:text="123456789012345"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/infoReg"
         app:layout_constraintTop_toTopOf="@+id/infoReg" />
@@ -55,7 +54,6 @@
         android:layout_height="55dp"
         android:fontFamily="@font/share"
         android:gravity="center_vertical"
-        android:text="FI12345/67	"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/infoRegText"
         app:layout_constraintTop_toBottomOf="@+id/infoRegText" />
@@ -79,7 +77,6 @@
         android:layout_marginStart="16dp"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
-        android:text="12/12/2013"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/infoName"
         app:layout_constraintTop_toTopOf="@+id/infoName" />
@@ -120,7 +117,6 @@
         android:layout_height="55dp"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Hell bent for leather"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/infoKennelNameText"
         app:layout_constraintTop_toBottomOf="@+id/infoKennelNameText" />
@@ -175,7 +171,6 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/share"
         android:gravity="center_vertical"
-        android:text="Musti"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoDogImage" />
