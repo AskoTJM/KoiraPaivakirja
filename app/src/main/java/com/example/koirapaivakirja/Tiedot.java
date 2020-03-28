@@ -70,6 +70,7 @@ public class Tiedot extends AppCompatActivity {
                         mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
                  //     Seuraavaa rivi aiheuttaa kaatumisen, koska timestamp muodossa
                 //        mInfoBirth.setText((CharSequence) dokumentti.get("birthdate"));
+
                         mInfoIDNumber.setText((CharSequence) dokumentti.get("microChipID").toString());
 
 
