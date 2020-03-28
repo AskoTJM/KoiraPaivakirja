@@ -8,6 +8,9 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+//import com.google.type.Date;
 
 import java.util.Map;
 
@@ -28,6 +32,7 @@ public class Tiedot extends AppCompatActivity {
     ImageView mInfoImageView;
     String infoMode = "Info"; // Modes = Info, Edit, Add
     Handler handler;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +73,11 @@ public class Tiedot extends AppCompatActivity {
                         mInfoName.setText((CharSequence) dokumentti.get("nickname"));
                         mInfoKennelName.setText((CharSequence) dokumentti.get("kennelname"));
                         mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
-                 //     Seuraavaa rivi aiheuttaa kaatumisen, koska timestamp muodossa
-                //        mInfoBirth.setText((CharSequence) dokumentti.get("birthdate"));
-
                         mInfoIDNumber.setText((CharSequence) dokumentti.get("microChipID").toString());
 
-
+                        Date bDate = document.getDate("birthdate");
+                        String sbDate = sdf.format(bDate);
+                        mInfoBirth.setText(sbDate);
                         // Log.d("Koera", "DocumentSnapshot data: " + document.toString()); // document.getData());
                     } else {
                         Log.d("Koira", "No such document");
