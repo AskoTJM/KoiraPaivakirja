@@ -107,6 +107,7 @@ public class Aktiviteetti extends AppCompatActivity {
                 Aktiviteetti.put("Kesto",Hours + ":" + String.format("%02d", Minutes) + ":" + String.format("%02d", Seconds));
                 Aktiviteetti.put("Lopetus",loppu);
                 Aktiviteetti.put("Päivämäärä", paivaMaara);
+
                 activitiesDB.document("lenkki" + count).set(Aktiviteetti);
                 
 

@@ -132,23 +132,26 @@ public class Tiedot extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void putDataToFireStore(){
 
         Map<String, Object> dogData = new HashMap<>();
-        dogData.put("nickname", mInfoName.getText());
-        dogData.put("kennelname", mInfoKennelName.getText());
-        dogData.put("regnumber", mInfoReg.getText());
-        dogData.put("microChipID", mInfoIDNumber.getText());
+        String pNickName= String.valueOf(mInfoName.getText());
+        String pKennelname = String.valueOf(mInfoKennelName.getText());
+        String pRegNum = String.valueOf(mInfoReg.getText());
+       // int pMicroChipID = Integer.parseInt(String.valueOf(mInfoIDNumber.getText()));
+        String temp = mInfoIDNumber.getText().toString();
+     //   int pMicroChipID = Integer.parseInt(temp);
+
+        dogData.put("nickname", pNickName);
+        dogData.put("kennelname", pKennelname);
+        dogData.put("regnumber", pRegNum);
+       // dogData.put("microChipID", pMicroChipID);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //CollectionReference collRef = db.collection("dogs");
-
-        //final DocumentReference newDog = db.collection("cities").document();
-
-        db.collection("/dogs")
-                .add(dogData)
+        db.collection("dogs").add(dogData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -161,16 +164,10 @@ public class Tiedot extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.w("Koira", "Error adding document", e);
                     }
-                });
+                }); /**/
 
         // newDog.set(dogData);
-        /*
-        collRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-            }
-        })*/
     };
 // Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin
     private void toggleEditMode(String infoMode2){
