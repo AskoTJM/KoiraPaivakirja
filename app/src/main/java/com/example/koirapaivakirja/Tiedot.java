@@ -2,7 +2,9 @@ package com.example.koirapaivakirja;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -21,7 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-//import com.google.type.Date;
 
 import java.util.Map;
 
@@ -30,7 +33,7 @@ public class Tiedot extends AppCompatActivity {
 
     EditText mInfoName, mInfoNote, mInfoIDNumber, mInfoReg, mInfoBirth, mInfoKennelName, mInfoWeight;
     ImageView mInfoImageView;
-    String infoMode = "Info"; // Modes = Info, Edit, Add
+    // Not in use anymore String infoMode = "Info"; // Modes = Info, Edit, Add
     Handler handler;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -38,6 +41,8 @@ public class Tiedot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiedot);
+
+
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
         mInfoKennelName = findViewById(R.id.infoKennelName);
@@ -50,12 +55,25 @@ public class Tiedot extends AppCompatActivity {
 
         handler = new Handler();
 
-      // mInfoImageView.setOnClickListener();
+        // Find the toolbar view inside the activity layout
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
 
-        toggleEditMode();
+      // mInfoImageView.setOnClickListener();
+      //  infoMode = "Edit";
+      //  toggleEditMode("Edit");
         getDataFromFireStore();
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_info, menu);
+        return true;
     }
 
     private void getDataFromFireStore(){
@@ -89,9 +107,9 @@ public class Tiedot extends AppCompatActivity {
         });
     }
 
-
-    private void toggleEditMode(){
-        switch(infoMode){
+// Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin (?)
+    private void toggleEditMode(String infoMode2){
+        switch(infoMode2){
             case "Info":
                 mInfoIDNumber.setEnabled(false);
                 mInfoBirth.setEnabled(false);
@@ -110,8 +128,19 @@ public class Tiedot extends AppCompatActivity {
                 mInfoNote.setEnabled(true);
                 mInfoWeight.setEnabled(true);
                 break;
+            case "Add":
+                // En tiedä voiko tehdä näin mutta kokeillaan
+                toggleEditMode("Edit");
+                mInfoIDNumber.setText("");
+                mInfoBirth.setText("");
+                mInfoKennelName.setText("");
+                mInfoName.setText("");
+                mInfoReg.setText("");
+                mInfoNote.setText("");
+                mInfoWeight.setText("");
+                break;
             default:
-                throw new IllegalStateException("Unexpected value: " + infoMode);
+                throw new IllegalStateException("Unexpected value: " + infoMode2);
         }
     }
 
