@@ -6,7 +6,7 @@
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/infoToolbarRemove"
-        android:title="Remove"
+        android:title="Save to DB"
         app:showAsAction="ifRoom|withText"></item>
 
 </menu>

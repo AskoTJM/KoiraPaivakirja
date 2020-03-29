@@ -143,12 +143,12 @@ public class Tiedot extends AppCompatActivity {
         String pRegNum = String.valueOf(mInfoReg.getText());
        // int pMicroChipID = Integer.parseInt(String.valueOf(mInfoIDNumber.getText()));
         String temp = mInfoIDNumber.getText().toString();
-     //   int pMicroChipID = Integer.parseInt(temp);
+        long pMicroChipID = Long.parseLong(temp);
 
         dogData.put("nickname", pNickName);
         dogData.put("kennelname", pKennelname);
         dogData.put("regnumber", pRegNum);
-       // dogData.put("microChipID", pMicroChipID);
+        dogData.put("microChipID", pMicroChipID);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("dogs").add(dogData)
