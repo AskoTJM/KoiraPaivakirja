@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -15,17 +13,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.view.Menu;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -41,7 +44,6 @@ public class Tiedot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiedot);
-
 
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
@@ -67,6 +69,7 @@ public class Tiedot extends AppCompatActivity {
         getDataFromFireStore();
 
 
+
     }
 
     @Override
@@ -74,6 +77,27 @@ public class Tiedot extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_info, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case (R.id.infoToolbarAdd):
+                toggleEditMode("Add");
+                Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
+                return true;
+            case (R.id.infoToolbarRemove):
+               // Toast.makeText(this, "Remove selected", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Save to DB selected", Toast.LENGTH_LONG).show();
+                putDataToFireStore();
+                return true;
+            /*case (R.id.infoToolbarSave):
+
+                return true;
+            */
+
+        }
+        return false;
     }
 
     private void getDataFromFireStore(){
@@ -87,15 +111,18 @@ public class Tiedot extends AppCompatActivity {
                     if (document.exists()) {
                         Map dokumentti;
                         dokumentti = document.getData();
-                        assert dokumentti != null;
-                        mInfoName.setText((CharSequence) dokumentti.get("nickname"));
-                        mInfoKennelName.setText((CharSequence) dokumentti.get("kennelname"));
-                        mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
-                        mInfoIDNumber.setText((CharSequence) dokumentti.get("microChipID").toString());
+                        if(dokumentti != null) {
+                            mInfoName.setText((CharSequence) dokumentti.get("nickname"));
+                            mInfoKennelName.setText((CharSequence) dokumentti.get("kennelname"));
+                            mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
+                            mInfoIDNumber.setText((CharSequence) dokumentti.get("microChipID").toString());
 
-                        Date bDate = document.getDate("birthdate");
-                        String sbDate = sdf.format(bDate);
-                        mInfoBirth.setText(sbDate);
+                            Date bDate = document.getDate("birthdate");
+                            if (bDate != null) {
+                                String sbDate = sdf.format(bDate);
+                                mInfoBirth.setText(sbDate);
+                            }
+                        }
                         // Log.d("Koera", "DocumentSnapshot data: " + document.toString()); // document.getData());
                     } else {
                         Log.d("Koira", "No such document");
@@ -107,7 +134,45 @@ public class Tiedot extends AppCompatActivity {
         });
     }
 
-// Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin (?)
+    private void putDataToFireStore(){
+
+        Map<String, Object> dogData = new HashMap<>();
+        dogData.put("nickname", mInfoName.getText());
+        dogData.put("kennelname", mInfoKennelName.getText());
+        dogData.put("regnumber", mInfoReg.getText());
+        dogData.put("microChipID", mInfoIDNumber.getText());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //CollectionReference collRef = db.collection("dogs");
+
+        //final DocumentReference newDog = db.collection("cities").document();
+
+        db.collection("/dogs")
+                .add(dogData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+
+                        Log.d("Koira", "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Koira", "Error adding document", e);
+                    }
+                });
+
+        // newDog.set(dogData);
+        /*
+        collRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+            }
+        })*/
+    };
+// Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin
     private void toggleEditMode(String infoMode2){
         switch(infoMode2){
             case "Info":
@@ -129,7 +194,7 @@ public class Tiedot extends AppCompatActivity {
                 mInfoWeight.setEnabled(true);
                 break;
             case "Add":
-                // En tiedä voiko tehdä näin mutta kokeillaan
+                // En tiedä voiko tehdä näin mutta kokeillaan, toimi.
                 toggleEditMode("Edit");
                 mInfoIDNumber.setText("");
                 mInfoBirth.setText("");

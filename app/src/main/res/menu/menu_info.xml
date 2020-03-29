@@ -1,13 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/miCompose"
-        android:icon="@android:drawable/btn_plus"
-        android:title="Compose"
+        android:id="@+id/infoToolbarAdd"
+        android:title="Add"
         app:showAsAction="ifRoom"></item>
     <item
-        android:id="@+id/miProfile"
-        android:icon="@android:drawable/btn_minus"
-        android:title="Profile"
+        android:id="@+id/infoToolbarRemove"
+        android:title="Remove"
         app:showAsAction="ifRoom|withText"></item>
+
 </menu>
