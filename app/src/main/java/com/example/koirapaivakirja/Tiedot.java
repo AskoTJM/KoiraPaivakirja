@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -89,7 +91,11 @@ public class Tiedot extends AppCompatActivity {
             case (R.id.infoToolbarRemove):
                // Toast.makeText(this, "Remove selected", Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "Save to DB selected", Toast.LENGTH_LONG).show();
-                putDataToFireStore();
+                try {
+                    putDataToFireStore();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 return true;
             /*case (R.id.infoToolbarSave):
 
@@ -125,7 +131,7 @@ public class Tiedot extends AppCompatActivity {
                         }
                         // Log.d("Koera", "DocumentSnapshot data: " + document.toString()); // document.getData());
                     } else {
-                        Log.d("Koira", "No such document");
+                        Log.d("Koera", "No such document");
                     }
                 } else {
                    // Log.d(this, "get failed with ", task.getException());
@@ -135,20 +141,30 @@ public class Tiedot extends AppCompatActivity {
 
     }
 
-    private void putDataToFireStore(){
+    private void putDataToFireStore() throws ParseException {
 
         Map<String, Object> dogData = new HashMap<>();
         String pNickName= String.valueOf(mInfoName.getText());
         String pKennelname = String.valueOf(mInfoKennelName.getText());
         String pRegNum = String.valueOf(mInfoReg.getText());
-       // int pMicroChipID = Integer.parseInt(String.valueOf(mInfoIDNumber.getText()));
         String temp = mInfoIDNumber.getText().toString();
         long pMicroChipID = Long.parseLong(temp);
+        //String dateTemp = mInfoBirth.getText().toString();
+        //Date dateIntTemp = Date,(dateTemp);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+        String dateInString = mInfoBirth.getText().toString();
+        Date dateTemp = formatter.parse(dateInString);
+        if(dateTemp != null) {
+            Timestamp pBirthDate = new Timestamp(dateTemp);
+            dogData.put("birthdate", pBirthDate);
+        }
 
         dogData.put("nickname", pNickName);
         dogData.put("kennelname", pKennelname);
         dogData.put("regnumber", pRegNum);
         dogData.put("microChipID", pMicroChipID);
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("dogs").add(dogData)
