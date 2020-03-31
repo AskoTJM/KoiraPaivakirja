@@ -234,7 +234,7 @@ public class Tiedot extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + infoMode2);
         }
     }
-    //alla olevilla funktioilla haetaan kuva galleriasta
+    //alla olevilla funktioilla haetaan kuva galleriasta ja asetetaan se imageviewiin.
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
