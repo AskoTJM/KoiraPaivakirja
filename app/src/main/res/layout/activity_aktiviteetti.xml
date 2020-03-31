@@ -21,7 +21,8 @@
         android:ems="10"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
-        android:text="17:01"
+        android:hint="17:01"
+        android:maxLength="5"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkOut" />
@@ -49,7 +50,7 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:inputType="date"
-        android:text="18/02/2020"
+        android:hint="18/02/2020"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@id/activityTimeStop"
         app:layout_constraintTop_toTopOf="@+id/activityTimeStop" />
@@ -63,6 +64,8 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:text=""
+        android:hint="1:30"
+        android:maxLength="5"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/activityTimeStart"
         app:layout_constraintTop_toTopOf="@+id/activityTimeStart" />
@@ -77,6 +80,8 @@
         android:fontFamily="@font/share"
         android:gravity="center_horizontal"
         android:text=""
+        android:hint="18:31"
+        android:maxLength="5"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/activityTimeStart"
         app:layout_constraintTop_toBottomOf="@+id/activityTimeStart" />

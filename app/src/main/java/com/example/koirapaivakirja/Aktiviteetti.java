@@ -21,7 +21,7 @@ public class Aktiviteetti extends AppCompatActivity {
     CheckBox mOut, mPlay;
     Button mSave;
     Handler handler;
-    String activity;
+    String activity, pNotes;
 
 
     @Override
@@ -58,6 +58,7 @@ public class Aktiviteetti extends AppCompatActivity {
                                     "Choose one activity type", Toast.LENGTH_SHORT).show();
                         } else {
                             try {
+                                pNotes = mWorkout.getText().toString();
                                 saveData();
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -76,14 +77,18 @@ public class Aktiviteetti extends AppCompatActivity {
 
             Map<String, Object> Aktiviteetti = new HashMap<>();
 
-            String StartTemp = mStart.getText().toString();
-            String DurationTemp = mCurrent.getText().toString();
-            String EndTemp = mDuration.getText().toString();
+            String pStart = mStart.getText().toString();
+            String pDuration = mCurrent.getText().toString();
+            String pEnd = mDuration.getText().toString();
 
-            Aktiviteetti.put("Start", StartTemp);
+            if(pNotes!= null) {
+                Aktiviteetti.put("Notes", pNotes);
+            }
+
+            Aktiviteetti.put("Start", pStart);
             Aktiviteetti.put("Activity", activity);
-            Aktiviteetti.put("Duration", DurationTemp + " hours");
-            Aktiviteetti.put("End", EndTemp);
+            Aktiviteetti.put("Duration", pDuration + " hours");
+            Aktiviteetti.put("End", pEnd);
             Aktiviteetti.put("Date", Timestamp.now());
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
