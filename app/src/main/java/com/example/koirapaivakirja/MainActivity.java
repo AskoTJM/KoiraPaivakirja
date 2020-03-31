@@ -51,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     mPassword.setError("Salasana vaaditaan");
                     return;
                 }
-                //rekisteröi käyttäjän firebaseen
+                //kirjaa valmiin käyttäjän sisään.
                 firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                  //kirjaa valmiin käyttäjän sisään
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             //jos kirjautuminen onnistui valmiilla käyttäjällä
                             startActivity(new Intent(getApplicationContext(),Etusivu.class));
                         }else{
-                            Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Virheellinen käyttäjä tai salasana", Toast.LENGTH_SHORT).show();
                             //jos käyttäjää ei olemassa tai väärät tunnukset
                         }
                     }
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intentActivity = new Intent(this, Rekisterointi.class);
         startActivity(intentActivity);
     }
-    public void goToMainactivity(View view) {
+    public void goToMainActivity(View view) {
         Intent intentActivity = new Intent(this, MainActivity.class);
         startActivity(intentActivity);
     }

@@ -37,11 +37,11 @@ public class Rekisterointi extends AppCompatActivity {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email required");
+                    mEmail.setError("Sähköposti vaaditaan");
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password required");
+                    mPassword.setError("Salasana vaaditaan");
                     return;
                 }
                 //rekisteröi käyttäjän firebaseen
@@ -49,10 +49,10 @@ public class Rekisterointi extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Rekisterointi.this, "user created", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Rekisterointi.this, "Rekisteröinti onnistui", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),Etusivu.class));
                         }else{
-                            Toast.makeText(Rekisterointi.this, "error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Rekisterointi.this, "Virhe luodessa uutta käyttäjää", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -61,7 +61,7 @@ public class Rekisterointi extends AppCompatActivity {
         });
     }
 
-    public void goToMainactivity(View view) {
+    public void goToMainActivity(View view) {
         Intent intentActivity = new Intent(this, MainActivity.class);
         startActivity(intentActivity);
     }
