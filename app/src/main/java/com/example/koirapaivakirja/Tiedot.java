@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -15,6 +18,7 @@ import java.util.Date;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,6 +44,8 @@ public class Tiedot extends AppCompatActivity {
     ImageView mInfoImageView;
     // Not in use anymore String infoMode = "Info"; // Modes = Info, Edit, Add
     Handler handler;
+    Uri mImageUri;
+    private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     @Override
@@ -56,6 +62,13 @@ public class Tiedot extends AppCompatActivity {
         mInfoWeight = findViewById(R.id.infoWeight);
 
         mInfoImageView = findViewById(R.id.infoDogImage);
+        mInfoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+
 
         handler = new Handler();
 
@@ -221,8 +234,18 @@ public class Tiedot extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + infoMode2);
         }
     }
-
-
+    //alla olevilla funktioilla haetaan kuva galleriasta
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            mImageUri = data.getData();
+            mInfoImageView.setImageURI(mImageUri);
+        }
+    }
 
 
 }
