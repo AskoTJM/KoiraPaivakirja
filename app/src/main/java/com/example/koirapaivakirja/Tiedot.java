@@ -1,9 +1,11 @@
 package com.example.koirapaivakirja;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +22,7 @@ import java.util.Date;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,6 +36,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -45,6 +52,8 @@ public class Tiedot extends AppCompatActivity {
     // Not in use anymore String infoMode = "Info"; // Modes = Info, Edit, Add
     Handler handler;
     Uri mImageUri;
+    public Uri imguri;
+    StorageReference mStorageRef;
     private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -52,7 +61,7 @@ public class Tiedot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiedot);
-
+        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
         mInfoKennelName = findViewById(R.id.infoKennelName);
@@ -66,6 +75,7 @@ public class Tiedot extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openGallery();
+                //Fileuploader();
             }
         });
 
@@ -236,16 +246,40 @@ public class Tiedot extends AppCompatActivity {
     }
     //alla olevilla funktioilla haetaan kuva galleriasta ja asetetaan se imageviewiin.
     private void openGallery(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    private String getExtension(Uri uri){
+        ContentResolver cr=getContentResolver();
+        MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
+    }
+    private void Fileuploader(){
+        StorageReference Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imguri));
+        Ref.putFile(imguri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Toast.makeText(Tiedot.this, "Image Uploaded succesfully",Toast.LENGTH_LONG);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            mImageUri = data.getData();
-            mInfoImageView.setImageURI(mImageUri);
+        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            imguri=data.getData();
+            mInfoImageView.setImageURI(imguri);
         }
     }
-
 
 }
