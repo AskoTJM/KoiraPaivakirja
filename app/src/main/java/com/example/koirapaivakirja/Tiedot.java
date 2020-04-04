@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +56,7 @@ public class Tiedot extends AppCompatActivity {
     Uri mImageUri;
     public Uri imguri;
     StorageReference mStorageRef;
+    StorageReference Ref;
     private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -256,14 +259,14 @@ public class Tiedot extends AppCompatActivity {
         MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
     }
-    private void Fileuploader(){
-        StorageReference Ref = mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imguri));
+    private void Fileuploader() {
+        StorageReference Ref = mStorageRef.child(System.currentTimeMillis() + "." + getExtension(imguri));
         Ref.putFile(imguri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(Tiedot.this, "Image Uploaded succesfully",Toast.LENGTH_LONG);
+                        Toast.makeText(Tiedot.this, "Image Uploaded succesfully", Toast.LENGTH_LONG);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -272,6 +275,21 @@ public class Tiedot extends AppCompatActivity {
 
                     }
                 });
+    }
+    private void Filedownloader() throws IOException {
+        File localFile = File.createTempFile("images", "jpg");
+        Ref.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
