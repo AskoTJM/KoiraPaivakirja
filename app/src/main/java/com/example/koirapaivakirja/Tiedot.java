@@ -78,7 +78,8 @@ public class Tiedot extends AppCompatActivity {
         mInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery();
+                if(mInfoName.isEnabled())
+                    openGallery();
                 //Fileuploader();
             }
 
@@ -99,7 +100,7 @@ public class Tiedot extends AppCompatActivity {
         getDataFromFireStore();
 
 
-
+        toggleEditMode("Info");
     }
 
     @Override
@@ -130,6 +131,7 @@ public class Tiedot extends AppCompatActivity {
             case (R.id.infoToolbarEdit):
                 Toast.makeText(this, "Edit selected", Toast.LENGTH_LONG).show();
                 toggleEditMode("Edit");
+
                 return true;
 
 
@@ -199,7 +201,7 @@ public class Tiedot extends AppCompatActivity {
 
 
 
-// For new Dog
+        // Check if new dog or updating old one
         if(dogChosen.equals("newDog")) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("dogs").add(dogData)
@@ -207,13 +209,13 @@ public class Tiedot extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
-                            Log.d("Koira", "DocumentSnapshot written with ID: " + documentReference.getId());
+                            Log.d("Koera", "DocumentSnapshot written with ID: " + documentReference.getId());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w("Koira", "Error adding document", e);
+                            Log.w("Koera", "Error adding document", e);
                         }
                     }); /**/
         }else{
