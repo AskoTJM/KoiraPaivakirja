@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 
-import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
@@ -33,7 +32,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,6 +58,9 @@ public class Tiedot extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
+    // Temporary Dog switcher
+    String dogChosen = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +81,9 @@ public class Tiedot extends AppCompatActivity {
                 openGallery();
                 //Fileuploader();
             }
-        });
 
+
+        });
 
         handler = new Handler();
 
@@ -112,9 +114,10 @@ public class Tiedot extends AppCompatActivity {
         switch (item.getItemId()) {
             case (R.id.infoToolbarAdd):
                 toggleEditMode("Add");
+                dogChosen = "newDog";
                 Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
                 return true;
-            case (R.id.infoToolbarRemove):
+            case (R.id.infoToolbarSave):
                // Toast.makeText(this, "Remove selected", Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "Save to DB selected", Toast.LENGTH_LONG).show();
                 try {
@@ -122,11 +125,13 @@ public class Tiedot extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                toggleEditMode("Info");
                 return true;
-            /*case (R.id.infoToolbarSave):
+            case (R.id.infoToolbarEdit):
+                Toast.makeText(this, "Edit selected", Toast.LENGTH_LONG).show();
+                toggleEditMode("Edit");
+                return true;
 
-                return true;
-            */
 
         }
         return false;
@@ -134,7 +139,7 @@ public class Tiedot extends AppCompatActivity {
 
     private void getDataFromFireStore(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("dogs").document("rKJvTSFsozBr0V5JAyvQ");
+        DocumentReference docRef = db.collection("dogs").document(dogChosen);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -170,15 +175,21 @@ public class Tiedot extends AppCompatActivity {
     private void putDataToFireStore() throws ParseException {
 
         Map<String, Object> dogData = new HashMap<>();
-        String pNickName= String.valueOf(mInfoName.getText());
-        String pKennelname = String.valueOf(mInfoKennelName.getText());
-        String pRegNum = String.valueOf(mInfoReg.getText());
-        String temp = mInfoIDNumber.getText().toString();
-        long pMicroChipID = Long.parseLong(temp);
-        //String dateTemp = mInfoBirth.getText().toString();
-        //Date dateIntTemp = Date,(dateTemp);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+            String pNickName = String.valueOf(mInfoName.getText());
+        if(!pNickName.isEmpty())
+            dogData.put("nickname", pNickName);
+            String pKennelname = String.valueOf(mInfoKennelName.getText());
+        if(!pKennelname.isEmpty())
+            dogData.put("kennelname", pKennelname);
+            String pRegNum = String.valueOf(mInfoReg.getText());
+        if(!pRegNum.isEmpty())
+            dogData.put("regnumber", pRegNum);
+            String temp = mInfoIDNumber.getText().toString();
+        if(!temp.isEmpty()){
+            long pMicroChipID = Long.parseLong(temp);
+            dogData.put("microChipID", pMicroChipID);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
         String dateInString = mInfoBirth.getText().toString();
         Date dateTemp = formatter.parse(dateInString);
         if(dateTemp != null) {
@@ -186,29 +197,42 @@ public class Tiedot extends AppCompatActivity {
             dogData.put("birthdate", pBirthDate);
         }
 
-        dogData.put("nickname", pNickName);
-        dogData.put("kennelname", pKennelname);
-        dogData.put("regnumber", pRegNum);
-        dogData.put("microChipID", pMicroChipID);
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("dogs").add(dogData)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
+// For new Dog
+        if(dogChosen.equals("newDog")) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("dogs").add(dogData)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
 
-                        Log.d("Koira", "DocumentSnapshot written with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Koira", "Error adding document", e);
-                    }
-                }); /**/
+                            Log.d("Koira", "DocumentSnapshot written with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("Koira", "Error adding document", e);
+                        }
+                    }); /**/
+        }else{
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("dogs").document(dogChosen).set(dogData)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("KOERA", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("KOERA", "Error writing document", e);
+                        }
+                    });
+        }
 
-        // newDog.set(dogData);
 
     };
 // Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin

@@ -5,8 +5,12 @@
         android:title="Add"
         app:showAsAction="ifRoom"></item>
     <item
-        android:id="@+id/infoToolbarRemove"
+        android:id="@+id/infoToolbarSave"
         android:title="Save to DB"
         app:showAsAction="ifRoom|withText"></item>
+    <item
+        android:id="@+id/infoToolbarEdit"
+        android:title="Edit"
+        app:showAsAction="withText"></item>
 
 </menu>

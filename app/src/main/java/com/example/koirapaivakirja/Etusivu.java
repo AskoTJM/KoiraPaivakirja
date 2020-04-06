@@ -14,6 +14,7 @@ public class Etusivu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etusivu);
+
     }
 
     public void goToFeed(View view) {
