@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/laakitysConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F6F6F6"
+        tools:context=".Laakitys">
+
+        <TextView
+            android:id="@+id/medDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Päivämäärä"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medDate"
+            app:layout_constraintStart_toStartOf="@+id/medDate" />
+
+        <TextView
+            android:id="@+id/medTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Kellonaika"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medTime"
+            app:layout_constraintStart_toStartOf="@+id/medTime" />
+
+        <TextView
+            android:id="@+id/medFoodText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Kutsumanimi"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medDog"
+            app:layout_constraintStart_toStartOf="@+id/medDog" />
+
+        <TextView
+            android:id="@+id/medAmountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Määrä"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medAmount"
+            app:layout_constraintStart_toStartOf="@+id/medAmount" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="164dp"
+            android:layout_height="125dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:srcCompat="@drawable/chihuahua" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="162dp"
+            android:layout_height="125dp"
+            android:scaleType="centerCrop"
+            android:scrollY="-40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/canine" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/whitedog" />
+
+        <EditText
+            android:id="@+id/medTime"
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#000000"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:inputType="time"
+            android:text="17:01"
+            android:maxLength="5"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <EditText
+            android:id="@+id/medDate"
+            android:layout_width="125dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="40dp"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:inputType="date"
+            android:text="18/02/2020"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/medTime"
+            app:layout_constraintTop_toTopOf="@+id/medTime"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/medBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:height="55dp"
+            android:fontFamily="@font/share"
+            android:text="Lääkitse"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/medDate"
+            app:layout_constraintTop_toTopOf="@+id/medDate"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/medDog"
+            android:layout_width="218dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:editable="false"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:text="casper"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medTime" />
+
+        <EditText
+            android:id="@+id/medAmount"
+            android:layout_width="83dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="24dp"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="330ml"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/medDog"
+            app:layout_constraintTop_toTopOf="@+id/medDog" />
+
+        <TextView
+            android:id="@+id/medNotesHeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Muistiinpanot"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medNotes"
+            app:layout_constraintStart_toStartOf="@+id/medNotes"
+            app:layout_constraintTop_toBottomOf="@+id/medDog"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <EditText
+            android:id="@+id/medNotes"
+            android:layout_width="336dp"
+            android:layout_height="182dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="116dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medDog" />
+
+        <TextView
+            android:id="@+id/nameDog1"
+            android:layout_width="65dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/share"
+            android:inputType="textMultiLine"
+            android:text="Justi \n8V  4kg"
+            android:textColor="#F6F6F6"
+            android:textColorHighlight="#0500DF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/nameDog3"
+            android:layout_width="65dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="6dp"
+            android:fontFamily="@font/share"
+            android:inputType="textMultiLine"
+            android:text="Musti \n6V  10kg"
+            android:textColor="#F6F6F6"
+            android:textColorHighlight="#0500DF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/nameDog2"
+            android:layout_width="65dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/share"
+            android:inputType="textMultiLine"
+            android:text="Kusti \n3V  18kg"
+            android:textColor="#F6F6F6"
+            android:textColorHighlight="#0500DF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/medNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Lääke"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/medName"
+            app:layout_constraintStart_toStartOf="@+id/medName" />
+
+        <EditText
+            android:id="@+id/medName"
+            android:layout_width="218dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:breakStrategy="simple"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:gravity="center_vertical"
+            android:text="Bisse"
+            android:inputType="textPersonName"
+            android:textAllCaps="false"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medDog" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
