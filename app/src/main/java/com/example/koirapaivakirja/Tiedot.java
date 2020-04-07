@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,12 +19,15 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.DatePicker;
@@ -36,6 +40,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -62,8 +67,13 @@ public class Tiedot extends AppCompatActivity {
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
     Calendar cal;
 
+    private GestureDetector gdt;
+    private static final int MIN_SWIPPING_DISTANCE = 50;
+    private static final int THRESHOLD_VELOCITY = 50;
     // Temporary Dog switcher
     String dogChosen = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
+    String[] dogDB = new String[3];
+    int doggie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +99,22 @@ public class Tiedot extends AppCompatActivity {
             }
 
         });
+        doggie = 0;
+        dogDB[0] = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
+        dogDB[1] = "AaxkqBCwOrJUkZYoKqZA";
+        dogDB[2] = "CMjBokjbbg41g8fqZdPU";
 
+        gdt = new GestureDetector(new GestureListener());
+        mInfoImageView.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            public boolean onTouch(View v, MotionEvent event) {
+                gdt.onTouchEvent(event);
+                // ... Respond to touch events
+                return true;
+
+            }
+        });
         handler = new Handler();
-
         // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Sets the Toolbar to act as the ActionBar for this Activity window.
@@ -105,6 +128,41 @@ public class Tiedot extends AppCompatActivity {
 
         // Probably Useless but at least we can be sure were in info mode.
         toggleEditMode("Info");
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener
+    {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            if (e1.getX() - e2.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY)
+            {
+                Toast.makeText(getApplicationContext(), "You have swipped left side", Toast.LENGTH_SHORT).show();
+                if(doggie == 0){
+                    doggie = 2;
+                }else {
+                    doggie--;
+                }
+                dogChosen = dogDB[doggie];
+                getDataFromFireStore();
+                /* Code that you want to do on swiping left side*/
+                return false;
+            }
+            else if (e2.getX() - e1.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY)
+            {
+                Toast.makeText(getApplicationContext(), "You have swipped right side", Toast.LENGTH_SHORT).show();
+                if(doggie == 2){
+                    doggie = 0;
+                }else {
+                    doggie++;
+                }
+                dogChosen = dogDB[doggie];
+                getDataFromFireStore();
+                /* Code that you want to do on swiping right side*/
+                return false;
+            }
+            return false;
+        }
     }
 
     @Override
@@ -306,26 +364,20 @@ public class Tiedot extends AppCompatActivity {
         //SimpleDateFormat sdfD = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         //String parseDate = mInfoBirth.getText().toString();
         //cal.setTime(sdfD.parse(parseDate));// all done
-
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
-
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-
                         mInfoBirth.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
-
-
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
-        mInfoBirth.setText((CharSequence) cal);
+     //   mInfoBirth.setText((CharSequence) cal);
 
     }
 

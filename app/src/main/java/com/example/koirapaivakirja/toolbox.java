@@ -34,18 +34,25 @@ public class toolbox {
     return null;
     }
 
-    public static Timestamp TimeStamp4Time(String dateInString) throws ParseException {
+    public static Timestamp TimeStamp4Time(String dateInString,String timeInString) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
         //String dateInString = date;
-        Date dateTemp = formatter.parse(dateInString);
+        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ssSS");
+        //Date dateTemp = formatter.parse(dateInString);
+        Calendar calendar = Calendar.getInstance();
 
-        if(dateTemp != null) {
-            Timestamp timeStamp = new Timestamp(dateTemp);
-            return timeStamp;
-        }
+        //if(dateTemp != null) {
+        //    Timestamp timeStamp = new Timestamp(getTimeInMillis(day,month,year,hour,minute));
+        //    return timeStamp;
+        //}
         return null;
     }
 
+    public static long getTimeInMillis(int day, int month, int year,int hour, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day, hour, minute);
+        return calendar.getTimeInMillis();
+    }
 /*
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {

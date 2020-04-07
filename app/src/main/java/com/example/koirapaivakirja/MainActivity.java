@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null){
+            String uID = firebaseAuth.getUid();
             startActivity(new Intent(getApplicationContext(),Etusivu.class));
             finish();
             //jos kirjautunut jo sisään, menee suoraan etusivulle
