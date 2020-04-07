@@ -49,7 +49,6 @@ public class Tiedot extends AppCompatActivity {
 
     EditText mInfoName, mInfoNote, mInfoIDNumber, mInfoReg, mInfoBirth, mInfoKennelName, mInfoWeight;
     ImageView mInfoImageView;
-    // Not in use anymore String infoMode = "Info"; // Modes = Info, Edit, Add
     Handler handler;
     Uri mImageUri;
     public Uri imguri;
@@ -57,6 +56,7 @@ public class Tiedot extends AppCompatActivity {
     StorageReference Ref;
     private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
 
     // Temporary Dog switcher
     String dogChosen = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
@@ -78,11 +78,11 @@ public class Tiedot extends AppCompatActivity {
         mInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if were in edit mode
                 if(mInfoName.isEnabled())
                     openGallery();
                 //Fileuploader();
             }
-
 
         });
 
@@ -99,7 +99,7 @@ public class Tiedot extends AppCompatActivity {
       //  toggleEditMode("Edit");
         getDataFromFireStore();
 
-
+        // Probably Useless but at least we can be sure were in info mode.
         toggleEditMode("Info");
     }
 
@@ -119,19 +119,18 @@ public class Tiedot extends AppCompatActivity {
                 Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
                 return true;
             case (R.id.infoToolbarSave):
-               // Toast.makeText(this, "Remove selected", Toast.LENGTH_LONG).show();
                 Toast.makeText(this, "Save to DB selected", Toast.LENGTH_LONG).show();
                 try {
                     putDataToFireStore();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                // Switch back to info mode
                 toggleEditMode("Info");
                 return true;
             case (R.id.infoToolbarEdit):
                 Toast.makeText(this, "Edit selected", Toast.LENGTH_LONG).show();
                 toggleEditMode("Edit");
-
                 return true;
 
 
@@ -191,6 +190,8 @@ public class Tiedot extends AppCompatActivity {
             long pMicroChipID = Long.parseLong(temp);
             dogData.put("microChipID", pMicroChipID);
         }
+
+        /*
         SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
         String dateInString = mInfoBirth.getText().toString();
         Date dateTemp = formatter.parse(dateInString);
@@ -198,8 +199,9 @@ public class Tiedot extends AppCompatActivity {
             Timestamp pBirthDate = new Timestamp(dateTemp);
             dogData.put("birthdate", pBirthDate);
         }
-
-
+        */
+        String dateInString = mInfoBirth.getText().toString();
+        dogData.put("birthdate", toolbox.TimeStamp4Date(dateInString));
 
         // Check if new dog or updating old one
         if(dogChosen.equals("newDog")) {
@@ -237,7 +239,7 @@ public class Tiedot extends AppCompatActivity {
 
 
     };
-// Muuttaa EditTextit joko muokattavaan tai vain luettavaan tilaan. Add tyhjentää vanhan tekstin
+// Turns EditTexts into different modes, Info/Edit/Add
     private void toggleEditMode(String infoMode2){
         switch(infoMode2){
             case "Info":
@@ -259,7 +261,6 @@ public class Tiedot extends AppCompatActivity {
                 mInfoWeight.setEnabled(true);
                 break;
             case "Add":
-                // En tiedä voiko tehdä näin mutta kokeillaan, toimi.
                 toggleEditMode("Edit");
                 mInfoIDNumber.setText("");
                 mInfoBirth.setText("");
