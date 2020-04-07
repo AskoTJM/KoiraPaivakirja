@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
@@ -23,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -56,7 +60,7 @@ public class Tiedot extends AppCompatActivity {
     StorageReference Ref;
     private static final int PICK_IMAGE = 100;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-
+    Calendar cal;
 
     // Temporary Dog switcher
     String dogChosen = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
@@ -274,6 +278,60 @@ public class Tiedot extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + infoMode2);
         }
     }
+/*
+    public void showTimePickerDialog(View v) {
+        s
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+
+                        txtTime.setText(hourOfDay + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
+    }
+*/
+    public void showDatePickerDialog(View v) throws ParseException {
+        //DialogFragment newFragment = new toolbox.DatePickerFragment().;
+        //newFragment.show(getSupportFragmentManager(), "datePicker");
+        final Calendar c = Calendar.getInstance();
+        //SimpleDateFormat sdfD = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        //String parseDate = mInfoBirth.getText().toString();
+        //cal.setTime(sdfD.parse(parseDate));// all done
+
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        mInfoBirth.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+        mInfoBirth.setText((CharSequence) cal);
+
+    }
+
+
+
+
     //alla olevilla funktioilla haetaan kuva galleriasta ja asetetaan se imageviewiin.
     private void openGallery(){
         Intent intent=new Intent();

@@ -105,7 +105,10 @@
         android:inputType="date"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/infoName"
-        app:layout_constraintTop_toTopOf="@+id/infoName" />
+        app:layout_constraintTop_toTopOf="@+id/infoName"
+        android:focusable="false"
+        android:onClick="showDatePickerDialog"
+        />
 
     <TextView
         android:id="@+id/infoNoteText"
@@ -135,7 +138,8 @@
         android:text="Syntymäpäivä"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoBirth"
-        app:layout_constraintStart_toStartOf="@+id/infoBirth" />
+        app:layout_constraintStart_toStartOf="@+id/infoBirth"
+        />
 
     <EditText
         android:id="@+id/infoKennelName"
