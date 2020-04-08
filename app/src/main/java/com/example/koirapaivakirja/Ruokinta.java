@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,6 +58,7 @@ public class Ruokinta extends AppCompatActivity {
     //Button getFoodButton;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference feedingRef = db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB");
 
 
 
@@ -122,14 +125,18 @@ public class Ruokinta extends AppCompatActivity {
             feedData.put("timeStamp", feedingTime);
 
 
-            db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB").add(feedData);
+            feedingRef.add(feedData);
             Toast.makeText(Ruokinta.this, "Ruokinta onnistunut!", Toast.LENGTH_SHORT).show();
         }
     }
 
+    public void getFeeding(View v){
+        Intent intent = new Intent(this, VanhatRuokinnat.class);
+        startActivity(intent);
+    }
 
     // Voi hakea vain yhden ruokinnan tiedon DataBasesta, ei käytännöllinen.
-    public void getFeeding(View v){
+   /* public void getFeeding(View v){
         db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB").document("Ruokinta").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -151,7 +158,7 @@ public class Ruokinta extends AppCompatActivity {
                         }
                     }
                 });
-    }
+    } */
 
     public void pvmButton(View v) throws ParseException {
         final android.icu.util.Calendar c = android.icu.util.Calendar.getInstance();
@@ -171,12 +178,13 @@ public class Ruokinta extends AppCompatActivity {
 
     }
 
-   /* public void showTimePickerDialog(View v) {
+   public void timeButton(View v) {
         final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
+        int feedHour = c.get(Calendar.HOUR_OF_DAY);
+        int feedMinute = c.get(Calendar.MINUTE);
 
-        // Launch Time Picker Dialog
+
+
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
 
@@ -184,9 +192,9 @@ public class Ruokinta extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
 
-                        txtTime.setText(hourOfDay + ":" + minute);
+                        ruokiTime.setText(hourOfDay + ":" + minute);
                     }
-                }, mHour, mMinute, false);
+                }, feedHour, feedMinute, true);
         timePickerDialog.show();
-    } */
+    }
 }
