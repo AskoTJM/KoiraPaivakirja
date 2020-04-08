@@ -95,6 +95,9 @@
             android:inputType="time"
             android:text="17:01"
             android:maxLength="5"
+            android:focusable="false"
+            android:clickable="true"
+            android:onClick="timeButton"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -109,6 +112,9 @@
             android:inputType="date"
             android:text="18/02/2020"
             android:textSize="24sp"
+            android:focusable="false"
+            android:onClick="showDatePickerDialog"
+            android:enabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/medTime"
             app:layout_constraintTop_toTopOf="@+id/medTime"
@@ -156,7 +162,7 @@
             android:fontFamily="@font/share"
             android:gravity="center"
             android:inputType="number"
-            android:text="330ml"
+            android:text="330"
             android:textSize="24dp"
             app:layout_constraintStart_toEndOf="@+id/medDog"
             app:layout_constraintTop_toTopOf="@+id/medDog" />
@@ -259,6 +265,32 @@
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medDog" />
+
+        <TextView
+            android:id="@+id/medUnitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/share"
+            android:text="Yksikkö"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/medUnit"
+            tools:layout_editor_absoluteY="416dp" />
+
+        <EditText
+            android:id="@+id/medUnit"
+            android:layout_width="83dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:fontFamily="@font/share"
+            android:gravity="center"
+            android:text="ml"
+            android:maxLength="2"
+            android:inputType="text"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/medName"
+            app:layout_constraintTop_toBottomOf="@+id/medAmount" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
