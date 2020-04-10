@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -35,6 +36,7 @@ public class Laakitys extends AppCompatActivity {
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
     public Calendar c = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +101,14 @@ public class Laakitys extends AppCompatActivity {
             String pDog= mDog.getText().toString();
             String pDose= mDose.getText().toString();
             String pUnit = mUnit.getText().toString();
+            String pNotes = mNotes.getText().toString();
 
-            //ilmoitukseen tuleva data
-            scheduleNotification(getNotification( "Lääkkeen nimi: " + pMedType + "\nPäivämäärä: " + pDate + "\nAjankohta: " + pTime + "\nKoiran nimi: "  + pDog + "\nAnnos: " + pDose + pUnit), 1);
+            //ilmoitukseen tuleva data. content perusilmoitukselle ja content1 laajennetulle ilmoitukselle
+            scheduleNotification(getNotification( pDog+" lääkitys klo "+pTime,
+                                                  "Koira: "  + pDog + "\nAika: " + pTime + " " + pDate + "\nlääke: " + pMedType + " "+ pDose + pUnit + " \n" + pNotes), 1);
 
             //dataa tekstikenttään testailua varten
-            mNotes.setText("Lääkkeen nimi: " + pMedType + "\nPäivämäärä: " + pDate + "\nAjankohta: " + pTime + "\nKoiran nimi: "  + pDog + "\nAnnos: " + pDose + pUnit);
+            //mNotes.setText("Lääkkeen nimi: " + pMedType + "\nPäivämäärä: " + pDate + "\nAjankohta: " + pTime + "\nKoiran nimi: "  + pDog + "\nAnnos: " + pDose + pUnit);
         }
 
 
@@ -167,14 +171,18 @@ public class Laakitys extends AppCompatActivity {
     }
 
 
-    private Notification getNotification (String content) {
+    private Notification getNotification (String content, String content1) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder( this, default_notification_channel_id ) ;
         builder.setContentTitle( "Koiran lääkitys" ) ;
         builder.setContentText(content) ;
         builder.setSmallIcon(R.drawable. ic_launcher_foreground ) ;
         builder.setAutoCancel( true ) ;
-        builder.setChannelId( NOTIFICATION_CHANNEL_ID ) ;
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+        builder.setChannelId( NOTIFICATION_CHANNEL_ID );
+        builder.setStyle(new NotificationCompat.BigTextStyle()
+                .bigText(content1));
         return builder.build() ;
     }
 
