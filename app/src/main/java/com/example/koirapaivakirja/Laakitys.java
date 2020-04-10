@@ -94,6 +94,7 @@ public class Laakitys extends AppCompatActivity {
 
         public void saveMedTime() throws ParseException{
             Toast.makeText(Laakitys.this,"Lääkityksen muistutus lisätty", Toast.LENGTH_SHORT).show();
+
             //kenttiin asetetut arvot
             String pMedType= mMedType.getText().toString();
             String pDate= mDate.getText().toString();
@@ -181,6 +182,7 @@ public class Laakitys extends AppCompatActivity {
         builder.setDefaults(Notification.DEFAULT_VIBRATE);
         builder.setDefaults(Notification.DEFAULT_SOUND);
         builder.setChannelId( NOTIFICATION_CHANNEL_ID );
+        //notifikaation laajennettu tila:
         builder.setStyle(new NotificationCompat.BigTextStyle()
                 .bigText(content1));
         return builder.build() ;
