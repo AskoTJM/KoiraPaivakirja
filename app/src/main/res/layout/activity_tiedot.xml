@@ -12,8 +12,8 @@
         android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary">
+        app:titleTextColor="@color/appToolbarTextColor"
+        android:background="@color/appToolbarBackGround">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Layout for content is here. This can be a RelativeLayout  -->

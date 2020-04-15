@@ -132,37 +132,40 @@ public class Tiedot extends AppCompatActivity {
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener
     {
+
+
+
         @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-        {
-            if (e1.getX() - e2.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY)
-            {
-                Toast.makeText(getApplicationContext(), "You have swipped left side", Toast.LENGTH_SHORT).show();
-                if(doggie == 0){
-                    doggie = 2;
-                }else {
-                    doggie--;
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            if (!mInfoName.isEnabled()) {
+                if (e1.getX() - e2.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
+                    Toast.makeText(getApplicationContext(), "You have swipped left side", Toast.LENGTH_SHORT).show();
+                    if (doggie == 0) {
+                        doggie = 2;
+                    } else {
+                        doggie--;
+                    }
+                    dogChosen = dogDB[doggie];
+                    getDataFromFireStore();
+                    /* Code that you want to do on swiping left side*/
+                    return false;
+                } else if (e2.getX() - e1.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
+                    Toast.makeText(getApplicationContext(), "You have swipped right side", Toast.LENGTH_SHORT).show();
+                    if (doggie == 2) {
+                        doggie = 0;
+                    } else {
+                        doggie++;
+                    }
+                    dogChosen = dogDB[doggie];
+                    getDataFromFireStore();
+                    /* Code that you want to do on swiping right side*/
+                    return false;
                 }
-                dogChosen = dogDB[doggie];
-                getDataFromFireStore();
-                /* Code that you want to do on swiping left side*/
                 return false;
-            }
-            else if (e2.getX() - e1.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY)
-            {
-                Toast.makeText(getApplicationContext(), "You have swipped right side", Toast.LENGTH_SHORT).show();
-                if(doggie == 2){
-                    doggie = 0;
-                }else {
-                    doggie++;
-                }
-                dogChosen = dogDB[doggie];
-                getDataFromFireStore();
-                /* Code that you want to do on swiping right side*/
-                return false;
-            }
-            return false;
+            }return false;
         }
+
     }
 
     @Override

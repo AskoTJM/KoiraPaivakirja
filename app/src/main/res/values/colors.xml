@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="appTextColor">#000000</color>
+    <color name="appFrontPageButtonBackGround">#0500DF</color>
+    <color name="appFrontPageButtonTextColor">#F6F6F6</color>
+    <color name="appFrontPageBackGround">#D6E4F0</color>
+    <color name="appBackGround">#F6F6F6</color>
+    <color name="appToolbarBackGround">#D6E4F0</color>
+    <color name="appToolbarTextColor">#000000</color>
+
 </resources>
