@@ -32,9 +32,13 @@ public class Etusivu extends AppCompatActivity {
     Intent intentInfo = new Intent(this, Tiedot.class);
         startActivity(intentInfo);
     }
-    public void goToMed(View view){
+    public void goToMed(View view) {
         Intent intentLaakitys = new Intent(this, Laakitys.class);
         startActivity(intentLaakitys);
+    }
+    public void goToDoctor(View view){
+        Intent intentDoctor = new Intent(this,LaakarinTiedot.class);
+        startActivity(intentDoctor);
     }
 
     public void logOut(View view) {
