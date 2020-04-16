@@ -2,12 +2,16 @@ package com.example.koirapaivakirja;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.ParseException;
@@ -36,6 +40,9 @@ public class Aktiviteetti extends AppCompatActivity {
         mOut = findViewById(R.id.checkOut);
         mPlay = findViewById(R.id.checkPlay);
         final Button mSave = (Button) findViewById(R.id.saveButton);
+
+        Toolbar mainToolbar = findViewById(R.id.activityToolbar);
+        setSupportActionBar(mainToolbar);
 
 
         handler = new Handler();
@@ -98,5 +105,18 @@ public class Aktiviteetti extends AppCompatActivity {
         }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+
+        return false;
+    }
 }

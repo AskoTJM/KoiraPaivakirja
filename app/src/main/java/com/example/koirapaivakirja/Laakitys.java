@@ -11,6 +11,8 @@ import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 import java.text.ParseException;
@@ -42,6 +45,10 @@ public class Laakitys extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laakitys);
+        Toolbar mainToolbar = findViewById(R.id.medicateToolbar);
+        setSupportActionBar(mainToolbar);
+
+
         mNotes = findViewById(R.id.medNotes);
         mDate = findViewById(R.id.medDate);
         mTime = findViewById(R.id.medTime);
@@ -188,4 +195,18 @@ public class Laakitys extends AppCompatActivity {
         return builder.build() ;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_medicate, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+
+        return false;
+    }
 }

@@ -84,7 +84,7 @@ public class Tiedot extends AppCompatActivity {
         mInfoWeight = findViewById(R.id.infoWeight);
 
         mInfoImageView = findViewById(R.id.infoDogImage);
-        mInfoImageView.setOnClickListener(new View.OnClickListener() {
+        /*mInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check if were in edit mode
@@ -92,8 +92,7 @@ public class Tiedot extends AppCompatActivity {
                     openGallery();
                 //Fileuploader();
             }
-
-        });
+        });*/
         doggie = 0;
         dogDB[0] = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
         dogDB[1] = "AaxkqBCwOrJUkZYoKqZA";
@@ -125,7 +124,12 @@ public class Tiedot extends AppCompatActivity {
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener
     {
-
+        @Override
+        public void onLongPress(MotionEvent event) {
+            if(mInfoName.isEnabled())
+                openGallery();
+            Log.d("KOERA", "onLongPress: " + event.toString());
+        }
 
 
         @Override
@@ -167,6 +171,7 @@ public class Tiedot extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_info, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
