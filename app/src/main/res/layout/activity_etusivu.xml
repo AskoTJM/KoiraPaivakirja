@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/mainFeedButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -76,7 +76,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/mainActivityButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="#0500DF"
@@ -85,13 +85,13 @@
             android:text="Aktiviteetit"
             android:textColor="#F6F6F6"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/mainInfoButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/mainInfoButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="#0500DF"
@@ -100,14 +100,14 @@
             android:text="Tiedot"
             android:textColor="#F6F6F6"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
+            app:layout_constraintBottom_toTopOf="@+id/mainMedicateButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
             app:layout_constraintVertical_bias="0.78" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/mainMedicateButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:background="#0500DF"
@@ -119,7 +119,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
             app:layout_constraintVertical_bias="0.82" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,7 +208,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/nuoli" />
-
+    <!--
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -219,6 +219,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         android:onClick="logOut"/>
+    -->
 
     <Button
         android:id="@+id/testinappi"

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -32,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         mSignInButton = findViewById(R.id.signInButton);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
+
         if (firebaseAuth.getCurrentUser() != null){
+
+            editor.putString("uid",firebaseAuth.getUid());
+            editor.commit();
             String uID = firebaseAuth.getUid();
             startActivity(new Intent(getApplicationContext(),Etusivu.class));
             finish();

@@ -4,22 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.text.ParseException;
-
 public class Etusivu extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etusivu);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        toolbox.getDogsToPref(pref);
+
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
 
@@ -62,11 +67,24 @@ public class Etusivu extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case (R.id.mainToolbarLogout):
+                FirebaseAuth.getInstance().signOut();
+                //kirjaa nykyisen käyttäjän ulos
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
 
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+
+                return true;
+
+        }
         return false;
     }
-
 }

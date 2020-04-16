@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.view.GestureDetector;
@@ -66,14 +68,17 @@ public class Tiedot extends AppCompatActivity {
     private static final int MIN_SWIPPING_DISTANCE = 50;
     private static final int THRESHOLD_VELOCITY = 50;
     // Temporary Dog switcher
-    String dogChosen = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
-    String[] dogDB = new String[3];
-    int doggie;
+    String dogChosen; // = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
+    ArrayList<String> dogDB = new ArrayList<>();
+    int dogNumberInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiedot);
+
+        Toolbar toolbar = findViewById(R.id.infoToolbar);
+        setSupportActionBar(toolbar);
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
@@ -93,10 +98,27 @@ public class Tiedot extends AppCompatActivity {
                 //Fileuploader();
             }
         });*/
-        doggie = 0;
-        dogDB[0] = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
-        dogDB[1] = "AaxkqBCwOrJUkZYoKqZA";
-        dogDB[2] = "CMjBokjbbg41g8fqZdPU";
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        String dogGone = pref.getString("dog"+dogNumberInt,null);
+        dogChosen = pref.getString("dog0",null);
+        dogNumberInt = pref.getInt("dogChosenNumber", -2);
+        String testToast = Integer.toString(pref.getInt("numberOfDogs", 0 ));
+        Toast.makeText(getApplicationContext(), dogGone, Toast.LENGTH_SHORT).show();
+
+
+        int numberOfDogs = pref.getInt("numberOfDogs",0);
+        if(numberOfDogs > 0) {
+            dogNumberInt = 0;
+            int i = 0;
+            while(i < numberOfDogs) {
+                String dogNum = "dog"+i;
+                dogDB.add(i,pref.getString(dogNum,null));
+                i++;
+            }
+        }
+
 
         gdt = new GestureDetector(new GestureListener());
         mInfoImageView.setOnTouchListener(new View.OnTouchListener() {
@@ -110,13 +132,12 @@ public class Tiedot extends AppCompatActivity {
         });
         handler = new Handler();
         // Find the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.infoToolbar);
-        setSupportActionBar(toolbar);
+
 
       // mInfoImageView.setOnClickListener();
       //  infoMode = "Edit";
       //  toggleEditMode("Edit");
-        getDataFromFireStore();
+        fetchDogDataFromFireStore();
 
         // Probably Useless but at least we can be sure were in info mode.
         toggleEditMode("Info");
@@ -124,6 +145,9 @@ public class Tiedot extends AppCompatActivity {
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener
     {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
         @Override
         public void onLongPress(MotionEvent event) {
             if(mInfoName.isEnabled())
@@ -137,25 +161,35 @@ public class Tiedot extends AppCompatActivity {
 
             if (!mInfoName.isEnabled()) {
                 if (e1.getX() - e2.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
-                    Toast.makeText(getApplicationContext(), "You have swipped left side", Toast.LENGTH_SHORT).show();
-                    if (doggie == 0) {
-                        doggie = 2;
+                    Toast.makeText(getApplicationContext(), "You have swiped left side", Toast.LENGTH_SHORT).show();
+                    if (pref.getInt("dogChosenNumber",-2) == 0) {
+
+                        editor.putInt("dogChosenNumber",(pref.getInt("numberOfDogs",-2) -1));
+                        editor.commit();
                     } else {
-                        doggie--;
+                        int i = pref.getInt("dogChosenNumber",-2);
+                        i--;
+                        editor.putInt("dogChosenNumber",i);
+                        editor.commit();
+
                     }
-                    dogChosen = dogDB[doggie];
-                    getDataFromFireStore();
-                    /* Code that you want to do on swiping left side*/
+                    dogChosen = dogDB.get(pref.getInt("dogChosenNumber",-2));
+                    fetchDogDataFromFireStore();
+
                     return false;
                 } else if (e2.getX() - e1.getX() > MIN_SWIPPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
-                    Toast.makeText(getApplicationContext(), "You have swipped right side", Toast.LENGTH_SHORT).show();
-                    if (doggie == 2) {
-                        doggie = 0;
+                    Toast.makeText(getApplicationContext(), "You have swiped right side", Toast.LENGTH_SHORT).show();
+                    if (pref.getInt("dogChosenNumber",-2) == (pref.getInt("numberOfDogs",-2) -1)) {
+                        editor.putInt("dogChosenNumber",0);
+                        editor.commit();
                     } else {
-                        doggie++;
+                        int i = pref.getInt("dogChosenNumber",-2);
+                        i++;
+                        editor.putInt("dogChosenNumber",i);
+                        editor.commit();
                     }
-                    dogChosen = dogDB[doggie];
-                    getDataFromFireStore();
+                    dogChosen = dogDB.get(pref.getInt("dogChosenNumber",-2));
+                    fetchDogDataFromFireStore();
                     /* Code that you want to do on swiping right side*/
                     return false;
                 }
@@ -184,7 +218,7 @@ public class Tiedot extends AppCompatActivity {
             case (R.id.infoToolbarSave):
                 Toast.makeText(this, "Save to DB selected", Toast.LENGTH_LONG).show();
                 try {
-                    putDataToFireStore();
+                    throwDogDataToFireStore();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -201,7 +235,8 @@ public class Tiedot extends AppCompatActivity {
         return false;
     }
 
-    private void getDataFromFireStore(){
+    private void fetchDogDataFromFireStore(){
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("dogs").document(dogChosen);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -236,7 +271,7 @@ public class Tiedot extends AppCompatActivity {
 
     }
 
-    private void putDataToFireStore() throws ParseException {
+    private void throwDogDataToFireStore() throws ParseException {
 
         Map<String, Object> dogData = new HashMap<>();
             String pNickName = String.valueOf(mInfoName.getText());
@@ -274,13 +309,13 @@ public class Tiedot extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
-                            Log.d("Koera", "DocumentSnapshot written with ID: " + documentReference.getId());
+                            Log.d("KOERA", "DocumentSnapshot written with ID: " + documentReference.getId());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w("Koera", "Error adding document", e);
+                            Log.w("KOERA", "Error adding document", e);
                         }
                     }); /**/
         }else{

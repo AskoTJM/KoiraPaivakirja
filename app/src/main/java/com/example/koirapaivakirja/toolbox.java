@@ -1,23 +1,24 @@
 package com.example.koirapaivakirja;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
-import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.view.ViewDebug;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TimePicker;
+import android.util.Log;
 
-import androidx.fragment.app.DialogFragment;
+import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class toolbox {
@@ -53,7 +54,42 @@ public class toolbox {
         calendar.set(year, month, day, hour, minute);
         return calendar.getTimeInMillis();
     }
-/*
+
+    public static boolean getDogsToPref(final SharedPreferences pref){
+
+        final SharedPreferences.Editor editor = pref.edit();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String user = "/userID/"+pref.getString("uid","null")+"/dogs";
+
+        db.collection(user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int i = 0;
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if(i == 0){
+                            editor.putString("dogChosen",document.getId());
+                            editor.putInt("dogChosenNumber", i);
+                        }
+                        String fieldName = "dog"+i;
+                        editor.putString(fieldName, document.getId());
+                        i++;
+                        editor.putInt("numberOfDogs",i);
+                        editor.commit();
+                    }
+                    Log.d("KOERA", "Error getting data");
+                } else {
+                    Log.d("KOERA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+    return true;
+    }
+
+    /*
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
 
