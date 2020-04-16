@@ -18,7 +18,7 @@
         android:backgroundTint="#0500DF"
         android:fontFamily="@font/share"
         android:text="Kirjaudu"
-        android:textColor="#F6F6F6"
+        android:textColor="@color/appTextColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -22,13 +22,13 @@ public class LaakarinTiedot extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_laakarin_tiedot);
-        button = findViewById(R.id.Tallenna);
-        button2 = findViewById(R.id.Peruuta);
-        editText = findViewById(R.id.Nimi);
-        editText3 = findViewById(R.id.Sposti);
-        editText4 = findViewById(R.id.Puhnro);
-        editText5 = findViewById(R.id.Address);
+        //setContentView(R.layout.activity_laakarin_tiedot);
+        //button = findViewById(R.id.Tallenna);
+        //button2 = findViewById(R.id.Peruuta);
+        //editText = findViewById(R.id.Nimi);
+        //editText3 = findViewById(R.id.Sposti);
+        //editText4 = findViewById(R.id.Puhnro);
+        //editText5 = findViewById(R.id.Address);
     }
     public void goBack(View view){
         Intent intent = new Intent(this, Etusivu.class);
