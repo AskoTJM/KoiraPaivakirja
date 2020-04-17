@@ -105,7 +105,7 @@ public class Tiedot extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
 
         dogNumberInt = pref.getInt("dogChosenNumber", ERROR_DOGS);
-        dogChosen = pref.getString("dog"+dogNumberInt,null);
+        //dogChosen = pref.getString("dog"+dogNumberInt,null);
 
         //String testToast = Integer.toString(pref.getInt("numberOfDogs", ERROR_DOGS ));
         //Toast.makeText(getApplicationContext(), dogGone, Toast.LENGTH_SHORT).show();
@@ -137,8 +137,6 @@ public class Tiedot extends AppCompatActivity {
         });
         handler = new Handler();
         // Find the toolbar view inside the activity layout
-
-
 
         fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
 
@@ -176,7 +174,6 @@ public class Tiedot extends AppCompatActivity {
                         editor.commit();
 
                     }
-                    dogChosen = dogDB.get(pref.getInt("dogChosenNumber",ERROR_DOGS));
                     fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
 
                     return false;
@@ -191,7 +188,7 @@ public class Tiedot extends AppCompatActivity {
                         editor.putInt("dogChosenNumber",i);
                         editor.commit();
                     }
-                    dogChosen = dogDB.get(pref.getInt("dogChosenNumber",ERROR_DOGS));
+
                     fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
                     /* Code that you want to do on swiping right side*/
                     return false;
@@ -237,10 +234,48 @@ public class Tiedot extends AppCompatActivity {
                 Toast.makeText(this, "Edit selected", Toast.LENGTH_LONG).show();
                 toggleEditMode("Edit");
                 return true;
+            case (R.id.infoToolbarDelete):
+                Toast.makeText(this, "Delete selected", Toast.LENGTH_LONG).show();
+                removeDogDataFromFireStore(pref);
+                toolbox.getDogsToPref(pref);
+                return true;
 
 
         }
         return false;
+    }
+
+    private void removeDogDataFromFireStore(SharedPreferences dogPref){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Remove Dog from DogDatabase
+        db.collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("KOERA", "Error deleting document", e);
+                    }
+                });
+        //Remove Dog From User
+        db.collection("userID").document(dogPref.getString("uid",null)).collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("KOERA", "Error deleting document", e);
+                    }
+                });
+
     }
 
     private void fetchDogDataFromFireStore(String dogString){
@@ -269,11 +304,11 @@ public class Tiedot extends AppCompatActivity {
                         }
                         // Log.d("Koera", "DocumentSnapshot data: " + document.toString()); // document.getData());
                     } else {
-                        Log.d("Koera", "No such document");
-                    }
-                } else {
-                   // Log.d(this, "get failed with ", task.getException());
-                }
+                Log.d("Koera", "No such document");
+            }
+        } else {
+                                // Log.d(this, "get failed with ", task.getException());
+                            }
             }
         });
 

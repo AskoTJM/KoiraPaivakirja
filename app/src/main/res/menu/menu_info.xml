@@ -11,9 +11,16 @@
         android:id="@+id/infoToolbarSave"
         android:title="Save to DB"
         app:showAsAction="withText"></item>
+
+    <item
+        android:id="@+id/infoToolbarDelete"
+        android:title="Remove Dog from DB"
+        app:showAsAction="withText"></item>
+
     <item
         android:id="@+id/infoToolbarEdit"
         android:title="Edit"
         app:showAsAction="withText"></item>
+
 
 </menu>
