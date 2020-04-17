@@ -327,6 +327,7 @@ public class Tiedot extends AppCompatActivity {
                             String uidString = dogPref.getString("uid",null);
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             db.collection("userID").document(uidString).collection("dogs").document(documentReferenceID).set(dogData);
+                            toolbox.getDogsToPref(dogPref);
                                     //.addOnSuccessListener( (OnSuccessListener) (aVoid) {
                                     //    @Override
                                     //    public void onSuccess(DocumentReference documentReference) {
