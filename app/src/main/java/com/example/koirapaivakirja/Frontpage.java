@@ -22,11 +22,12 @@ public class Frontpage extends AppCompatActivity {
         setContentView(R.layout.activity_frontpage);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
+        //SharedPreferences.Editor editor = pref.edit();
         toolbox.getDogsToPref(pref);
 
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
+
 
     }
 
@@ -78,7 +79,7 @@ public class Frontpage extends AppCompatActivity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
-
+                editor.apply();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
 

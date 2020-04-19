@@ -58,6 +58,7 @@
             android:fontFamily="@font/share"
             android:text="@string/nickname"
             android:textSize="18sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/medDog"
             app:layout_constraintStart_toStartOf="@+id/medDog" />
 
@@ -97,7 +98,7 @@
             android:ems="10"
             android:focusable="false"
             android:fontFamily="@font/share"
-            android:hint="17:01"
+            android:hint="@string/hintTime"
             android:inputType="time"
             android:maxLength="5"
             android:onClick="timeButton"
@@ -116,7 +117,7 @@
             android:ems="10"
             android:fontFamily="@font/share"
             android:inputType="date"
-            android:hint="18/02/2020"
+            android:hint="@string/hintdate"
             android:textSize="24sp"
             android:focusable="false"
             android:onClick="showDatePickerDialog"
@@ -142,7 +143,7 @@
             app:layout_constraintStart_toEndOf="@+id/medDate"
             app:layout_constraintTop_toTopOf="@+id/medDate"
             app:layout_constraintVertical_bias="0.0" />
-
+<!--Unnecessary field But screws up layout if removew-->
         <EditText
             android:id="@+id/medDog"
             android:layout_width="218dp"
@@ -155,6 +156,7 @@
             android:inputType="textPersonName"
             android:singleLine="false"
             android:textSize="24sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medTime" />
 
@@ -167,7 +169,7 @@
             android:fontFamily="@font/share"
             android:gravity="center"
             android:inputType="number"
-            android:hint="100"
+            android:hint=""
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/medDog"
             app:layout_constraintTop_toTopOf="@+id/medDog" />
@@ -191,6 +193,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="116dp"
             android:background="@android:drawable/editbox_background_normal"
+            android:hint="@string/hintnotes"
             android:ems="10"
             android:fontFamily="@font/share"
             android:gravity="start|top"
@@ -263,6 +266,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:breakStrategy="simple"
+            android:hint="@string/hintMedicationGiven"
             android:ems="10"
             android:fontFamily="@font/share"
             android:gravity="center_vertical"
@@ -291,7 +295,7 @@
             android:ems="10"
             android:fontFamily="@font/share"
             android:gravity="center"
-            android:hint="mg"
+            android:hint="@string/milligrams"
             android:maxLength="2"
             android:inputType="text"
             android:textSize="24sp"

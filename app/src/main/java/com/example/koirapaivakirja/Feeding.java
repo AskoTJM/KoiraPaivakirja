@@ -168,7 +168,8 @@ public class Feeding extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int fYear,
                                           int fmonthOfYear, int fdayOfMonth) {
-                        ruokiDate.setText(fdayOfMonth + "." + (fmonthOfYear + 1) + "." + fYear);
+                        String setString = (fdayOfMonth + "." + (fmonthOfYear + 1) + "." + fYear);
+                        ruokiDate.setText(setString);
                     }
                 }, feedYear, feedMonth, feedDay);
         datePickerDialog.show();
@@ -188,8 +189,8 @@ public class Feeding extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-
-                        ruokiTime.setText(hourOfDay + ":" + minute);
+                        String setString = (hourOfDay + ":" + minute);
+                        ruokiTime.setText(setString);
                     }
                 }, feedHour, feedMinute, true);
         timePickerDialog.show();

@@ -83,7 +83,7 @@ public class Info extends AppCompatActivity {
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
         mInfoKennelName = findViewById(R.id.infoKennelName);
-        mInfoName = findViewById(R.id.infoName);
+        mInfoName = findViewById(R.id.infoNickName);
         mInfoReg = findViewById(R.id.infoReg);
 
         mInfoNote = findViewById(R.id.infoNote);
@@ -250,7 +250,7 @@ public class Info extends AppCompatActivity {
     private void fetchDogDataFromFireStore(String dogString){
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
+        //SharedPreferences.Editor editor = pref.edit();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("dogs").document(dogString);
@@ -506,7 +506,8 @@ public class Info extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        mInfoBirth.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                        String setString = (dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                        mInfoBirth.setText(setString);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -536,7 +537,7 @@ public class Info extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(Info.this, "Image Uploaded succesfully", Toast.LENGTH_LONG);
+                        Toast.makeText(Info.this, "Image Uploaded succesfully", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

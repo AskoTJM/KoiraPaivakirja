@@ -126,7 +126,8 @@ public class Medicate extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        mDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                        String setString = (dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                        mDate.setText(setString);
                         c.set(Calendar.YEAR,year);
                         c.set(Calendar.MONTH,monthOfYear);
                         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
@@ -145,8 +146,8 @@ public class Medicate extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
 
-
-                        mTime.setText(hourOfDay + ":" + minute);
+                        String setString = (hourOfDay + ":" + minute);
+                        mTime.setText(setString);
 
                         c.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         c.set(Calendar.MINUTE,minute);

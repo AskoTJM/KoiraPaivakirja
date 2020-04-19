@@ -48,5 +48,20 @@
     <string name="edit_dog">Muokkaa koiran tietoja</string>
     <string name="profilepic">profilepic</string>
     <string name="hintdate">18/02/2020</string>
+    <string name="hintnotes">Notes come here</string>
+    <string name="hintIDnum">Dogs ID number</string>
+    <string name="hintDogReg">Dogs reg number</string>
+    <string name="hintWeight">Dogs weight</string>
+    <string name="hintBirthday">Dogs birthday</string>
+    <string name="hintKennelName">Dogs Kennel Name</string>
+    <string name="hintNickname">Dogs nick name</string>
+    <string name="hintLoginEmailField">E-mail field for login</string>
+    <string name="hintLoginPasswordField">Password field for login</string>
+    <string name="hintMedicationGiven">Name of the medication given</string>
+    <string name="hintTime">17:01</string>
+    <string name="hintElapsedtime">1:30</string>
+    <string name="hintTimeStop">18:31</string>
+    <string name="grams">g</string>
+    <string name="milligrams">mg</string>
 
 </resources>

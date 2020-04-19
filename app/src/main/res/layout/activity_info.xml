@@ -43,6 +43,7 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         android:text="@string/underConstruction"
+        android:hint="@string/hintnotes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoNoteText"
         app:layout_constraintTop_toBottomOf="@+id/infoNoteText" />
@@ -57,6 +58,7 @@
         android:gravity="center_vertical"
         android:inputType="number"
         android:textSize="24sp"
+        android:hint="@string/hintIDnum"
         app:layout_constraintStart_toEndOf="@+id/infoReg"
         app:layout_constraintTop_toTopOf="@+id/infoReg" />
 
@@ -78,6 +80,7 @@
         android:fontFamily="@font/share"
         android:gravity="center_vertical"
         android:textSize="24sp"
+        android:hint="@string/hintDogReg"
         app:layout_constraintStart_toStartOf="@+id/infoRegText"
         app:layout_constraintTop_toBottomOf="@+id/infoRegText" />
 
@@ -89,6 +92,7 @@
         android:enabled="false"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/hintWeight"
         android:text="@string/underConstruction"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/infoBirth"
@@ -101,11 +105,12 @@
         android:layout_marginStart="16dp"
         android:enabled="false"
         android:fontFamily="@font/share"
+        android:hint="@string/hintBirthday"
         android:gravity="center_horizontal|center_vertical"
         android:inputType="date"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/infoName"
-        app:layout_constraintTop_toTopOf="@+id/infoName"
+        app:layout_constraintStart_toEndOf="@+id/infoNickName"
+        app:layout_constraintTop_toTopOf="@+id/infoNickName"
         android:focusable="false"
         android:onClick="showDatePickerDialog"
         />
@@ -146,6 +151,7 @@
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:enabled="false"
+        android:hint="@string/hintKennelName"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="24sp"
@@ -169,8 +175,8 @@
         android:fontFamily="@font/share"
         android:text="@string/nickname"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/infoName"
-        app:layout_constraintStart_toStartOf="@+id/infoName" />
+        app:layout_constraintBottom_toTopOf="@+id/infoNickName"
+        app:layout_constraintStart_toStartOf="@+id/infoNickName" />
 
     <TextView
         android:id="@+id/infoKennelNameText"
@@ -179,8 +185,8 @@
         android:fontFamily="@font/share"
         android:text="@string/kennelName"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/infoName"
-        app:layout_constraintTop_toBottomOf="@+id/infoName" />
+        app:layout_constraintStart_toStartOf="@+id/infoNickName"
+        app:layout_constraintTop_toBottomOf="@+id/infoNickName" />
 
     <ImageView
         android:id="@+id/infoDogImage"
@@ -196,12 +202,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/infoName"
+        android:id="@+id/infoNickName"
         android:layout_width="125dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
         android:enabled="false"
+        android:hint="@string/hintNickname"
         android:fontFamily="@font/share"
         android:gravity="center_vertical"
         android:textSize="24sp"
