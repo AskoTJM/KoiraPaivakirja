@@ -1,6 +1,5 @@
 package com.example.koirapaivakirja;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,26 +7,18 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +28,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Ruokinta extends AppCompatActivity {
+public class Feeding extends AppCompatActivity {
 
 
     EditText ruokiDate;
@@ -68,7 +59,7 @@ public class Ruokinta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ruokinta);
+        setContentView(R.layout.activity_feeding);
         Toolbar Toolbar = findViewById(R.id.feedToolbar);
         setSupportActionBar(Toolbar);
 
@@ -79,7 +70,7 @@ public class Ruokinta extends AppCompatActivity {
         currentTime = format.format(calendar.getTime());
         currentDate = DateFormat.getDateInstance().format(calendar.getTime());
 
-        foodAdditional = findViewById(R.id.FeedNotes);
+        foodAdditional = findViewById(R.id.feedNote);
         ruokiDate = findViewById(R.id.feedDate);
         ruokiTime = findViewById(R.id.feedTime);
         foodType = findViewById(R.id.feedFood);
@@ -94,16 +85,16 @@ public class Ruokinta extends AppCompatActivity {
     public void addFeeding(View v) throws ParseException {
 
         if (foodType.getText().toString().trim().equals("")) {
-            Toast.makeText(Ruokinta.this, "Lisää ruoan nimi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Feeding.this, "Lisää ruoan nimi", Toast.LENGTH_SHORT).show();
         }
         else if (foodAmount.getText().toString().trim().equals("")) {
-            Toast.makeText(Ruokinta.this, "Lisää ruoan määrä", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Feeding.this, "Lisää ruoan määrä", Toast.LENGTH_SHORT).show();
         }
         else if (ruokiDate.getText().toString().trim().equals("")) {
-            Toast.makeText(Ruokinta.this, "Lisää ruokinnan päivämäärä", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Feeding.this, "Lisää ruokinnan päivämäärä", Toast.LENGTH_SHORT).show();
         }
         else if (ruokiTime.getText().toString().trim().equals("")) {
-            Toast.makeText(Ruokinta.this, "Lisää ruokinnan aika!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Feeding.this, "Lisää ruokinnan aika!", Toast.LENGTH_SHORT).show();
         }
         else {
             String current_date = ruokiDate.getText().toString();
@@ -132,12 +123,12 @@ public class Ruokinta extends AppCompatActivity {
 
 
             feedingRef.add(feedData);
-            Toast.makeText(Ruokinta.this, "Ruokinta onnistunut!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Feeding.this, "Ruokinta onnistunut!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void getFeeding(View v){
-        Intent intent = new Intent(this, VanhatRuokinnat.class);
+        Intent intent = new Intent(this, OldFeedings.class);
         startActivity(intent);
     }
 

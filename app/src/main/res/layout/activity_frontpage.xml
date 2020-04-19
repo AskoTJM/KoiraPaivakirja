@@ -25,38 +25,15 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F6F6"
-    tools:context=".Etusivu" >
+    android:background="@color/appBackGround"
+    tools:context=".Frontpage" >
 
-<!--
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="71dp"
-        android:scaleX="-1"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/nuoli" />
-    -->
-    <!--
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="273dp"
-        android:layout_height="214dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rectangle" />
-    -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="401dp"
         android:layout_height="348dp"
-        android:background="#D6E4F0"
+        android:background="@color/appBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -66,11 +43,11 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:background="#0500DF"
+            android:background="@color/appFrontPageButtonBackGround"
             android:fontFamily="@font/share"
             android:onClick="goToFeed"
-            android:text="Ruokinta"
-            android:textColor="#F6F6F6"
+            android:text="@string/mainFeed"
+            android:textColor="@color/appFrontPageButtonTextColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +57,11 @@
             android:id="@+id/mainActivityButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#0500DF"
+            android:background="@color/appFrontPageButtonBackGround"
             android:fontFamily="@font/share"
             android:onClick="goToActivity"
-            android:text="Aktiviteetit"
-            android:textColor="#F6F6F6"
+            android:text="@string/mainActivity"
+            android:textColor="@color/appFrontPageButtonTextColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/mainInfoButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,11 +72,11 @@
             android:id="@+id/mainInfoButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#0500DF"
+            android:background="@color/appFrontPageButtonBackGround"
             android:fontFamily="@font/share"
             android:onClick="goToInfo"
-            android:text="Tiedot"
-            android:textColor="#F6F6F6"
+            android:text="@string/mainInfo"
+            android:textColor="@color/appFrontPageButtonTextColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/mainMedicateButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,11 +88,11 @@
             android:id="@+id/mainMedicateButton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#0500DF"
+            android:background="@color/appFrontPageButtonBackGround"
             android:fontFamily="@font/share"
             android:onClick="goToMed"
-            android:text="Lääkitys"
-            android:textColor="#F6F6F6"
+            android:text="@string/mainMedicate"
+            android:textColor="@color/appFrontPageButtonTextColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,13 +109,14 @@
         android:longClickable="true"
         android:scaleType="centerCrop"
         android:src="@drawable/whitedog"
+        android:contentDescription="@string/profilepic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainNickName"
+        android:id="@+id/loginNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
@@ -150,22 +128,7 @@
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/share"
-        android:text="8V 4kg"
-        android:textColor="@color/appTextColor"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    -->
     <!--
     <TextView
         android:id="@+id/mainAlarmTime"

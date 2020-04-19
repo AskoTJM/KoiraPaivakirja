@@ -12,15 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LaakarinTiedot"></activity>
-        <activity android:name=".VanhatRuokinnat" />
-        <activity android:name=".Laakitys" />
-        <activity android:name=".Rekisterointi" />
-        <activity android:name=".Tiedot" />
-        <activity android:name=".LemmikinValinta" />
-        <activity android:name=".Etusivu" />
-        <activity android:name=".Aktiviteetti" />
-        <activity android:name=".Ruokinta" />
+        <activity android:name=".DoctorInformation"/>
+        <activity android:name=".OldFeedings" />
+        <activity android:name=".Medicate" />
+        <activity android:name=".RegisteringUser" />
+        <activity android:name=".Info" />
+        <activity android:name=".SelectingDog" />
+        <activity android:name=".Frontpage" />
+        <activity android:name=".Activities" />
+        <activity android:name=".Feeding" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,14 +12,14 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Etusivu extends AppCompatActivity {
+public class Frontpage extends AppCompatActivity {
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_etusivu);
+        setContentView(R.layout.activity_frontpage);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
@@ -31,26 +31,26 @@ public class Etusivu extends AppCompatActivity {
     }
 
     public void goToFeed(View view) {
-        Intent intentFeed = new Intent(this, Ruokinta.class);
+        Intent intentFeed = new Intent(this, Feeding.class);
         startActivity(intentFeed);
     }
 
     public void goToActivity(View view) {
-        Intent intentActivity = new Intent(this, Aktiviteetti.class);
+        Intent intentActivity = new Intent(this, Activities.class);
         startActivity(intentActivity);
     }
 
     public void goToInfo(View view) {
 
-    Intent intentInfo = new Intent(this, Tiedot.class);
+    Intent intentInfo = new Intent(this, Info.class);
         startActivity(intentInfo);
     }
     public void goToMed(View view) {
-        Intent intentLaakitys = new Intent(this, Laakitys.class);
+        Intent intentLaakitys = new Intent(this, Medicate.class);
         startActivity(intentLaakitys);
     }
     public void goToDoctor(View view){
-        Intent intentDoctor = new Intent(this,LaakarinTiedot.class);
+        Intent intentDoctor = new Intent(this, DoctorInformation.class);
         startActivity(intentDoctor);
     }
 

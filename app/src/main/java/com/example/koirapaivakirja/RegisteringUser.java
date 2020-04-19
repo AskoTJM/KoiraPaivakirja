@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Rekisterointi extends AppCompatActivity {
+public class RegisteringUser extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     EditText mEmail, mPassword;
@@ -24,10 +24,10 @@ public class Rekisterointi extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rekisterointi);
+        setContentView(R.layout.activity_registering);
 
-        mEmail = findViewById(R.id.sahkoposti);
-        mPassword = findViewById(R.id.salasana);
+        mEmail = findViewById(R.id.loginEmailField);
+        mPassword = findViewById(R.id.loginPasswordField);
         mRegisterButton = findViewById(R.id.registerButton);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -49,10 +49,10 @@ public class Rekisterointi extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Rekisterointi.this, "Rekisteröinti onnistui", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),Etusivu.class));
+                            Toast.makeText(RegisteringUser.this, "Rekisteröinti onnistui", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), Frontpage.class));
                         }else{
-                            Toast.makeText(Rekisterointi.this, "Virhe luodessa uutta käyttäjää", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisteringUser.this, "Virhe luodessa uutta käyttäjää", Toast.LENGTH_SHORT).show();
 
                         }
                     }

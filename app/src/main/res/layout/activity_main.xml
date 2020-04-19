@@ -8,32 +8,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F6F6"
+    android:background="@color/appBackGround"
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/loginSignInButton"
         android:layout_width="357dp"
         android:layout_height="64dp"
-        android:backgroundTint="#0500DF"
+        android:backgroundTint="@color/appFrontPageButtonBackGround"
         android:fontFamily="@font/share"
-        android:text="Kirjaudu"
+        android:text="@string/login"
         android:textColor="@color/appTextColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/loginForgotYourPasswordText"
         app:layout_constraintVertical_bias="0.93" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/regImage"
         android:layout_width="360dp"
         android:layout_height="238dp"
         android:adjustViewBounds="true"
         android:contextClickable="false"
         android:cropToPadding="true"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/profilepic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -43,47 +44,47 @@
         app:srcCompat="@drawable/canine" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loginLoginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sansita"
-        android:text="Kirjaudu sisään"
+        android:text="@string/loginInside"
+        android:textColor="@color/appTextColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginAppName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/loginUserYourGoogleAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sansita"
+        android:text="@string/useYourGoogleAccount"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/loginLoginText"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/loginAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sansita"
-        android:text="Käytä Google-tiliäsi"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/sansita"
-        android:text="Koirapäiväkirja"
-        android:textColor="#000000"
+        android:text="@string/dogdiary"
+        android:textColor="@color/appTextColor"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/regImage" />
 
     <EditText
-        android:id="@+id/sahkoposti"
+        android:id="@+id/loginEmailField"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@android:drawable/editbox_background"
@@ -92,11 +93,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/loginUserYourGoogleAccount"
         app:layout_constraintVertical_bias="0.100000024" />
 
     <EditText
-        android:id="@+id/salasana"
+        android:id="@+id/loginPasswordField"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@android:drawable/editbox_background"
@@ -105,48 +106,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sahkoposti"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailField"
         app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/loginForgotYourEmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unohditko sähköpostiosoitteesi?"
-        android:textColor="#2030D5"
+        android:text="@string/forgotyouremail"
+        android:textColor="@color/appFrontPageButtonBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sahkoposti"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailField"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/loginForgotYourPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unohditko salasanasi?"
-        android:textColor="#2030D5"
+        android:text="@string/forgotyourpassword"
+        android:textColor="@color/appFrontPageButtonBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salasana"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordField"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/mainNickName"
+        android:id="@+id/loginNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToRegister"
-        android:text="Uusi täällä? Luo käyttäjä"
-        android:textColor="#2030D5"
-        android:textSize="20dp"
+        android:text="@string/newuser"
+        android:textColor="@color/appFrontPageButtonBackGround"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salasana"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordField"
         app:layout_constraintVertical_bias="0.19999999" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

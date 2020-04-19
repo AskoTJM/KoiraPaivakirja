@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LaakarinTiedot extends AppCompatActivity {
+public class DoctorInformation extends AppCompatActivity {
 
     Button button;
     Button button2;
@@ -31,12 +31,12 @@ public class LaakarinTiedot extends AppCompatActivity {
         //editText5 = findViewById(R.id.Address);
     }
     public void goBack(View view){
-        Intent intent = new Intent(this, Etusivu.class);
+        Intent intent = new Intent(this, Frontpage.class);
         startActivity(intent);
 
     }
     public void tallennaTiedot(View view){
-        Intent intent = new Intent(this, Etusivu.class);
+        Intent intent = new Intent(this, Frontpage.class);
         Context context = getApplicationContext();
         CharSequence text = "Tiedot tallennettu";
         int duration = Toast.LENGTH_SHORT;

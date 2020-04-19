@@ -6,9 +6,8 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
-import static com.example.koirapaivakirja.Laakitys.NOTIFICATION_CHANNEL_ID;
+import static com.example.koirapaivakirja.Medicate.NOTIFICATION_CHANNEL_ID;
 
 //luokka ilmoituksia varten
 public class AlertReceiver extends BroadcastReceiver {

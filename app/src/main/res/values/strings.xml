@@ -3,4 +3,50 @@
     <string name="microChipID">Tunnistusmerkintä</string>
     <string name="nickname">Kutsumanimi</string>
 
+    <string name="mainActivity">Aktiviteetti</string>
+    <string name="mainFeed">Ruokinta</string>
+    <string name="mainInfo">Tiedot</string>
+    <string name="mainMedicate">Lääkintä</string>
+
+    <string name="underConstruction">UnderConstruction</string>
+    <string name="notesBeHere">Huomioitavaa</string>
+
+    <string name="weight">Paino</string>
+    <string name="birthday">Syntymäpäivä</string>
+    <string name="regNumberText">Rekisterinumero</string>
+    <string name="kennelName">Kennelnimi</string>
+    <string name="outing">Ulkoilu</string>
+    <string name="play">Leikki</string>
+    <string name="timeSpent">Aikaa kulunut</string>
+    <string name="ended">Loppui</string>
+    <string name="date">Päivämäärä</string>
+    <string name="start">Aloitus</string>
+    <string name="save">Tallenna</string>
+    <string name="stop">Lopeta</string>
+    <string name="time">Kellonaika</string>
+    <string name="amount">Määrä</string>
+    <string name="medicine">Lääke</string>
+    <string name="unit">Yksikkö</string>
+    <string name="login">Kirjaudu</string>
+    <string name="loginInside">Kirjaudu sisään</string>
+    <string name="useYourGoogleAccount">Käytä Google-tiliäsi</string>
+    <string name="dogdiary">Koirapäiväkirja</string>
+    <string name="forgotyouremail">Unohditko sähköpostiosoitteesi?</string>
+    <string name="forgotyourpassword">Unohditko salasanasi?</string>
+    <string name="newuser">Uusi täällä? Luo käyttäjä</string>
+    <string name="register">Rekisteröi</string>
+    <string name="registernewuser">Rekisteröi uusi käyttäjä</string>
+    <string name="email">Sähköposti</string>
+    <string name="password">Salasana</string>
+    <string name="alreadyhaveuser">Omistat jo käyttäjän? Kirjaudu täältä</string>
+    <string name="feed">Ruoki</string>
+    <string name="getfeedings">Hae ruokinnat</string>
+    <string name="log_out">Log out</string>
+    <string name="addDog">Uusi koira</string>
+    <string name="savetodb">Tallenna tiedot</string>
+    <string name="remove_dog">Poista koiran tiedot</string>
+    <string name="edit_dog">Muokkaa koiran tietoja</string>
+    <string name="profilepic">profilepic</string>
+    <string name="hintdate">18/02/2020</string>
+
 </resources>

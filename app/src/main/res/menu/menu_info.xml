@@ -1,26 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    >
+
 
     <item
         android:id="@+id/infoToolbarAdd"
-        android:title="Add"
-        app:showAsAction="withText"></item>
+        android:title="@string/addDog"
+        app:showAsAction="withText"/>
     <item
         android:id="@+id/infoToolbarSave"
-        android:title="Save to DB"
-        app:showAsAction="withText"></item>
+        android:title="@string/savetodb"
+        app:showAsAction="withText"/>
 
     <item
         android:id="@+id/infoToolbarDelete"
-        android:title="Remove Dog from DB"
-        app:showAsAction="withText"></item>
+        android:title="@string/remove_dog"
+        app:showAsAction="withText"/>
 
     <item
         android:id="@+id/infoToolbarEdit"
-        android:title="Edit"
-        app:showAsAction="withText"></item>
+        android:title="@string/edit_dog"
+        app:showAsAction="withText"/>
 
 
 </menu>

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/mainToolbarLogout"
-        android:title="Log out"
-        app:showAsAction="withText"></item>
+        android:title="@string/log_out"
+        app:showAsAction="withText"/>
 
 </menu>

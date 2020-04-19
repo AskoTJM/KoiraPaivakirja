@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
@@ -30,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mEmail = findViewById(R.id.sahkoposti);
-        mPassword = findViewById(R.id.salasana);
-        mSignInButton = findViewById(R.id.signInButton);
+        mEmail = findViewById(R.id.loginEmailField);
+        mPassword = findViewById(R.id.loginPasswordField);
+        mSignInButton = findViewById(R.id.loginSignInButton);
         firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.setFirestoreSettings(settings);
 
-            startActivity(new Intent(getApplicationContext(),Etusivu.class));
+            startActivity(new Intent(getApplicationContext(), Frontpage.class));
             finish();
             //jos kirjautunut jo sisään, menee suoraan etusivulle
         }
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Kirjautuminen onnistui", Toast.LENGTH_SHORT).show();
                             //jos kirjautuminen onnistui valmiilla käyttäjällä
-                            startActivity(new Intent(getApplicationContext(),Etusivu.class));
+                            startActivity(new Intent(getApplicationContext(), Frontpage.class));
                         }else{
                             Toast.makeText(MainActivity.this, "Virheellinen käyttäjä tai salasana", Toast.LENGTH_SHORT).show();
                             //jos käyttäjää ei olemassa tai väärät tunnukset
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void goToRegister(View view) {
-        Intent intentActivity = new Intent(this, Rekisterointi.class);
+        Intent intentActivity = new Intent(this, RegisteringUser.class);
         startActivity(intentActivity);
     }
     public void goToMainActivity(View view) {

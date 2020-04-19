@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VanhatRuokinnat">
+    tools:context=".OldFeedings">
 
     <TextView
         android:id="@+id/feedingList"
@@ -13,6 +13,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

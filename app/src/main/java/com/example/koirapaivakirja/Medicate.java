@@ -8,7 +8,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.Menu;
@@ -26,7 +25,7 @@ import androidx.core.app.NotificationCompat;
 import java.text.ParseException;
 
 
-public class Laakitys extends AppCompatActivity {
+public class Medicate extends AppCompatActivity {
 
     int mYear;
     int mMonth;
@@ -44,7 +43,7 @@ public class Laakitys extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_laakitys);
+        setContentView(R.layout.activity_medicate);
         Toolbar mainToolbar = findViewById(R.id.medicateToolbar);
         setSupportActionBar(mainToolbar);
 
@@ -74,17 +73,17 @@ public class Laakitys extends AppCompatActivity {
 
                     case R.id.medBtn:
                         if (mDate.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Aseta päivämäärä", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Aseta päivämäärä", Toast.LENGTH_SHORT).show();
                         } else if (mTime.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Aseta ajankohta", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Aseta ajankohta", Toast.LENGTH_SHORT).show();
                         } else if (mUnit.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Aseta annoksen yksikkö", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Aseta annoksen yksikkö", Toast.LENGTH_SHORT).show();
                         } else if (mMedType.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Aseta lääkkeen nimi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Aseta lääkkeen nimi", Toast.LENGTH_SHORT).show();
                         } else if (mDog.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Valitse koiran nimi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Valitse koiran nimi", Toast.LENGTH_SHORT).show();
                         } else if (mDose.getText().toString().equals("")) {
-                            Toast.makeText(Laakitys.this, "Valitse annos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Medicate.this, "Valitse annos", Toast.LENGTH_SHORT).show();
                         } else {
                             try {
                                 saveMedTime();
@@ -100,7 +99,7 @@ public class Laakitys extends AppCompatActivity {
     }
 
         public void saveMedTime() throws ParseException{
-            Toast.makeText(Laakitys.this,"Lääkityksen muistutus lisätty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Medicate.this,"Lääkityksen muistutus lisätty", Toast.LENGTH_SHORT).show();
 
             //kenttiin asetetut arvot
             String pMedType= mMedType.getText().toString();

@@ -8,31 +8,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Rekisterointi">
+    tools:context=".RegisteringUser">
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="357dp"
         android:layout_height="64dp"
-        android:backgroundTint="#0500DF"
+        android:backgroundTint="@color/appFrontPageButtonBackGround"
         android:fontFamily="@font/share"
-        android:text="Rekisteröi"
-        android:textColor="#F6F6F6"
+        android:text="@string/register"
+        android:textColor="@color/appBackGround"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/loginForgotYourPasswordText"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/regImage"
         android:layout_width="360dp"
         android:layout_height="238dp"
         android:adjustViewBounds="true"
         android:contextClickable="false"
         android:cropToPadding="true"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/profilepic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -43,35 +44,35 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loginLoginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sansita"
-        android:text="Rekisteröi uusi käyttäjä"
-        android:textColor="#000000"
+        android:text="@string/registernewuser"
+        android:textColor="@color/appTextColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/loginAppName"
         app:layout_constraintVertical_bias="0.021" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/loginAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sansita"
-        android:text="Koirapäiväkirja"
-        android:textColor="#000000"
+        android:text="@string/app_name"
+        android:textColor="@color/appTextColor"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/regImage"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/sahkoposti"
+        android:id="@+id/loginEmailField"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@android:drawable/editbox_background"
@@ -81,11 +82,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/regImage"
         app:layout_constraintVertical_bias="0.32999998" />
 
     <EditText
-        android:id="@+id/salasana"
+        android:id="@+id/loginPasswordField"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@android:drawable/editbox_background"
@@ -95,47 +96,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sahkoposti"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailField"
         app:layout_constraintVertical_bias="0.166" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/loginForgotYourEmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sähköposti"
-        android:textColor="#2030D5"
+        android:text="@string/email"
+        android:textColor="@color/appFrontPageButtonBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sahkoposti"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailField"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/loginForgotYourPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salasana"
-        android:textColor="#2030D5"
+        android:text="@string/password"
+        android:textColor="@color/appFrontPageButtonBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salasana"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordField"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/mainNickName"
+        android:id="@+id/loginNewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToMainActivity"
-        android:text="Omistat jo käyttäjän? Kirjaudu täältä"
-        android:textColor="#2030D5"
-        android:textSize="20dp"
+        android:text="@string/alreadyhaveuser"
+        android:textColor="@color/appFrontPageButtonBackGround"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/loginLoginText"
         app:layout_constraintVertical_bias="0.79" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

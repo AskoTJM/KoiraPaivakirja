@@ -10,9 +10,6 @@ import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Handler;
@@ -24,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import android.view.GestureDetector;
@@ -53,10 +49,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
-public class Tiedot extends AppCompatActivity {
+public class Info extends AppCompatActivity {
 
     EditText mInfoName, mInfoNote, mInfoIDNumber, mInfoReg, mInfoBirth, mInfoKennelName, mInfoWeight;
     ImageView mInfoImageView;
@@ -78,7 +73,7 @@ public class Tiedot extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tiedot);
+        setContentView(R.layout.activity_info);
 
         Toolbar toolbar = findViewById(R.id.infoToolbar);
         setSupportActionBar(toolbar);
@@ -114,6 +109,7 @@ public class Tiedot extends AppCompatActivity {
 
 
         gdt = new GestureDetector(new GestureListener());
+
         mInfoImageView.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
@@ -540,7 +536,7 @@ public class Tiedot extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Toast.makeText(Tiedot.this, "Image Uploaded succesfully", Toast.LENGTH_LONG);
+                        Toast.makeText(Info.this, "Image Uploaded succesfully", Toast.LENGTH_LONG);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

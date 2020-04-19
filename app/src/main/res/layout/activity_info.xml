@@ -30,8 +30,8 @@
     android:id="@+id/tiedotContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F6F6"
-    tools:context=".Tiedot">
+    android:background="@color/appBackGround"
+    tools:context=".Info">
 
     <EditText
         android:id="@+id/infoNote"
@@ -42,7 +42,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:singleLine="false"
-        android:text="Ruoka-allergia: Sika"
+        android:text="@string/underConstruction"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoNoteText"
         app:layout_constraintTop_toBottomOf="@+id/infoNoteText" />
@@ -89,7 +89,7 @@
         android:enabled="false"
         android:fontFamily="@font/share"
         android:gravity="center_horizontal|center_vertical"
-        android:text="8kg"
+        android:text="@string/underConstruction"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/infoBirth"
         app:layout_constraintTop_toTopOf="@+id/infoBirth" />
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Huomioitavaa"
+        android:text="@string/notesBeHere"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoReg"
         app:layout_constraintTop_toBottomOf="@+id/infoReg" />
@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Paino"
+        android:text="@string/weight"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoWeight"
         app:layout_constraintStart_toStartOf="@+id/infoWeight" />
@@ -135,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Syntymäpäivä"
+        android:text="@string/birthday"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoBirth"
         app:layout_constraintStart_toStartOf="@+id/infoBirth"
@@ -157,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Rekisterinumero"
+        android:text="@string/regNumberText"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoKennelName"
         app:layout_constraintTop_toBottomOf="@+id/infoKennelName" />
@@ -167,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Kutsumanimi"
+        android:text="@string/nickname"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/infoName"
         app:layout_constraintStart_toStartOf="@+id/infoName" />
@@ -177,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/share"
-        android:text="Kennelnimi"
+        android:text="@string/kennelName"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/infoName"
         app:layout_constraintTop_toBottomOf="@+id/infoName" />
@@ -186,8 +186,9 @@
         android:id="@+id/infoDogImage"
         android:layout_width="413dp"
         android:layout_height="245dp"
-        android:longClickable="true"
+        android:longClickable="false"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/profilepic"
         android:src="@drawable/whitedog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

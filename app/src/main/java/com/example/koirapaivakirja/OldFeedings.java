@@ -3,7 +3,6 @@ package com.example.koirapaivakirja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -12,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class VanhatRuokinnat extends AppCompatActivity {
+public class OldFeedings extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference feedingRef = db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB");
@@ -21,7 +20,7 @@ public class VanhatRuokinnat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vanhat_ruokinnat);
+        setContentView(R.layout.activity_oldfeedings);
         feedingData = findViewById(R.id.feedingList);
 
         loadNotes();
@@ -36,14 +35,14 @@ public class VanhatRuokinnat extends AppCompatActivity {
                         String data = "";
 
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            RuokintaData ruokintaData = documentSnapshot.toObject(RuokintaData.class);
-                            ruokintaData.setDocumentId(documentSnapshot.getId());
+                            FeedingData feedingData = documentSnapshot.toObject(FeedingData.class);
+                            feedingData.setDocumentId(documentSnapshot.getId());
 
-                            String documentId = ruokintaData.getDocumentId();
-                            String current_date = ruokintaData.getCurrent_date();
-                            String current_time = ruokintaData.getCurrent_time();
-                            String food_type = ruokintaData.getFood_type();
-                            String food_amount = ruokintaData.getFood_amount();
+                            String documentId = feedingData.getDocumentId();
+                            String current_date = feedingData.getCurrent_date();
+                            String current_time = feedingData.getCurrent_time();
+                            String food_type = feedingData.getFood_type();
+                            String food_amount = feedingData.getFood_amount();
 
                             data += "ID: " + documentId
                                     + "\nRuokinnan pvm: " + current_date + "\nRuokinta aika: " + current_time +
