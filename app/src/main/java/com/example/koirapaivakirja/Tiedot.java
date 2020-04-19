@@ -10,6 +10,9 @@ import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Handler;
@@ -33,6 +36,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +53,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class Tiedot extends AppCompatActivity {
@@ -69,10 +74,6 @@ public class Tiedot extends AppCompatActivity {
     private static final int THRESHOLD_VELOCITY = 50;
     private static final int ERROR_DOGS = -2;
     private static final int NEW_DOG = -1;
-    // Temporary Dog switcher
-    String dogChosen; // = "t4oHb1WKfnprJ82oa0Zj"; //"rKJvTSFsozBr0V5JAyvQ";
-    ArrayList<String> dogDB = new ArrayList<>();
-    int dogNumberInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +82,20 @@ public class Tiedot extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.infoToolbar);
         setSupportActionBar(toolbar);
+        handler = new Handler();
+
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mInfoIDNumber = findViewById(R.id.infoIDNum);
         mInfoBirth = findViewById(R.id.infoBirth);
         mInfoKennelName = findViewById(R.id.infoKennelName);
         mInfoName = findViewById(R.id.infoName);
         mInfoReg = findViewById(R.id.infoReg);
+
         mInfoNote = findViewById(R.id.infoNote);
+        TextView mInfoNoteText = findViewById(R.id.infoNoteText);
         mInfoWeight = findViewById(R.id.infoWeight);
+        mInfoNote.setVisibility(View.INVISIBLE);
+        mInfoNoteText.setVisibility(View.INVISIBLE);
 
         mInfoImageView = findViewById(R.id.infoDogImage);
         /*mInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -102,27 +109,8 @@ public class Tiedot extends AppCompatActivity {
         });*/
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
+        //SharedPreferences.Editor editor = pref.edit();
 
-        dogNumberInt = pref.getInt("dogChosenNumber", ERROR_DOGS);
-        //dogChosen = pref.getString("dog"+dogNumberInt,null);
-
-        //String testToast = Integer.toString(pref.getInt("numberOfDogs", ERROR_DOGS ));
-        //Toast.makeText(getApplicationContext(), dogGone, Toast.LENGTH_SHORT).show();
-
-
-        int numberOfDogs = pref.getInt("numberOfDogs",ERROR_DOGS);
-        if(numberOfDogs > 0) {
-
-            int i = 0;
-            while(i < numberOfDogs) {
-                String dogNum = "dog"+i;
-                dogDB.add(i,pref.getString(dogNum,null));
-                i++;
-            }
-        }else{
-            Toast.makeText(getApplicationContext(), "You have no dogs. :'(", Toast.LENGTH_SHORT).show();
-        }
 
 
         gdt = new GestureDetector(new GestureListener());
@@ -135,7 +123,7 @@ public class Tiedot extends AppCompatActivity {
 
             }
         });
-        handler = new Handler();
+
         // Find the toolbar view inside the activity layout
 
         fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
@@ -168,12 +156,14 @@ public class Tiedot extends AppCompatActivity {
                         editor.putInt("dogChosenNumber",(pref.getInt("numberOfDogs",ERROR_DOGS) -1));
                         editor.commit();
                     } else {
-                        int i = pref.getInt("dogChosenNumber",-2);
+                        int i = pref.getInt("dogChosenNumber",ERROR_DOGS);
                         i--;
                         editor.putInt("dogChosenNumber",i);
                         editor.commit();
 
                     }
+                    //refreshDogsFromPref(pref);
+
                     fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
 
                     return false;
@@ -189,7 +179,12 @@ public class Tiedot extends AppCompatActivity {
                         editor.commit();
                     }
 
+
+                    //refreshDogsFromPref(pref);
+
                     fetchDogDataFromFireStore(pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null));
+
+
                     /* Code that you want to do on swiping right side*/
                     return false;
                 }
@@ -217,7 +212,6 @@ public class Tiedot extends AppCompatActivity {
                 toggleEditMode("Add");
                 editor.putInt("dogChosenNumber",NEW_DOG);
                 editor.commit();
-                //dogChosen = "newDog";
                 Toast.makeText(this, "Add selected", Toast.LENGTH_LONG).show();
                 return true;
             case (R.id.infoToolbarSave):
@@ -236,7 +230,7 @@ public class Tiedot extends AppCompatActivity {
                 return true;
             case (R.id.infoToolbarDelete):
                 Toast.makeText(this, "Delete selected", Toast.LENGTH_LONG).show();
-                removeDogDataFromFireStore(pref);
+                toolbox.removeDogDataFromFireStore(pref);
                 toolbox.getDogsToPref(pref);
                 return true;
 
@@ -245,40 +239,22 @@ public class Tiedot extends AppCompatActivity {
         return false;
     }
 
-    private void removeDogDataFromFireStore(SharedPreferences dogPref){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // Remove Dog from DogDatabase
-        db.collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("KOERA", "Error deleting document", e);
-                    }
-                });
-        //Remove Dog From User
-        db.collection("userID").document(dogPref.getString("uid",null)).collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("KOERA", "Error deleting document", e);
-                    }
-                });
+
+    // Transfer data from SharedPreferences to views.
+    private void refreshDogsFromPref(SharedPreferences pref){
+            String dogChosen2 = "dog"+pref.getInt("dogChosenNumber",ERROR_DOGS);
+
+            mInfoName.setText(pref.getString(dogChosen2+"_nickname", null));
+            mInfoKennelName.setText(pref.getString(dogChosen2+"_kennelname",null));
+            mInfoReg.setText(pref.getString(dogChosen2+"regnumber",null));
+            mInfoIDNumber.setText(pref.getString(dogChosen2+"microChipID",null));
 
     }
 
     private void fetchDogDataFromFireStore(String dogString){
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("dogs").document(dogString);
@@ -291,11 +267,65 @@ public class Tiedot extends AppCompatActivity {
                         Map dokumentti;
                         dokumentti = document.getData();
                         if(dokumentti != null) {
-                            mInfoName.setText((CharSequence) dokumentti.get("nickname"));
-                            mInfoKennelName.setText((CharSequence) dokumentti.get("kennelname"));
-                            mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
-                            mInfoIDNumber.setText((CharSequence) dokumentti.get("microChipID").toString());
+                            if(dokumentti.get("nickname") != null) {
+                                mInfoName.setText((CharSequence) dokumentti.get("nickname"));
+                            }else{
+                                mInfoName.setText("");
+                            }
 
+                            if(dokumentti.get("kennelname") != null) {
+                                mInfoKennelName.setText((CharSequence) dokumentti.get("kennelname"));
+                            }else{
+                                mInfoKennelName.setText("");
+                            }
+
+                            if(dokumentti.get("regnumber") != null) {
+                                mInfoReg.setText((CharSequence) dokumentti.get("regnumber"));
+                            }else{
+                                mInfoReg.setText("");
+                            }
+
+                            if(dokumentti.get("microChipID") != null) {
+                                mInfoIDNumber.setText(dokumentti.get("microChipID").toString());
+                            }else{
+                                mInfoIDNumber.setText("");
+                            }
+                            //SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+                            //SharedPreferences.Editor editor = pref.edit();
+
+                            //String infoImageName = "dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"profile.webp";
+                            //mInfoImageView.setImageDrawable(Drawable.createFromPath(infoImageName));
+
+                            //mInfoImageView.setImageBitmap(BitmapFactory.decodeFile(R.drawable.blackdog));
+                            //Drawable myImage = getResources().getDrawable(infoImageName);
+                            //imageView.setImageResource(R.drawable.myImage);
+
+
+                            Log.d("Koera", "No such document");
+
+                                /*if(dokumentti.get("profilepicture") != null){
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    StorageReference storageRef = storage.getReference();
+                                    StorageReference httpsReference = storage.getReferenceFromUrl(dokumentti.get("profilepicture").toString());
+                                    storageRef.child(httpsReference.toString()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            // Got the download URL for 'users/me/profile.png'
+                                            //Toast.makeText(Tiedot.this, uri.toString(), Toast.LENGTH_LONG);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle any errors
+                                        }
+                                    });
+
+                                //}
+                                */
+                            //SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+                            //SharedPreferences.Editor editor = pref.edit();
+                            //editor.putString("profilePic", d);
+                            //editor.commit();
                             Date bDate = document.getDate("birthdate");
                             if (bDate != null) {
                                 String sbDate = sdf.format(bDate);
@@ -313,6 +343,8 @@ public class Tiedot extends AppCompatActivity {
         });
 
     }
+
+
 
     private void throwDogDataToFireStore(final SharedPreferences dogPref) throws ParseException {
 

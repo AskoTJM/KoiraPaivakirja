@@ -19,14 +19,25 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ruokintaConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F6F6F6"
         tools:context=".Ruokinta">
+
+        <ImageView
+            android:id="@+id/feedDogImage"
+            android:layout_width="413dp"
+            android:layout_height="245dp"
+            android:longClickable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/whitedog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/feedDateText"
@@ -42,11 +53,12 @@
             android:id="@+id/feedTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/share"
             android:text="Kellonaika"
             android:textSize="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/feedTime"
-            app:layout_constraintStart_toStartOf="@+id/feedTime" />
+            app:layout_constraintStart_toStartOf="@+id/feedTime"
+            app:layout_constraintTop_toBottomOf="@+id/feedDogImage" />
 
         <TextView
             android:id="@+id/feedFoodText"
@@ -77,54 +89,22 @@
             app:layout_constraintTop_toBottomOf="@id/feedAmountText"
             app:layout_constraintRight_toRightOf="@id/feedAmount"/>
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="164dp"
-            android:layout_height="125dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/chihuahua" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="162dp"
-            android:layout_height="125dp"
-            android:scaleType="centerCrop"
-            android:scrollY="-40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/canine" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/whitedog" />
-
         <EditText
             android:id="@+id/feedTime"
             android:layout_width="61dp"
             android:layout_height="55dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
             android:backgroundTint="#000000"
+            android:clickable="true"
             android:ems="10"
+            android:focusable="false"
             android:fontFamily="@font/share"
             android:inputType="time"
-            android:focusable="false"
-            android:clickable="true"
             android:onClick="timeButton"
             android:text="17:01"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/feedTimeText" />
 
         <EditText
             android:id="@+id/feedDate"
@@ -220,7 +200,6 @@
             android:id="@+id/FeedNotes"
             android:layout_width="336dp"
             android:layout_height="182dp"
-            android:layout_marginStart="36dp"
             android:layout_marginTop="32dp"
             android:background="@android:drawable/editbox_background_normal"
             android:ems="10"
@@ -228,9 +207,9 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:singleLine="false"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/feedFood"
             app:layout_constraintTop_toBottomOf="@+id/feedFood" />
-
+<!--
         <TextView
             android:id="@+id/nameDog1"
             android:layout_width="65dp"
@@ -245,36 +224,8 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="@+id/imageView3" />
+-->
 
-        <TextView
-            android:id="@+id/nameDog3"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="6dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Musti \n6V  10kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/nameDog2"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Kusti \n3V  18kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

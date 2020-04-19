@@ -19,8 +19,7 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/laakitysConstraint"
         android:layout_width="match_parent"
@@ -42,11 +41,15 @@
             android:id="@+id/medTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/share"
             android:text="Kellonaika"
             android:textSize="18dp"
             app:layout_constraintBottom_toTopOf="@+id/medTime"
-            app:layout_constraintStart_toStartOf="@+id/medTime" />
+            app:layout_constraintStart_toStartOf="@+id/medTime"
+            app:layout_constraintTop_toBottomOf="@id/medDogImage"
+            app:layout_constraintVertical_bias="1.0" />
+
 
         <TextView
             android:id="@+id/medFoodText"
@@ -68,6 +71,8 @@
             app:layout_constraintBottom_toTopOf="@+id/medAmount"
             app:layout_constraintStart_toStartOf="@+id/medAmount" />
 
+
+        <!--
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="164dp"
@@ -98,25 +103,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/whitedog" />
+-->
+
+        <ImageView
+            android:id="@+id/medDogImage"
+            android:layout_width="413dp"
+            android:layout_height="245dp"
+            android:longClickable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/whitedog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/medTime"
             android:layout_width="61dp"
             android:layout_height="55dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
             android:backgroundTint="#000000"
-            android:ems="10"
-            android:fontFamily="@font/share"
-            android:inputType="time"
-            android:hint="17:01"
-            android:maxLength="5"
-            android:focusable="false"
             android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/share"
+            android:hint="17:01"
+            android:inputType="time"
+            android:maxLength="5"
             android:onClick="timeButton"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@id/medTimeText"
+
+
+            />
 
         <EditText
             android:id="@+id/medDate"
@@ -208,7 +228,7 @@
             android:singleLine="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medDog" />
-
+        <!--
         <TextView
             android:id="@+id/nameDog1"
             android:layout_width="65dp"
@@ -223,7 +243,8 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="@+id/imageView3" />
-
+        -->
+        <!--
         <TextView
             android:id="@+id/nameDog3"
             android:layout_width="65dp"
@@ -238,7 +259,8 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView" />
-
+        -->
+        <!--
         <TextView
             android:id="@+id/nameDog2"
             android:layout_width="65dp"
@@ -253,7 +275,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintStart_toStartOf="@+id/imageView2" />
-
+        -->
         <TextView
             android:id="@+id/medNameText"
             android:layout_width="wrap_content"
@@ -287,8 +309,8 @@
             android:fontFamily="@font/share"
             android:text="Yksikkö"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/medUnit"
-            tools:layout_editor_absoluteY="416dp" />
+            app:layout_constraintBottom_toTopOf="@+id/medUnit"
+            app:layout_constraintStart_toStartOf="@+id/medUnit" />
 
         <EditText
             android:id="@+id/medUnit"

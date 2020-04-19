@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         mSignInButton = findViewById(R.id.signInButton);
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
@@ -42,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("uid",firebaseAuth.getUid());
             editor.commit();
             String uID = firebaseAuth.getUid();
+
+            FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                    .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+                    .build();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.setFirestoreSettings(settings);
+
             startActivity(new Intent(getApplicationContext(),Etusivu.class));
             finish();
             //jos kirjautunut jo sisään, menee suoraan etusivulle

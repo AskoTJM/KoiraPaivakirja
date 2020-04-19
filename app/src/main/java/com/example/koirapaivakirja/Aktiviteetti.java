@@ -39,7 +39,7 @@ public class Aktiviteetti extends AppCompatActivity {
         mDate = findViewById(R.id.activityDateStart);
         mOut = findViewById(R.id.checkOut);
         mPlay = findViewById(R.id.checkPlay);
-        final Button mSave = (Button) findViewById(R.id.saveButton);
+        final Button mSave = (Button) findViewById(R.id.activitySaveButton);
 
         Toolbar mainToolbar = findViewById(R.id.activityToolbar);
         setSupportActionBar(mainToolbar);
@@ -52,7 +52,7 @@ public class Aktiviteetti extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
 
-                    case R.id.saveButton:
+                    case R.id.activitySaveButton:
                         if (mOut.isChecked()) {
                             activity = "Outside";
                         }

@@ -7,6 +7,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,9 +22,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class toolbox {
     String timeString;
+    private static final int ERROR_DOGS = -2;
+    private static final int NEW_DOG = -1;
 
     public static Timestamp TimeStamp4Date(String date) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
@@ -33,26 +38,6 @@ public class toolbox {
             return timeStamp;
         }
     return null;
-    }
-
-    public static Timestamp TimeStamp4Time(String dateInString,String timeInString) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
-        //String dateInString = date;
-        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ssSS");
-        //Date dateTemp = formatter.parse(dateInString);
-        Calendar calendar = Calendar.getInstance();
-
-        //if(dateTemp != null) {
-        //    Timestamp timeStamp = new Timestamp(getTimeInMillis(day,month,year,hour,minute));
-        //    return timeStamp;
-        //}
-        return null;
-    }
-
-    public static long getTimeInMillis(int day, int month, int year,int hour, int minute) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day, hour, minute);
-        return calendar.getTimeInMillis();
     }
 
     public static boolean getDogsToPref(final SharedPreferences pref){
@@ -74,7 +59,39 @@ public class toolbox {
                             editor.putInt("dogChosenNumber", i);
                         }
                         String fieldName = "dog"+i;
-                        editor.putString(fieldName, document.getId());
+                        editor.putString( fieldName, document.getId());
+
+                        String fieldNameToo = fieldName+"nickname";
+
+                        if(document.get("nickname") != null) {
+                            editor.putString(fieldNameToo, (String) document.get("nickname"));
+                        }else{
+                            editor.putString(fieldNameToo, "");
+                        }
+
+                        fieldNameToo = fieldName + "_kennelname";
+                        /*
+                        if(document.get("kennelname") != null) {
+                            editor.putString(fieldNameToo, (String) document.get("kennelname"));
+                        }else{
+                            editor.putString(fieldNameToo, "");
+                        }
+
+                        fieldNameToo = fieldName+"_regnumber";
+                        if(document.get("regnumber") != null) {
+                            editor.putString(fieldNameToo, (String) document.get("regnumber"));
+                        }else{
+                            editor.putString(fieldNameToo, "");
+                        }
+
+                        fieldNameToo = fieldName+"_microChipID";
+                        if(document.get("microChipID") != null) {
+                            editor.putString(fieldNameToo, (String) document.get("microChipID"));
+                        }else{
+                            editor.putString(fieldNameToo, "");
+                        }
+                        */
+
                         i++;
                         editor.putInt("numberOfDogs",i);
                         editor.commit();
@@ -88,6 +105,62 @@ public class toolbox {
 
     return true;
     }
+
+    public static void removeDogDataFromFireStore(SharedPreferences dogPref){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Remove Dog from DogDatabase
+        db.collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("KOERA", "Error deleting document", e);
+                    }
+                });
+        //Remove Dog From User
+        db.collection("userID").document(dogPref.getString("uid",null)).collection("dogs").document(dogPref.getString("dog"+dogPref.getInt("dogChosenNumber",ERROR_DOGS),null)).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("KOERA", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("KOERA", "Error deleting document", e);
+                    }
+                });
+
+    }
+
+
+    public static Timestamp TimeStamp4Time(String dateInString,String timeInString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
+        //String dateInString = date;
+        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ssSS");
+        //Date dateTemp = formatter.parse(dateInString);
+        Calendar calendar = Calendar.getInstance();
+
+        //if(dateTemp != null) {
+        //    Timestamp timeStamp = new Timestamp(getTimeInMillis(day,month,year,hour,minute));
+        //    return timeStamp;
+        //}
+        return null;
+    }
+
+    public static long getTimeInMillis(int day, int month, int year,int hour, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day, hour, minute);
+        return calendar.getTimeInMillis();
+    }
+
+
 
     /*
     public static class TimePickerFragment extends DialogFragment
