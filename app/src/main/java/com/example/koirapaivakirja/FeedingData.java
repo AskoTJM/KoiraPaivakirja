@@ -11,7 +11,7 @@ public class FeedingData {
 
     }
 
-    String getDocumentId(){
+    public String getDocumentId(){
         return documentId;
     }
     void setDocumentId(String documentId) {
@@ -23,16 +23,16 @@ public class FeedingData {
         this.current_date = current_date;
         this.current_time = current_time;
     }
-    String getFood_type() {
+    public String getFood_type() {
         return food_type;
     }
-    String getFood_amount() {
+    public String getFood_amount() {
         return food_amount;
     }
-    String getCurrent_date() {
+    public String getCurrent_date() {
         return current_date;
     }
-    String getCurrent_time() {
+    public String getCurrent_time() {
         return current_time;
     }
 

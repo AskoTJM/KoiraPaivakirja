@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/share"
             android:labelFor="@id/feedFood"
-            android:text="@string/nickname"
+            android:text="@string/feedFoodGiven"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/feedFood"
             app:layout_constraintStart_toStartOf="@+id/feedFood" />

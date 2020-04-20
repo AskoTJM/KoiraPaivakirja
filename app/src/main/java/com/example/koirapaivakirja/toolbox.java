@@ -1,7 +1,10 @@
 package com.example.koirapaivakirja;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -139,6 +145,34 @@ public class toolbox {
 
     }
 
+    public void getDogImageFromStorage(SharedPreferences pref){
+        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference imageRef = storage.getReference()
+                .child(dogChosen).child("profilepic.webp");
+/*
+        imageRef.getBytes(1024*1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                        profileImageView.setImageBitmap(bitmap);
+
+                    }
+                });
+*/
+        imageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("KOERA", "Download url is:" + uri.toString());
+                    }
+                });
+
+
+    }
 
     public static Timestamp TimeStamp4Time(String dateInString,String timeInString) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());

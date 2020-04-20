@@ -7,20 +7,29 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.ParseException;
 
@@ -34,11 +43,16 @@ public class Medicate extends AppCompatActivity {
     int mMinute;
     Button mMed;
     EditText mNotes, mDate, mTime, mDog, mDose, mMedType, mUnit;
+    ImageView mDogImage;
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
     public Calendar c = Calendar.getInstance();
 
+    private static final int MIN_SWIPING_DISTANCE = 50;
+    private static final int THRESHOLD_VELOCITY = 50;
+    private static final int ERROR_DOGS = -2;
+    private static final int NEW_DOG = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +70,9 @@ public class Medicate extends AppCompatActivity {
         mMed = findViewById(R.id.medBtn);
         mMedType = findViewById(R.id.medName);
         mUnit = findViewById(R.id.medUnit);
+        mDogImage = findViewById(R.id.medDogImage);
 
+        getProfilePicture();
 
         //hakee tämänhetkisen ajan
         mYear = c.get(Calendar.YEAR);
@@ -208,5 +224,32 @@ public class Medicate extends AppCompatActivity {
 
 
         return false;
+    }
+
+    private void getProfilePicture(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        assert dogChosen != null;
+        StorageReference imageRef = storage.getReference()
+                .child(dogChosen).child("profilepic.webp");
+
+        imageRef.getBytes(1024*1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                        mDogImage.setImageBitmap(bitmap);
+
+                    }
+                });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        getProfilePicture();
+
     }
 }

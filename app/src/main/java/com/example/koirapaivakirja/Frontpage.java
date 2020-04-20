@@ -5,16 +5,27 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Frontpage extends AppCompatActivity {
 
-
+    private static final int MIN_SWIPING_DISTANCE = 50;
+    private static final int THRESHOLD_VELOCITY = 50;
+    private static final int ERROR_DOGS = -2;
+    private static final int NEW_DOG = -1;
+    ImageView mainDogImage; //= findViewById(R.id.mainDogImage);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +35,50 @@ public class Frontpage extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         //SharedPreferences.Editor editor = pref.edit();
         toolbox.getDogsToPref(pref);
+        mainDogImage = findViewById(R.id.mainDogImage);
 
-        Toolbar mainToolbar = (Toolbar) findViewById(R.id.mainToolbar);
+        Toolbar mainToolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
 
+        getProfilePicture();
+        /*
+        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        assert dogChosen != null;
+        StorageReference imageRef = storage.getReference()
+                .child(dogChosen).child("profilepic.webp");
 
+        imageRef.getBytes(1024*1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                        mainDogImage.setImageBitmap(bitmap);
+
+                    }
+                });
+        */
+
+
+    }
+
+    private void getProfilePicture(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        assert dogChosen != null;
+        StorageReference imageRef = storage.getReference()
+                .child(dogChosen).child("profilepic.webp");
+
+        imageRef.getBytes(1024*1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                        mainDogImage.setImageBitmap(bitmap);
+
+                    }
+                });
     }
 
     public void goToFeed(View view) {
@@ -87,5 +137,13 @@ public class Frontpage extends AppCompatActivity {
 
         }
         return false;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        getProfilePicture();
+
     }
 }

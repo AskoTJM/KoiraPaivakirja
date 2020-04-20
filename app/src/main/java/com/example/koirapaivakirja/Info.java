@@ -10,6 +10,8 @@ import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Handler;
@@ -249,7 +251,7 @@ public class Info extends AppCompatActivity {
 
     private void fetchDogDataFromFireStore(String dogString){
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         //SharedPreferences.Editor editor = pref.edit();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -286,15 +288,23 @@ public class Info extends AppCompatActivity {
                             }else{
                                 mInfoIDNumber.setText("");
                             }
-                            //SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-                            //SharedPreferences.Editor editor = pref.edit();
 
-                            //String infoImageName = "dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"profile.webp";
-                            //mInfoImageView.setImageDrawable(Drawable.createFromPath(infoImageName));
+                            String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
 
-                            //mInfoImageView.setImageBitmap(BitmapFactory.decodeFile(R.drawable.blackdog));
-                            //Drawable myImage = getResources().getDrawable(infoImageName);
-                            //imageView.setImageResource(R.drawable.myImage);
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            assert dogChosen != null;
+                            StorageReference imageRef = storage.getReference()
+                                    .child(dogChosen).child("profilepic.webp");
+
+                            imageRef.getBytes(1024*1024)
+                                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                                        @Override
+                                        public void onSuccess(byte[] bytes) {
+                                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                                            mInfoImageView.setImageBitmap(bitmap);
+
+                                        }
+                                    });
 
 
                             Log.d("Koera", "No such document");
@@ -433,7 +443,7 @@ public class Info extends AppCompatActivity {
         }
 
 
-    };
+    }
 // Turns EditTexts into different modes, Info/Edit/Add
     private void toggleEditMode(String infoMode2){
         switch(infoMode2){

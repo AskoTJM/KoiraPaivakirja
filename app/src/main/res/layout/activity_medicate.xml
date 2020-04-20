@@ -73,20 +73,19 @@
             app:layout_constraintStart_toStartOf="@+id/medAmount" />
 
 
-
-
         <ImageView
             android:id="@+id/medDogImage"
             android:layout_width="413dp"
             android:layout_height="245dp"
+            android:contentDescription="@string/profilepic"
             android:longClickable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/whitedog"
-            android:contentDescription="@string/profilepic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/whitedog" />
 
         <EditText
             android:id="@+id/medTime"

@@ -38,7 +38,7 @@
                 android:ems="10"
                 android:fontFamily="@font/share"
                 android:gravity="center_horizontal"
-                android:hint="@string/hintTime"
+                android:autofillHints=""
                 android:maxLength="5"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,8 @@
                 android:inputType="date"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@+id/activityElapsedTime"
-                app:layout_constraintTop_toTopOf="@+id/activityTimeStop" />
+                app:layout_constraintTop_toTopOf="@+id/activityTimeStop"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/activityElapsedTime"
@@ -84,7 +85,8 @@
                 android:text=""
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/activityTimeStart"
-                app:layout_constraintTop_toTopOf="@+id/activityTimeStart" />
+                app:layout_constraintTop_toTopOf="@+id/activityTimeStart"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/activityTimeStop"
@@ -100,7 +102,8 @@
                 android:text=""
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@+id/activityTimeStart"
-                app:layout_constraintTop_toBottomOf="@+id/activityTimeStart" />
+                app:layout_constraintTop_toBottomOf="@+id/activityTimeStart"
+                android:autofillHints="" />
 
             <ImageView
                 android:id="@+id/activityDogImage"
@@ -113,7 +116,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/whitedog" />
 
 
             <EditText
@@ -127,7 +131,8 @@
                 android:inputType="textMultiLine"
 
                 app:layout_constraintStart_toStartOf="@+id/activityTimeStop"
-                app:layout_constraintTop_toBottomOf="@+id/activityDateStart" />
+                app:layout_constraintTop_toBottomOf="@+id/activityDateStart"
+                android:autofillHints="" />
 
             <CheckBox
                 android:id="@+id/checkOut"

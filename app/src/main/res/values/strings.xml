@@ -63,5 +63,6 @@
     <string name="hintTimeStop">18:31</string>
     <string name="grams">g</string>
     <string name="milligrams">mg</string>
+    <string name="feedFoodGiven">Ruoka</string>
 
 </resources>

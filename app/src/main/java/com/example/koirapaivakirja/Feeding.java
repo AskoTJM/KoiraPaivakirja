@@ -6,18 +6,25 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,6 +43,7 @@ public class Feeding extends AppCompatActivity {
     EditText foodType;
     EditText foodAmount;
     EditText foodAdditional;
+    ImageView feedDogImage;
     private static final String FOOD_ADDITIONAL = "feedingNote";
     private static final String FOOD_TYPE = "food_type";
     private static final String FOOD_AMOUNT = "food_amount";
@@ -51,8 +59,11 @@ public class Feeding extends AppCompatActivity {
     //Button feedButton;
     //Button getFoodButton;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference feedingRef = db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB");
+    private static final int MIN_SWIPING_DISTANCE = 50;
+    private static final int THRESHOLD_VELOCITY = 50;
+    private static final int ERROR_DOGS = -2;
+    private static final int NEW_DOG = -1;
+
 
 
 
@@ -77,12 +88,19 @@ public class Feeding extends AppCompatActivity {
         foodAmount = findViewById(R.id.feedAmount);
         //feedButton = findViewById(R.id.feedBtn);
         //getFoodButton = findViewById(R.id.getButton);
+        feedDogImage = findViewById(R.id.feedDogImage);
         ruokiTime.setText(currentTime);
         ruokiDate.setText(currentDate);
-
+        getProfilePicture();
     }
 
     public void addFeeding(View v) throws ParseException {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        String dogChosen = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS),null);
+        String dogPath = "dogs/"+dogChosen+"/feedingDB";
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference feedingRef = db.collection(dogPath);
 
         if (foodType.getText().toString().trim().equals("")) {
             Toast.makeText(Feeding.this, "Lisää ruoan nimi", Toast.LENGTH_SHORT).show();
@@ -118,6 +136,7 @@ public class Feeding extends AppCompatActivity {
             String dateString = ruokiDate.getText().toString();
             //String timeString = ruokiTime.getText().toString();
             Date dateTemp = formatter.parse(dateString);
+            assert dateTemp != null;
             Timestamp feedingTime = new Timestamp(dateTemp);
             feedData.put("timeStamp", feedingTime);
 
@@ -127,7 +146,7 @@ public class Feeding extends AppCompatActivity {
         }
     }
 
-    public void getFeeding(View v){
+    public void getFeeding(){
         Intent intent = new Intent(this, OldFeedings.class);
         startActivity(intent);
     }
@@ -206,8 +225,39 @@ public class Feeding extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-
-
+        switch (item.getItemId()) {
+            case (R.id.feedToolbarGetFeedings):
+                Intent intentOldFeedings = new Intent(this, OldFeedings.class);
+                startActivity(intentOldFeedings);
+                break;
+        }
         return false;
+    }
+
+    private void getProfilePicture(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        assert dogChosen != null;
+        StorageReference imageRef = storage.getReference()
+                .child(dogChosen).child("profilepic.webp");
+
+        imageRef.getBytes(1024*1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
+                        feedDogImage.setImageBitmap(bitmap);
+
+                    }
+                });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        getProfilePicture();
+
     }
 }
