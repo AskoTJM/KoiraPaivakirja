@@ -16,119 +16,132 @@
         android:background="@color/appToolbarBackGround">
     </androidx.appcompat.widget.Toolbar>
 
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/ConstraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/appBackGround"
-    tools:context=".Frontpage" >
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="401dp"
-        android:layout_height="348dp"
-        android:background="@color/appBackGround"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/mainFeedButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@color/appFrontPageButtonBackGround"
-            android:fontFamily="@font/share"
-            android:onClick="goToFeed"
-            android:text="@string/mainFeed"
-            android:textColor="@color/appFrontPageButtonTextColor"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/mainActivityButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@color/appFrontPageButtonBackGround"
-            android:fontFamily="@font/share"
-            android:onClick="goToActivity"
-            android:text="@string/mainActivity"
-            android:textColor="@color/appFrontPageButtonTextColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/mainInfoButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton" />
-
-        <Button
-            android:id="@+id/mainInfoButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@color/appFrontPageButtonBackGround"
-            android:fontFamily="@font/share"
-            android:onClick="goToInfo"
-            android:text="@string/mainInfo"
-            android:textColor="@color/appFrontPageButtonTextColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/mainMedicateButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
-            app:layout_constraintVertical_bias="0.78" />
-
-        <Button
-            android:id="@+id/mainMedicateButton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@color/appFrontPageButtonBackGround"
-            android:fontFamily="@font/share"
-            android:onClick="goToMed"
-            android:text="@string/mainMedicate"
-            android:textColor="@color/appFrontPageButtonTextColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
-            app:layout_constraintVertical_bias="0.82" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/mainDogImage"
-        android:layout_width="413dp"
-        android:layout_height="245dp"
-        android:longClickable="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/whitedog"
-        android:contentDescription="@string/profilepic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/loginNewUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/share"
-        android:textColor="@color/appTextColor"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/mainDogImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/appBackGround"
+            tools:context=".Frontpage">
 
 
-    <!--
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="401dp"
+                android:layout_height="348dp"
+                android:background="@color/appBackGround"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <Button
+                    android:id="@+id/mainFeedButton"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/appFrontPageButtonBackGround"
+                    android:fontFamily="@font/share"
+                    android:onClick="goToFeed"
+                    android:text="@string/mainFeed"
+                    android:textColor="@color/appFrontPageButtonTextColor"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/mainActivityButton"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/appFrontPageButtonBackGround"
+                    android:fontFamily="@font/share"
+                    android:onClick="goToActivity"
+                    android:text="@string/mainActivity"
+                    android:textColor="@color/appFrontPageButtonTextColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/mainInfoButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mainFeedButton" />
+
+                <Button
+                    android:id="@+id/mainInfoButton"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/appFrontPageButtonBackGround"
+                    android:fontFamily="@font/share"
+                    android:onClick="goToInfo"
+                    android:text="@string/mainInfo"
+                    android:textColor="@color/appFrontPageButtonTextColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/mainMedicateButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
+                    app:layout_constraintVertical_bias="0.78" />
+
+                <Button
+                    android:id="@+id/mainMedicateButton"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/appFrontPageButtonBackGround"
+                    android:fontFamily="@font/share"
+                    android:onClick="goToMed"
+                    android:text="@string/mainMedicate"
+                    android:textColor="@color/appFrontPageButtonTextColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mainFeedButton"
+                    app:layout_constraintVertical_bias="0.82" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/mainDogImage"
+                android:layout_width="413dp"
+                android:layout_height="245dp"
+                android:contentDescription="@string/profilepic"
+                android:longClickable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/whitedog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/loginNewUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/share"
+                android:textColor="@color/appTextColor"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/mainDogImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/frontPageNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp"
+                android:textSize="24sp"
+                android:textColor="@color/appBackGround"
+                android:backgroundTint="@color/appTextColor"
+                android:text="@string/nickname"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                app:layout_constraintStart_toStartOf="@+id/mainDogImage" />
+
+
+            <!--
     <TextView
         android:id="@+id/mainAlarmTime"
         android:layout_width="wrap_content"
@@ -142,7 +155,7 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="@+id/mainNickName" />
     -->
-    <!--
+            <!--
     <TextView
         android:id="@+id/mainAlarmReason"
         android:layout_width="wrap_content"
@@ -157,7 +170,7 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="@+id/textView7" />
     -->
-<!--
+            <!--
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="139dp"
@@ -191,7 +204,6 @@
 -->
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

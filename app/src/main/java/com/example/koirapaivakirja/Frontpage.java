@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +32,7 @@ public class Frontpage extends AppCompatActivity {
     private static final int ERROR_DOGS = -2;
     private static final int NEW_DOG = -1;
     ImageView mainDogImage; //= findViewById(R.id.mainDogImage);
+    TextView mainNickName;
 
     private GestureDetector gdt;
 
@@ -44,7 +46,8 @@ public class Frontpage extends AppCompatActivity {
         toolbox.getDogsToPref(pref);
         toolbox.getDogDataToPref(pref);
         mainDogImage = findViewById(R.id.mainDogImage);
-
+        mainNickName = findViewById(R.id.frontPageNickName);
+        getNameOfTheChosenDog();
         Toolbar mainToolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
 
@@ -195,6 +198,7 @@ public class Frontpage extends AppCompatActivity {
 
                     }
                     //refreshDogsFromPref(pref);
+                    getNameOfTheChosenDog();
                     getProfilePicture();
 
                     return false;
@@ -209,11 +213,19 @@ public class Frontpage extends AppCompatActivity {
                         editor.putInt("dogChosenNumber",i);
                         editor.commit();
                     }
+                    getNameOfTheChosenDog();
                     getProfilePicture();
                     return false;
                 }
                 return false;
         }
 
+    }
+
+    private void getNameOfTheChosenDog(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
+        String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
+        mainNickName.setText(tempDogString);
     }
 }
