@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -81,37 +82,41 @@ public class toolbox {
     return true;
     }
 
-    public void getDogDataToPref(SharedPreferences pref){
+    public static void getDogDataToPref(final SharedPreferences pref){
 
         final SharedPreferences.Editor editor = pref.edit();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String dog = "/dogs/"+pref.getString("dog"+pref.getInt("chosenDogNumber",ERROR_DOGS),"null");
+        int numberOfDogs = pref.getInt("numberOfDogs",ERROR_DOGS);
+        int i = 0;
 
-        db.collection(dog).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    int i = 0;
+        while(i < numberOfDogs) {
+            String dog = pref.getString("dog" + i, "null");
+            //String dog = pref.getString("dog"+i,null);
+            final String fieldName = "dog" + i;
+            db.collection("/dogs/").document(dog).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
 
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if(i == 0){
-                            editor.putString("dogChosen",document.getId());
-                            editor.putInt("dogChosenNumber", i);
+                        DocumentSnapshot document = task.getResult();
+                        //String fieldNameToo = fieldName+"nickname";
+                        if (document.get("nickname") != null) {
+                            //    String tempDog = document.getString("nickname");
+                            editor.putString(fieldName + "nickname", document.getString("nickname"));
+                        } else {
+                            editor.putString(fieldName + "nickname", "");
                         }
-                        String fieldName = "dog"+i;
-                        editor.putString( fieldName, document.getId());
-                        i++;
-                        editor.putInt("numberOfDogs",i);
+
                         editor.commit();
+                    }else {
+                        Log.d("KOERA", "Error getting documents: ", task.getException());
                     }
-                    Log.d("KOERA", "Error getting data");
-                } else {
-                    Log.d("KOERA", "Error getting documents: ", task.getException());
                 }
-            }
-        });
-        
+            });
+
+            i++;
+        }
        //String fieldNameToo = fieldName+"nickname";
 
         //if(document.get("nickname") != null) {

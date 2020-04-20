@@ -42,6 +42,7 @@ public class Frontpage extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         //SharedPreferences.Editor editor = pref.edit();
         toolbox.getDogsToPref(pref);
+        toolbox.getDogDataToPref(pref);
         mainDogImage = findViewById(R.id.mainDogImage);
 
         Toolbar mainToolbar = findViewById(R.id.mainToolbar);

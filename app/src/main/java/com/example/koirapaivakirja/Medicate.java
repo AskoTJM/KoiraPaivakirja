@@ -77,10 +77,10 @@ public class Medicate extends AppCompatActivity {
         mMedType = findViewById(R.id.medName);
         mUnit = findViewById(R.id.medUnit);
         mDogImage = findViewById(R.id.medDogImage);
-        // Quick Fix for choosing dog
-        String tempDogString = "dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"nickname";
-        String tempDog = pref.getString(tempDogString,null);
-        mDog.setText(tempDog);
+        // Automatic
+        getNameOfTheChosenDog();
+
+
         gdt = new GestureDetector(new Medicate.GestureListener());
 
         mDogImage.setOnTouchListener(new View.OnTouchListener() {
@@ -266,6 +266,13 @@ public class Medicate extends AppCompatActivity {
                 });
     }
 
+    private void getNameOfTheChosenDog(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
+        String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
+        mDog.setText(tempDogString);
+    }
+
     private class GestureListener extends GestureDetector.SimpleOnGestureListener
     {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
@@ -293,7 +300,8 @@ public class Medicate extends AppCompatActivity {
                     editor.commit();
 
                 }
-                //refreshDogsFromPref(pref);
+
+                getNameOfTheChosenDog();
                 getProfilePicture();
 
                 return false;
@@ -302,12 +310,14 @@ public class Medicate extends AppCompatActivity {
                 if (pref.getInt("dogChosenNumber",ERROR_DOGS) == (pref.getInt("numberOfDogs",ERROR_DOGS) -1)) {
                     editor.putInt("dogChosenNumber",0);
                     editor.commit();
+
                 } else {
                     int i = pref.getInt("dogChosenNumber",ERROR_DOGS);
                     i++;
                     editor.putInt("dogChosenNumber",i);
                     editor.commit();
                 }
+                getNameOfTheChosenDog();
                 getProfilePicture();
                 return false;
             }
