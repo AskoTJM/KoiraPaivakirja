@@ -139,6 +139,7 @@ public class Feeding extends AppCompatActivity {
             String food_amount = foodAmount.getText().toString();
             String food_amountUnit = "g";
             String feedingNote = foodAdditional.getText().toString();
+            String feedUid = pref.getString("uid",null);
 
             Map<String, Object> feedData = new HashMap<>();
             feedData.put(CURRENT_DATE, current_date);
@@ -147,6 +148,7 @@ public class Feeding extends AppCompatActivity {
             feedData.put(FOOD_UNIT, food_amountUnit);
             feedData.put(FOOD_TYPE, food_type);
             feedData.put(FOOD_ADDITIONAL, feedingNote);
+            feedData.put("uid", feedUid);
 
 
             //Calendar calendar = Calendar.getInstance();

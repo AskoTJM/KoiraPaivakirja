@@ -88,7 +88,7 @@ public class Activities extends AppCompatActivity {
 
                     case R.id.activitySaveButton:
                         if (mOut.isChecked()) {
-                            activity = "Outside";
+                            activity = "Walk";
                         }
                         if (mPlay.isChecked()) {
                             activity = "Play";
@@ -134,10 +134,11 @@ public class Activities extends AppCompatActivity {
 
             SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
             //SharedPreferences.Editor editor = pref.edit();
+            Aktiviteetti.put("uid", pref.getString("uid",null));
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             String chosenDog = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS),null);
-            String dogPath = "dogs"+chosenDog+"activitiesDB";
+            String dogPath = "dogs/"+chosenDog+"/activitiesDB";
             db.collection(dogPath).add(Aktiviteetti);
 
 

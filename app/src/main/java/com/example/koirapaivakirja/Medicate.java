@@ -65,6 +65,7 @@ public class Medicate extends AppCompatActivity {
         setContentView(R.layout.activity_medicate);
         Toolbar mainToolbar = findViewById(R.id.medicateToolbar);
         setSupportActionBar(mainToolbar);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
 
 
         mNotes = findViewById(R.id.medNotes);
@@ -76,7 +77,10 @@ public class Medicate extends AppCompatActivity {
         mMedType = findViewById(R.id.medName);
         mUnit = findViewById(R.id.medUnit);
         mDogImage = findViewById(R.id.medDogImage);
-
+        // Quick Fix for choosing dog
+        String tempDogString = "dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"nickname";
+        String tempDog = pref.getString(tempDogString,null);
+        mDog.setText(tempDog);
         gdt = new GestureDetector(new Medicate.GestureListener());
 
         mDogImage.setOnTouchListener(new View.OnTouchListener() {

@@ -69,14 +69,16 @@ public class toolbox {
 
                         String fieldNameToo = fieldName+"nickname";
 
-                        if(document.get("nickname") != null) {
-                            editor.putString(fieldNameToo, (String) document.get("nickname"));
-                        }else{
-                            editor.putString(fieldNameToo, "");
-                        }
+                        //if(document.get("nickname") != null) {
+                            String tempDog = document.getString("nickname");
+                            editor.putString(fieldNameToo, tempDog);
+                        //}else{
+                        //    editor.putString(fieldNameToo, "");
+                        //}
 
-                        fieldNameToo = fieldName + "_kennelname";
+
                         /*
+                        fieldNameToo = fieldName + "_kennelname";
                         if(document.get("kennelname") != null) {
                             editor.putString(fieldNameToo, (String) document.get("kennelname"));
                         }else{
