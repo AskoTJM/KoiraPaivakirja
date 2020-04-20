@@ -3,6 +3,7 @@ package com.example.koirapaivakirja;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -10,8 +11,10 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -59,6 +62,8 @@ public class Feeding extends AppCompatActivity {
     //Button feedButton;
     //Button getFoodButton;
 
+    private GestureDetector gdt;
+
     private static final int MIN_SWIPING_DISTANCE = 50;
     private static final int THRESHOLD_VELOCITY = 50;
     private static final int ERROR_DOGS = -2;
@@ -91,6 +96,19 @@ public class Feeding extends AppCompatActivity {
         feedDogImage = findViewById(R.id.feedDogImage);
         ruokiTime.setText(currentTime);
         ruokiDate.setText(currentDate);
+
+        gdt = new GestureDetector(new Feeding.GestureListener());
+
+        feedDogImage.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            public boolean onTouch(View v, MotionEvent event) {
+                gdt.onTouchEvent(event);
+                // ... Respond to touch events
+                return true;
+
+            }
+        });
+
         getProfilePicture();
     }
 
@@ -251,6 +269,56 @@ public class Feeding extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
+        @Override
+        public void onLongPress(MotionEvent event) {
+
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            if (e1.getX() - e2.getX() > MIN_SWIPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
+                Toast.makeText(getApplicationContext(), "You have swiped left side", Toast.LENGTH_SHORT).show();
+                if (pref.getInt("dogChosenNumber",ERROR_DOGS) == 0) {
+
+                    editor.putInt("dogChosenNumber",(pref.getInt("numberOfDogs",ERROR_DOGS) -1));
+                    editor.commit();
+                } else {
+                    int i = pref.getInt("dogChosenNumber",ERROR_DOGS);
+                    i--;
+                    editor.putInt("dogChosenNumber",i);
+                    editor.commit();
+
+                }
+                //refreshDogsFromPref(pref);
+                getProfilePicture();
+
+                return false;
+            } else if (e2.getX() - e1.getX() > MIN_SWIPING_DISTANCE && Math.abs(velocityX) > THRESHOLD_VELOCITY) {
+                Toast.makeText(getApplicationContext(), "You have swiped right side", Toast.LENGTH_SHORT).show();
+                if (pref.getInt("dogChosenNumber",ERROR_DOGS) == (pref.getInt("numberOfDogs",ERROR_DOGS) -1)) {
+                    editor.putInt("dogChosenNumber",0);
+                    editor.commit();
+                } else {
+                    int i = pref.getInt("dogChosenNumber",ERROR_DOGS);
+                    i++;
+                    editor.putInt("dogChosenNumber",i);
+                    editor.commit();
+                }
+                getProfilePicture();
+                return false;
+            }
+            return false;
+        }
+
     }
 
     @Override
