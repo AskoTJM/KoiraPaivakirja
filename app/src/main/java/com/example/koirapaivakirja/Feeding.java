@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class Feeding extends AppCompatActivity {
     EditText foodAmount;
     EditText foodAdditional;
     ImageView feedDogImage;
+    TextView feedNickName;
     private static final String FOOD_ADDITIONAL = "feedingNote";
     private static final String FOOD_TYPE = "food_type";
     private static final String FOOD_AMOUNT = "food_amount";
@@ -86,6 +88,7 @@ public class Feeding extends AppCompatActivity {
         currentTime = format.format(calendar.getTime());
         currentDate = DateFormat.getDateInstance().format(calendar.getTime());
 
+        feedNickName = findViewById(R.id.feedNickName);
         foodAdditional = findViewById(R.id.feedNote);
         ruokiDate = findViewById(R.id.feedDate);
         ruokiTime = findViewById(R.id.feedTime);
@@ -109,6 +112,7 @@ public class Feeding extends AppCompatActivity {
             }
         });
 
+        getNameOfTheChosenDog();
         getProfilePicture();
     }
 
@@ -300,7 +304,7 @@ public class Feeding extends AppCompatActivity {
                     editor.commit();
 
                 }
-                //refreshDogsFromPref(pref);
+                getNameOfTheChosenDog();
                 getProfilePicture();
 
                 return false;
@@ -315,12 +319,20 @@ public class Feeding extends AppCompatActivity {
                     editor.putInt("dogChosenNumber",i);
                     editor.commit();
                 }
+                getNameOfTheChosenDog();
                 getProfilePicture();
                 return false;
             }
             return false;
         }
 
+    }
+
+    private void getNameOfTheChosenDog(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
+        String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
+        feedNickName.setText(tempDogString);
     }
 
     @Override

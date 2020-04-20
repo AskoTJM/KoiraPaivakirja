@@ -200,54 +200,7 @@
             android:singleLine="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medDog" />
-        <!--
-        <TextView
-            android:id="@+id/nameDog1"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Justi \n8V  4kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/imageView3" />
-        -->
-        <!--
-        <TextView
-            android:id="@+id/nameDog3"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="6dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Musti \n6V  10kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView" />
-        -->
-        <!--
-        <TextView
-            android:id="@+id/nameDog2"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Kusti \n3V  18kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2" />
-        -->
+
         <TextView
             android:id="@+id/medNameText"
             android:layout_width="wrap_content"
@@ -300,6 +253,18 @@
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/medName"
             app:layout_constraintTop_toBottomOf="@+id/medAmount" />
+
+        <TextView
+            android:id="@+id/medNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="24dp"
+            android:textSize="24sp"
+            android:textColor="@color/appBackGround"
+            android:backgroundTint="@color/appTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/medDogImage"
+            app:layout_constraintStart_toStartOf="@+id/medDogImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -215,22 +215,18 @@
             android:singleLine="false"
             app:layout_constraintStart_toStartOf="@+id/feedFood"
             app:layout_constraintTop_toBottomOf="@+id/feedFood" />
-<!--
+
         <TextView
-            android:id="@+id/nameDog1"
-            android:layout_width="65dp"
-            android:layout_height="45dp"
+            android:id="@+id/feedNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/share"
-            android:inputType="textMultiLine"
-            android:text="Justi \n8V  4kg"
-            android:textColor="#F6F6F6"
-            android:textColorHighlight="#0500DF"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/imageView3" />
--->
+            android:layout_marginBottom="24dp"
+            android:textSize="24sp"
+            android:textColor="@color/appBackGround"
+            android:backgroundTint="@color/appTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/feedDogImage"
+            app:layout_constraintStart_toStartOf="@+id/feedDogImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

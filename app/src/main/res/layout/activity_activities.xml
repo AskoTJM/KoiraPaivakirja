@@ -223,6 +223,18 @@
                 app:layout_constraintBottom_toTopOf="@+id/activityBtn"
                 app:layout_constraintStart_toEndOf="@+id/activityElapsedTime" />
 
+            <TextView
+                android:id="@+id/activityNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp"
+                android:textSize="24sp"
+                android:textColor="@color/appBackGround"
+                android:backgroundTint="@color/appTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/activityDogImage"
+                app:layout_constraintStart_toStartOf="@+id/activityDogImage" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

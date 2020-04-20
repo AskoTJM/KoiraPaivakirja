@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class Medicate extends AppCompatActivity {
     Button mMed;
     EditText mNotes, mDate, mTime, mDog, mDose, mMedType, mUnit;
     ImageView mDogImage;
+    TextView mNickName;
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
@@ -77,6 +79,7 @@ public class Medicate extends AppCompatActivity {
         mMedType = findViewById(R.id.medName);
         mUnit = findViewById(R.id.medUnit);
         mDogImage = findViewById(R.id.medDogImage);
+        mNickName = findViewById(R.id.medNickName);
         // Automatic
         getNameOfTheChosenDog();
 
@@ -271,6 +274,7 @@ public class Medicate extends AppCompatActivity {
 
         String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
         mDog.setText(tempDogString);
+        mNickName.setText(tempDogString);
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener
@@ -329,7 +333,7 @@ public class Medicate extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-
+        getNameOfTheChosenDog();
         getProfilePicture();
 
     }

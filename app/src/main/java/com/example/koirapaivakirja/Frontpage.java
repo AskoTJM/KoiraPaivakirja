@@ -165,7 +165,7 @@ public class Frontpage extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-
+        getNameOfTheChosenDog();
         getProfilePicture();
 
     }
