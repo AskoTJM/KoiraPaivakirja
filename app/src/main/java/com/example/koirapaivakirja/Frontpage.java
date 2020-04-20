@@ -43,8 +43,8 @@ public class Frontpage extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
         //SharedPreferences.Editor editor = pref.edit();
-        toolbox.getDogsToPref(pref);
-        toolbox.getDogDataToPref(pref);
+     //   toolbox.getDogsToPref(pref);
+     //   toolbox.getDogDataToPref(pref);
         mainDogImage = findViewById(R.id.mainDogImage);
         mainNickName = findViewById(R.id.frontPageNickName);
         getNameOfTheChosenDog();
@@ -64,29 +64,14 @@ public class Frontpage extends AppCompatActivity {
         });
 
         getProfilePicture();
-        /*
-        String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        assert dogChosen != null;
-        StorageReference imageRef = storage.getReference()
-                .child(dogChosen).child("profilepic.webp");
-
-        imageRef.getBytes(1024*1024)
-                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0  ,bytes.length);
-                        mainDogImage.setImageBitmap(bitmap);
-
-                    }
-                });
-        */
-
 
     }
 
     private void getProfilePicture(){
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        toolbox.getDogsToPref(pref);
+        toolbox.getDogDataToPref(pref);
         String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         assert dogChosen != null;
