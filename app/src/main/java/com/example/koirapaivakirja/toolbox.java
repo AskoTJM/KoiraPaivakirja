@@ -46,6 +46,7 @@ public class toolbox {
     return null;
     }
 
+
     public static boolean getDogsToPref(final SharedPreferences pref){
 
         final SharedPreferences.Editor editor = pref.edit();
@@ -66,15 +67,59 @@ public class toolbox {
                         }
                         String fieldName = "dog"+i;
                         editor.putString( fieldName, document.getId());
+                        i++;
+                        editor.putInt("numberOfDogs",i);
+                        editor.commit();
+                    }
+                    Log.d("KOERA", "Error getting data");
+                } else {
+                    Log.d("KOERA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
-                        String fieldNameToo = fieldName+"nickname";
+    return true;
+    }
 
-                        //if(document.get("nickname") != null) {
-                            String tempDog = document.getString("nickname");
-                            editor.putString(fieldNameToo, tempDog);
-                        //}else{
-                        //    editor.putString(fieldNameToo, "");
-                        //}
+    public void getDogDataToPref(SharedPreferences pref){
+
+        final SharedPreferences.Editor editor = pref.edit();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String dog = "/dogs/"+pref.getString("dog"+pref.getInt("chosenDogNumber",ERROR_DOGS),"null");
+
+        db.collection(dog).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int i = 0;
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if(i == 0){
+                            editor.putString("dogChosen",document.getId());
+                            editor.putInt("dogChosenNumber", i);
+                        }
+                        String fieldName = "dog"+i;
+                        editor.putString( fieldName, document.getId());
+                        i++;
+                        editor.putInt("numberOfDogs",i);
+                        editor.commit();
+                    }
+                    Log.d("KOERA", "Error getting data");
+                } else {
+                    Log.d("KOERA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        
+       //String fieldNameToo = fieldName+"nickname";
+
+        //if(document.get("nickname") != null) {
+        //    String tempDog = document.getString("nickname");
+        //    editor.putString(fieldNameToo, tempDog);
+        //}else{
+        //    editor.putString(fieldNameToo, "");
+        //}
 
 
                         /*
@@ -100,18 +145,6 @@ public class toolbox {
                         }
                         */
 
-                        i++;
-                        editor.putInt("numberOfDogs",i);
-                        editor.commit();
-                    }
-                    Log.d("KOERA", "Error getting data");
-                } else {
-                    Log.d("KOERA", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-    return true;
     }
 
     public static void removeDogDataFromFireStore(SharedPreferences dogPref){
