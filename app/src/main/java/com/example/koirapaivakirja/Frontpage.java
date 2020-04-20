@@ -197,7 +197,7 @@ public class Frontpage extends AppCompatActivity {
                         editor.commit();
 
                     }
-                    //refreshDogsFromPref(pref);
+
                     getNameOfTheChosenDog();
                     getProfilePicture();
 
