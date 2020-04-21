@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Kirjautuminen onnistui", Toast.LENGTH_SHORT).show();
                             //jos kirjautuminen onnistui valmiilla käyttäjällä
                             startActivity(new Intent(getApplicationContext(), Frontpage.class));
+
                         }else{
                             Toast.makeText(MainActivity.this, "Virheellinen käyttäjä tai salasana", Toast.LENGTH_SHORT).show();
                             //jos käyttäjää ei olemassa tai väärät tunnukset
@@ -112,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intentActivity = new Intent(this, MainActivity.class);
         startActivity(intentActivity);
     }
+
 }

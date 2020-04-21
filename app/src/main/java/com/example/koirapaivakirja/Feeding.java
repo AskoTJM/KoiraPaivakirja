@@ -232,8 +232,21 @@ public class Feeding extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-                        String setString = (hourOfDay + ":" + minute);
-                        ruokiTime.setText(setString);
+                        if(hourOfDay<10 && minute>10){
+                            ruokiTime.setText("0" + hourOfDay + ":" + minute);
+                        }
+
+                        else if(minute<10 && hourOfDay>10) {
+                            ruokiTime.setText(hourOfDay + ":" + "0" + minute);
+                        }
+
+                        else if(minute<10 && hourOfDay<10)
+                        {
+                            ruokiTime.setText("0" + hourOfDay + ":" + "0" + minute);
+                        }
+                        else {
+                            ruokiTime.setText(hourOfDay + ":" + minute);
+                        }
                     }
                 }, feedHour, feedMinute, true);
         timePickerDialog.show();
