@@ -2,6 +2,7 @@ package com.example.koirapaivakirja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,21 +14,28 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class OldFeedings extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference feedingRef = db.collection("dogs/rKJvTSFsozBr0V5JAyvQ/feedingDB");
+    
     private TextView feedingData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oldfeedings);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
+        String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber",-2),null);
+        String tempDogPath = "dogs/"+tempDogString+"/feedingDB";
+
         feedingData = findViewById(R.id.feedingList);
 
-        loadNotes();
+        loadNotes(tempDogPath);
 
     }
 
-    public void loadNotes() {
+    public void loadNotes(String tempDogPath) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference feedingRef = db.collection(tempDogPath);
         feedingRef.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

@@ -194,7 +194,6 @@
         android:id="@+id/infoDogImage"
         android:layout_width="413dp"
         android:layout_height="245dp"
-        android:longClickable="false"
         android:scaleType="centerCrop"
         android:contentDescription="@string/profilepic"
         android:src="@drawable/whitedog"
