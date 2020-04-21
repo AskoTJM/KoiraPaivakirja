@@ -53,10 +53,11 @@ public class OldFeedings extends AppCompatActivity {
                             String current_time = feedingData.getCurrent_time();
                             String food_type = feedingData.getFood_type();
                             String food_amount = feedingData.getFood_amount();
+                            String feedingNote = feedingData.getFeedingNote();
 
                             data +=
                                     "\nRuokinnan pvm: " + current_date + "\nRuokinta aika: " + current_time +
-                                    "\nRuoan tyyppi: " + food_type + "\nRuoan määrä: " + food_amount + "g" + "\n\n";
+                                    "\nRuoan tyyppi: " + food_type + "\nRuoan määrä: " + food_amount + "g" + "\nLisätietoja:" + feedingNote + "\n";
                         }
                         feedingData.setTextColor(Color.BLACK);
                         feedingData.setMovementMethod(new ScrollingMovementMethod());

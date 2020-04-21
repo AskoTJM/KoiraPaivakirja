@@ -154,7 +154,7 @@ public class Feeding extends AppCompatActivity {
             feedData.put(FOOD_ADDITIONAL, feedingNote);
             feedData.put("uid", feedUid);
             feedData.put("timeStamp", Timestamp.now());
-            
+
 
 
             feedingRef.add(feedData);

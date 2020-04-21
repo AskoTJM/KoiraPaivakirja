@@ -6,6 +6,7 @@ public class FeedingData {
     private String food_amount;
     private String current_time;
     private String current_date;
+    private String feedingNote;
 
     public FeedingData() {
 
@@ -17,11 +18,12 @@ public class FeedingData {
     void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
-    public FeedingData(String food_type, String food_amount, String current_date, String current_time) {
+    public FeedingData(String food_type, String food_amount, String current_date, String current_time, String feedingNote) {
         this.food_type = food_type;
         this.food_amount = food_amount;
         this.current_date = current_date;
         this.current_time = current_time;
+        this.feedingNote = feedingNote;
     }
     public String getFood_type() {
         return food_type;
@@ -34,6 +36,9 @@ public class FeedingData {
     }
     public String getCurrent_time() {
         return current_time;
+    }
+    public String getFeedingNote() {
+        return feedingNote;
     }
 
 }
