@@ -3,7 +3,9 @@ package com.example.koirapaivakirja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,17 +48,18 @@ public class OldFeedings extends AppCompatActivity {
                             FeedingData feedingData = documentSnapshot.toObject(FeedingData.class);
                             feedingData.setDocumentId(documentSnapshot.getId());
 
-                            String documentId = feedingData.getDocumentId();
+                             //String documentId = feedingData.getDocumentId();
                             String current_date = feedingData.getCurrent_date();
                             String current_time = feedingData.getCurrent_time();
                             String food_type = feedingData.getFood_type();
                             String food_amount = feedingData.getFood_amount();
 
-                            data += "ID: " + documentId
-                                    + "\nRuokinnan pvm: " + current_date + "\nRuokinta aika: " + current_time +
+                            data +=
+                                    "\nRuokinnan pvm: " + current_date + "\nRuokinta aika: " + current_time +
                                     "\nRuoan tyyppi: " + food_type + "\nRuoan määrä: " + food_amount + "g" + "\n\n";
                         }
-
+                        feedingData.setTextColor(Color.BLACK);
+                        feedingData.setMovementMethod(new ScrollingMovementMethod());
                         feedingData.setText(data);
                     }
                 });

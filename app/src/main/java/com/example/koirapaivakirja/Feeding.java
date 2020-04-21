@@ -153,16 +153,8 @@ public class Feeding extends AppCompatActivity {
             feedData.put(FOOD_TYPE, food_type);
             feedData.put(FOOD_ADDITIONAL, feedingNote);
             feedData.put("uid", feedUid);
-
-
-            //Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
-            String dateString = ruokiDate.getText().toString();
-            //String timeString = ruokiTime.getText().toString();
-            Date dateTemp = formatter.parse(dateString);
-            assert dateTemp != null;
-            Timestamp feedingTime = new Timestamp(dateTemp);
-            feedData.put("timeStamp", feedingTime);
+            feedData.put("timeStamp", Timestamp.now());
+            
 
 
             feedingRef.add(feedData);
