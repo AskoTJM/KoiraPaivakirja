@@ -186,8 +186,25 @@ public class Medicate extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
 
-                        String setString = (hourOfDay + ":" + minute);
-                        mTime.setText(setString);
+                        if(hourOfDay<10 && minute>10){
+                            mTime.setText("0"+hourOfDay + ":" + minute);
+                        }
+
+                        else if(minute<10 && hourOfDay>10){
+                            mTime.setText(hourOfDay + ":" + "0"+ minute);
+                        }
+
+                        else if(minute<10 && hourOfDay<10){
+                            mTime.setText("0"+hourOfDay + ":" + "0"+ minute);
+                        }
+
+                        else {
+                            mTime.setText(hourOfDay + ":" + minute);
+                        }
+
+
+                        //String setString = (hourOfDay + ":" + minute);
+                        //mTime.setText(setString);
 
                         c.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         c.set(Calendar.MINUTE,minute);
