@@ -39,24 +39,13 @@
                 android:fontFamily="@font/share"
                 android:gravity="center_horizontal"
                 android:autofillHints=""
+                android:hint="17:01"
                 android:maxLength="5"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkOut" />
 
-            <ToggleButton
-                android:id="@+id/activityBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:height="55dp"
-                android:checked="false"
-                android:fontFamily="@font/share"
-                android:textOff="@string/start"
-                android:textOn="@string/stop"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/activitySaveButton"
-                app:layout_constraintStart_toStartOf="@+id/activitySaveButton"
-                app:layout_constraintTop_toTopOf="@+id/activityDateStart" />
+
 
             <EditText
                 android:id="@+id/activityDateStart"
@@ -68,6 +57,9 @@
                 android:hint="@string/hintdate"
                 android:inputType="date"
                 android:textSize="24sp"
+                android:focusable="false"
+                android:onClick="showDatePickerDialog"
+                android:enabled="true"
                 app:layout_constraintStart_toStartOf="@+id/activityElapsedTime"
                 app:layout_constraintTop_toTopOf="@+id/activityTimeStop"
                 android:autofillHints="" />
@@ -129,7 +121,6 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-
                 app:layout_constraintStart_toStartOf="@+id/activityTimeStop"
                 app:layout_constraintTop_toBottomOf="@+id/activityDateStart"
                 android:autofillHints="" />
@@ -217,11 +208,14 @@
                 android:id="@+id/activitySaveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginBottom="28dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/share"
+                android:textSize="18dp"
                 android:text="@string/save"
-                app:layout_constraintBottom_toTopOf="@+id/activityBtn"
-                app:layout_constraintStart_toEndOf="@+id/activityElapsedTime" />
+                app:layout_constraintEnd_toEndOf="@+id/checkPlay"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/activityElapsedTime"
+                app:layout_constraintTop_toBottomOf="@+id/checkPlay" />
 
             <TextView
                 android:id="@+id/activityNickName"

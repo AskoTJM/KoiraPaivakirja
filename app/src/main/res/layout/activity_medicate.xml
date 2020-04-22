@@ -168,7 +168,7 @@
             android:fontFamily="@font/share"
             android:gravity="center"
             android:inputType="number"
-            android:hint=""
+            android:hint="200"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/medDog"
             app:layout_constraintTop_toTopOf="@+id/medDog" />

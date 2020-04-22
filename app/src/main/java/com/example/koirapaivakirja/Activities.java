@@ -1,9 +1,11 @@
 package com.example.koirapaivakirja;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.util.Calendar;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ public class Activities extends AppCompatActivity {
     private static final int THRESHOLD_VELOCITY = 50;
     private static final int ERROR_DOGS = -2;
     private static final int NEW_DOG = -1;
+
 
     EditText mWorkout, mStart, mCurrent, mDuration, mDate;
     TextView activitiesNickName;
