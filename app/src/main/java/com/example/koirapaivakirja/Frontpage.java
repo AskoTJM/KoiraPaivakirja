@@ -71,8 +71,6 @@ public class Frontpage extends AppCompatActivity {
     private void getProfilePicture(){
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-        toolbox.getDogsToPref(pref);
-        toolbox.getDogDataToPref(pref);
         String dogChosen = pref.getString("dog"+(pref.getInt("dogChosenNumber", ERROR_DOGS)),null);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         assert dogChosen != null;
