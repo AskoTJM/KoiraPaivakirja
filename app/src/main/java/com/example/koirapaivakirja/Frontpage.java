@@ -42,12 +42,12 @@ public class Frontpage extends AppCompatActivity {
         setContentView(R.layout.activity_frontpage);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
-        //SharedPreferences.Editor editor = pref.edit();
+       // SharedPreferences.Editor editor = pref.edit();
      //   toolbox.getDogsToPref(pref);
      //   toolbox.getDogDataToPref(pref);
         mainDogImage = findViewById(R.id.mainDogImage);
         mainNickName = findViewById(R.id.frontPageNickName);
-        getNameOfTheChosenDog();
+   //     getNameOfTheChosenDog();
         Toolbar mainToolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
 
@@ -63,7 +63,8 @@ public class Frontpage extends AppCompatActivity {
             }
         });
 
-        getProfilePicture();
+        //getNameOfTheChosenDog();
+        //getProfilePicture();
 
     }
 
@@ -150,6 +151,8 @@ public class Frontpage extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
         getNameOfTheChosenDog();
         getProfilePicture();
 
@@ -165,7 +168,6 @@ public class Frontpage extends AppCompatActivity {
 
         }
 
-
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
@@ -180,9 +182,7 @@ public class Frontpage extends AppCompatActivity {
                         i--;
                         editor.putInt("dogChosenNumber",i);
                         editor.commit();
-
                     }
-
                     getNameOfTheChosenDog();
                     getProfilePicture();
 
@@ -191,13 +191,14 @@ public class Frontpage extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have swiped right side", Toast.LENGTH_SHORT).show();
                     if (pref.getInt("dogChosenNumber",ERROR_DOGS) == (pref.getInt("numberOfDogs",ERROR_DOGS) -1)) {
                         editor.putInt("dogChosenNumber",0);
-                        editor.commit();
+                       // editor.commit();
                     } else {
                         int i = pref.getInt("dogChosenNumber",ERROR_DOGS);
                         i++;
                         editor.putInt("dogChosenNumber",i);
-                        editor.commit();
+                       // editor.commit();
                     }
+                    editor.commit();
                     getNameOfTheChosenDog();
                     getProfilePicture();
                     return false;
@@ -213,4 +214,6 @@ public class Frontpage extends AppCompatActivity {
         String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
         mainNickName.setText(tempDogString);
     }
+
+
 }

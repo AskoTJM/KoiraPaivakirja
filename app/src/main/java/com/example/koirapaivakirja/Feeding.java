@@ -112,8 +112,8 @@ public class Feeding extends AppCompatActivity {
             }
         });
 
-        getNameOfTheChosenDog();
-        getProfilePicture();
+      //  getNameOfTheChosenDog();
+      //  getProfilePicture();
     }
 
     public void addFeeding(View v) throws ParseException {

@@ -40,16 +40,17 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
 
             // Have issues with new install without SharedPreferences file. Maybe this will help for now.
-            editor.putString("dog0","AaxkqBCwOrJUkZYoKqZA");
-            editor.putString("dog1","CMjBokjbbg41g8fqZdPU");
-            editor.putString("dog2","rKJvTSFsozBr0V5JAyvQ");
-            editor.putInt("dogChosenNumber",0);
-            editor.putInt("numberOfDogs",3);
-            editor.putString("dog0nickname","A-koera");
-            editor.putString("dog1nickname","Babs");
-            editor.putString("dog2nickname","Musti");
-            editor.commit();
-
+            if(pref.getString("dog0",null) == null) {
+                editor.putString("dog0", "AaxkqBCwOrJUkZYoKqZA");
+                editor.putString("dog1", "CMjBokjbbg41g8fqZdPU");
+                editor.putString("dog2", "rKJvTSFsozBr0V5JAyvQ");
+                editor.putInt("dogChosenNumber", 0);
+                editor.putInt("numberOfDogs", 3);
+                editor.putString("dog0nickname", "A-koera");
+                editor.putString("dog1nickname", "Babs");
+                editor.putString("dog2nickname", "Musti");
+                editor.commit();
+            }
         //toolbox.getDogsToPref(pref);
         //toolbox.getDogDataToPref(pref);
 

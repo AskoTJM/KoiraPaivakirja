@@ -63,7 +63,7 @@ public class toolbox {
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if(i == 0){
-                            editor.putString("dogChosen",document.getId());
+                            //editor.putString("dogChosen",document.getId());
                             editor.putInt("dogChosenNumber", i);
                         }
                         String fieldName = "dog"+i;

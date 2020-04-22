@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -39,6 +40,7 @@ public class Activities extends AppCompatActivity {
     private static final int NEW_DOG = -1;
 
     EditText mWorkout, mStart, mCurrent, mDuration, mDate;
+    TextView activitiesNickName;
     ImageView activitiesDogImage;
     CheckBox mOut, mPlay;
     Button mSave;
@@ -60,6 +62,8 @@ public class Activities extends AppCompatActivity {
         mOut = findViewById(R.id.checkOut);
         mPlay = findViewById(R.id.checkPlay);
         activitiesDogImage = findViewById(R.id.activityDogImage);
+        activitiesNickName = findViewById(R.id.activityNickName);
+
         final Button mSave = findViewById(R.id.activitySaveButton);
 
         Toolbar mainToolbar = findViewById(R.id.activityToolbar);
@@ -207,6 +211,7 @@ public class Activities extends AppCompatActivity {
 
                 }
                 //refreshDogsFromPref(pref);
+                getNameOfTheChosenDog();
                 getProfilePicture();
 
                 return false;
@@ -221,6 +226,7 @@ public class Activities extends AppCompatActivity {
                     editor.putInt("dogChosenNumber",i);
                     editor.commit();
                 }
+                getNameOfTheChosenDog();
                 getProfilePicture();
                 return false;
             }
@@ -229,10 +235,17 @@ public class Activities extends AppCompatActivity {
 
     }
 
+    private void getNameOfTheChosenDog(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+
+        String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
+        activitiesNickName.setText(tempDogString);
+    }
+
     @Override
     public void onResume(){
         super.onResume();
-
+        getNameOfTheChosenDog();
         getProfilePicture();
 
     }
