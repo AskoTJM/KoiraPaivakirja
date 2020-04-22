@@ -14,7 +14,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class OldFeedings extends AppCompatActivity {
 
-    
+
     private TextView feedingData;
 
     @Override
