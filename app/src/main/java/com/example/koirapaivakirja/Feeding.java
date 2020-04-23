@@ -100,7 +100,9 @@ public class Feeding extends AppCompatActivity {
         ruokiTime.setText(currentTime);
         ruokiDate.setText(currentDate);
 
-
+       //SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+       // String previousFood = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousFeedFood","");
+       // foodType.setText(previousFood);
 
         gdt = new GestureDetector(new Feeding.GestureListener());
 
@@ -139,6 +141,7 @@ public class Feeding extends AppCompatActivity {
             Toast.makeText(Feeding.this, "Lisää ruokinnan aika!", Toast.LENGTH_SHORT).show();
         }
         else {
+
             String current_date = ruokiDate.getText().toString();
             String current_time = ruokiTime.getText().toString();
             String food_type = foodType.getText().toString();
@@ -146,6 +149,11 @@ public class Feeding extends AppCompatActivity {
             String food_amountUnit = "g";
             String feedingNote = foodAdditional.getText().toString();
             String feedUid = pref.getString("uid",null);
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousFeedFood", food_type);
+            editor.putString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousFeedAmount", food_amount);
+            editor.apply();
 
             Map<String, Object> feedData = new HashMap<>();
             feedData.put(CURRENT_DATE, current_date);
@@ -337,6 +345,10 @@ public class Feeding extends AppCompatActivity {
 
     private void getNameOfTheChosenDog(){
         SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+        String previousFood = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousFeedFood","");
+        foodType.setText(previousFood);
+        String previousAmount = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousFeedAmount","");
+        foodAmount.setText(previousAmount);
 
         String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
         feedNickName.setText(tempDogString);
