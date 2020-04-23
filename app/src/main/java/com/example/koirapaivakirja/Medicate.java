@@ -35,7 +35,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 public class Medicate extends AppCompatActivity {
@@ -81,7 +83,19 @@ public class Medicate extends AppCompatActivity {
         mDogImage = findViewById(R.id.medDogImage);
         mNickName = findViewById(R.id.medNickName);
         // Automatic
-        getNameOfTheChosenDog();
+        // Set current time and date because that looks nice
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        mTime.setText(format.format(calendar.getTime()));
+        mDate.setText(DateFormat.getDateInstance().format(calendar.getTime()));
+
+   //     String previousMed = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedication","");
+   //     mMedType.setText(previousMed);
+   //     int previousDose = pref.getInt("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedicationDose",0);
+   //     mDose.setRawInputType(previousDose);
+
+        //getNameOfTheChosenDog();
+        //getProfilePicture();
 
 
         gdt = new GestureDetector(new Medicate.GestureListener());
@@ -96,7 +110,7 @@ public class Medicate extends AppCompatActivity {
             }
         });
 
-        getProfilePicture();
+
 
         //hakee tämänhetkisen ajan
         mYear = c.get(Calendar.YEAR);
@@ -140,6 +154,13 @@ public class Medicate extends AppCompatActivity {
 
         public void saveMedTime() throws ParseException{
             Toast.makeText(Medicate.this,"Lääkityksen muistutus lisätty", Toast.LENGTH_SHORT).show();
+            // Saving the given medication to SharedPreferences for next use.
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("DogPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedication",mMedType.getText().toString());
+            editor.putInt("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedicationDose", Integer.parseInt(mDose.getText().toString()));
+            editor.putString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedicationUnit",mUnit.getText().toString());
+            editor.apply();
 
             //kenttiin asetetut arvot
             String pMedType= mMedType.getText().toString();
@@ -292,6 +313,13 @@ public class Medicate extends AppCompatActivity {
         String tempDogString = pref.getString("dog"+pref.getInt("dogChosenNumber", ERROR_DOGS)+"nickname",null);
         mDog.setText(tempDogString);
         mNickName.setText(tempDogString);
+
+        String previousMed = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedication","");
+        mMedType.setText(previousMed);
+        int previousDose = pref.getInt("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedicationDose",0);
+        mDose.setText(Integer.toString(previousDose));
+        String previousMedicationUnit = pref.getString("dog"+pref.getInt("dogChosenNumber",ERROR_DOGS)+"_previousMedicationUnit","");
+        mUnit.setText(previousMedicationUnit);
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener

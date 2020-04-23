@@ -211,7 +211,7 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/share"
                 android:textSize="18dp"
-                android:text="@string/save"
+                android:text="@string/start"
                 app:layout_constraintEnd_toEndOf="@+id/checkPlay"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/activityElapsedTime"

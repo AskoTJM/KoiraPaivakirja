@@ -1,11 +1,9 @@
 package com.example.koirapaivakirja;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
@@ -15,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +30,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +43,16 @@ public class Activities extends AppCompatActivity {
     private static final int NEW_DOG = -1;
 
 
-    EditText mWorkout, mStart, mCurrent, mDuration, mDate;
+    EditText mWorkout, mStart, mElapsed, mStop, mDate;
     TextView activitiesNickName;
     ImageView activitiesDogImage;
     CheckBox mOut, mPlay;
     Button mSave;
     Handler handler;
     String activity, pNotes;
+
+    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+    java.util.Calendar calendar = Calendar.getInstance();
 
     private GestureDetector gdt;
 
@@ -62,16 +63,16 @@ public class Activities extends AppCompatActivity {
         setContentView(R.layout.activity_activities);
         mWorkout = findViewById(R.id.activityNote);
         mStart = findViewById(R.id.activityTimeStart);
-        mCurrent = findViewById(R.id.activityElapsedTime);
-        mDuration = findViewById(R.id.activityTimeStop);
+        mElapsed = findViewById(R.id.activityElapsedTime);
+        mStop = findViewById(R.id.activityTimeStop);
         mDate = findViewById(R.id.activityDateStart);
         mOut = findViewById(R.id.checkOut);
         mPlay = findViewById(R.id.checkPlay);
         activitiesDogImage = findViewById(R.id.activityDogImage);
         activitiesNickName = findViewById(R.id.activityNickName);
 
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        java.util.Calendar calendar = Calendar.getInstance();
+        //SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        // java.util.Calendar calendar = Calendar.getInstance();
         mStart.setText(format.format(calendar.getTime()));
         mDate.setText(DateFormat.getDateInstance().format(calendar.getTime()));
 
@@ -102,28 +103,59 @@ public class Activities extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.activitySaveButton:
-                        if (mOut.isChecked()) {
-                            activity = "Walk";
+                        switch (mSave.getText().toString()) {
+                            case "Aloitus":
+                               // SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                                java.util.Calendar calendar = Calendar.getInstance();
+
+                                mStart.setText(format.format(calendar.getTime()));
+                                if (mOut.isChecked()) {
+                                    activity = "Walk";
+                                }
+                                if (mPlay.isChecked()) {
+                                    activity = "Play";
+                                }
+                                if ((mOut.isChecked() == true) && (mPlay.isChecked() == true) || (mOut.isChecked() == false) && (mPlay.isChecked() == false)) {
+
+                                    Toast.makeText(Activities.this,
+                                            "Choose one activity type", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mSave.setText("Lopeta");
+                                }
+                                break;
+                            case "Lopeta":
+                                java.util.Calendar calendar2 = Calendar.getInstance();
+                                mStop.setText(format.format(calendar2.getTime()));
+                                Date startTime = null;
+                                try {
+                                    startTime = format.parse(mStart.getText().toString());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                Date stopTime = null;
+                                try {
+                                    stopTime = format.parse(mStop.getText().toString());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                long difference = stopTime.getTime() - startTime.getTime();
+                                String text = format.format(new Date(difference));
+                                mElapsed.setText(text);
+                                mSave.setText("Tallenna");
+                                break;
+                            case "Tallenna":
+                                try {
+                                    pNotes = mWorkout.getText().toString();
+                                    saveData();
+                                    mSave.setText("Aloitus");
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                break;
                         }
-                        if (mPlay.isChecked()) {
-                            activity = "Play";
-                        }
-                        if ((mOut.isChecked() == true) && (mPlay.isChecked() == true)||(mOut.isChecked() == false) && (mPlay.isChecked() == false)) {
-
-                            Toast.makeText(Activities.this,
-                                    "Choose one activity type", Toast.LENGTH_SHORT).show();
-                        } else {
-                            try {
-                                pNotes = mWorkout.getText().toString();
-                                saveData();
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-
-
                 }
+
             }
         });
     }
@@ -134,8 +166,8 @@ public class Activities extends AppCompatActivity {
             Map<String, Object> Aktiviteetti = new HashMap<>();
 
             String pStart = mStart.getText().toString();
-            String pDuration = mCurrent.getText().toString();
-            String pEnd = mDuration.getText().toString();
+            String pDuration = mElapsed.getText().toString();
+            String pEnd = mStop.getText().toString();
 
             if(pNotes!= null) {
                 Aktiviteetti.put("Notes", pNotes);

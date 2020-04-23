@@ -59,8 +59,8 @@
     <string name="hintLoginPasswordField">Password field for login</string>
     <string name="hintMedicationGiven">Name of the medication given</string>
     <string name="hintTime">17:01</string>
-    <string name="hintElapsedtime">1:30</string>
-    <string name="hintTimeStop">18:31</string>
+    <string name="hintElapsedtime">--:--</string>
+    <string name="hintTimeStop">--:--</string>
     <string name="grams">g</string>
     <string name="milligrams">mg</string>
     <string name="feedFoodGiven">Ruoka</string>
