@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.util.Calendar;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +29,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +69,11 @@ public class Activities extends AppCompatActivity {
         mPlay = findViewById(R.id.checkPlay);
         activitiesDogImage = findViewById(R.id.activityDogImage);
         activitiesNickName = findViewById(R.id.activityNickName);
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        java.util.Calendar calendar = Calendar.getInstance();
+        mStart.setText(format.format(calendar.getTime()));
+        mDate.setText(DateFormat.getDateInstance().format(calendar.getTime()));
 
         final Button mSave = findViewById(R.id.activitySaveButton);
 

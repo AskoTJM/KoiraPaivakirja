@@ -100,6 +100,8 @@ public class Feeding extends AppCompatActivity {
         ruokiTime.setText(currentTime);
         ruokiDate.setText(currentDate);
 
+
+
         gdt = new GestureDetector(new Feeding.GestureListener());
 
         feedDogImage.setOnTouchListener(new View.OnTouchListener() {
