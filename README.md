@@ -9,3 +9,8 @@ Development Team: Casper Frilund, Tatu Kynsilehto, Aleksi Leinonen, Asko Mattila
 
 Projekti päättynyt 24.4.2020
 
+Huom. Ohjelma ei toimi oikein ilman Googlen sertifikaattia palveluihin 
+      sekä projektia varten luotuja testi-käyttäjätunnuksia.
+      Jos haluat kokeilla ohjelmaa käytännössä ota yhteyttä repon omistajaan.
+      - Asko M.
+      
